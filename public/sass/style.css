@@ -13,6 +13,15 @@
   align-items: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1440px;
+}
+
 li {
   list-style-type: none;
 }
