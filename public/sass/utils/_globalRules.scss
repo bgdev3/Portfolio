@@ -1,8 +1,12 @@
 // Règles globales
 *{
     box-sizing: border-box;
+    color: white;
 }
 
+body{
+    color: #131212;
+}
 .wrapper{
     width: 100%;
     max-width: 1440px;
