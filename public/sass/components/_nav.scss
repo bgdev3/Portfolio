@@ -1,0 +1,6 @@
+// Menu de navigation
+@use '../utils/mixins';
+
+.nav-header {
+    @include mixins.flex-row(row, space-between, center);
+}

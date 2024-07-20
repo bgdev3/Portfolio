@@ -1,0 +1,5 @@
+@use '../utils/mixins';
+
+.header {
+    @include mixins.flex-row(row, space-between, center);
+}
