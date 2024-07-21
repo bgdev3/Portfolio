@@ -16,10 +16,12 @@
 * {
   box-sizing: border-box;
   color: white;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
 }
 
 body {
-  background-color: #131212;
+  color: #131212;
 }
 
 .wrapper {
