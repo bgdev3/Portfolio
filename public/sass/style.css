@@ -6,11 +6,11 @@
   align-items: center;
 }
 .header h1 {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
 }
 
 nav:has(.nav-header) {
-  flex: 0 1 auto;
+  flex: 1;
 }
 
 .nav-header {
