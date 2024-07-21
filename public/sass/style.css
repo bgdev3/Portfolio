@@ -6,7 +6,7 @@
   align-items: center;
 }
 .header h1 {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
 }
 
 nav:has(.nav-header) {
