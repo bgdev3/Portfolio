@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/878534cf28.js" crossorigin="anonymous"></script>
     <!-- inclut la feuille de style -->
     <link rel="stylesheet"  href="sass/style.css">
-    <title>Portfolio</title>
+    <title><?php echo $title; ?></title>
 </head>
 <body>
     <div class="wrapper">
