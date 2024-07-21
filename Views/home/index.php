@@ -3,8 +3,8 @@ $title = 'Accueil';
 ?>
 
 <section>
-    <div>
-        <p>Guillaume<Br>Boukehaili<br>Développeur web</p>
+    <div class="presentation">
+        <p class="name-style">Guillaume<Br>Boukehaili<br>Développeur web</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque repellendus rem corporis numquam harum! Fuga illum nemo, nam earum rem, porro nesciunt, error delectus fugit consequuntur non inventore magnam culpa?
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas voluptates ipsum possimus non nostrum, soluta dolorum quod. Suscipit quasi ex eius consequatur veniam earum molestiae nemo cum, iste, autem quis!
         Laborum illo blanditiis aperiam sapiente, sed laboriosam asperiores impedit maiores, omnis eum minus sint commodi necessitatibus at aspernatur deserunt! Quisquam non voluptatum et alias sunt ea officiis magni explicabo dolores?

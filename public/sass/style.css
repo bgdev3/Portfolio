@@ -20,6 +20,19 @@ nav:has(.nav-header) {
   align-items: center;
 }
 
+@media only screen and (min-width: 1024px) {
+  .presentation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.name-style {
+  font-size: 2em;
+}
+
 * {
   box-sizing: border-box;
   color: white;

@@ -1,0 +1,11 @@
+@use '../utils/mixins';
+
+.presentation {
+    @include mixins.desktop{
+        @include mixins.flex-row(row, space-between, center);
+    }   
+}
+
+.name-style {
+    font-size: 2em;
+}
