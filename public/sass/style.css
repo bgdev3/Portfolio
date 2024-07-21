@@ -9,12 +9,15 @@
   flex: 1 1 auto;
 }
 
+nav:has(.nav-header) {
+  flex: 0 1 auto;
+}
+
 .nav-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex: 1 1 auto;
 }
 
 * {
