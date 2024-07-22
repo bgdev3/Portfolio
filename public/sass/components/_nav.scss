@@ -1,5 +1,6 @@
 // Menu de navigation
 @use '../utils/mixins';
+@use '../utils/variables' as color ;
 
 nav:has(.nav-header) {
     flex: 1;
@@ -7,5 +8,17 @@ nav:has(.nav-header) {
 
 .nav-header {
     @include mixins.flex-row(row, space-between, center);
+    
+        li::after{
+            content: '';
+            display: block;
+            border-bottom: 3px solid color.$color_pink;
+            transform: scaleX(0);
+            transition: transform 250ms ease-in-out;
+        }
+        
+        li:hover::after{
+        transform: scaleX(1);
+        }
 }
 

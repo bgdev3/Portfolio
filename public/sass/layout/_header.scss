@@ -1,9 +1,11 @@
 @use '../utils/mixins';
+@use '../utils/variables' as color ;
 
 .header {
     @include mixins.flex-row(row, space-between, center);
      
     h1 {
         flex: 1 1 auto;
+        color:color.$color_pink;
     }
 }

@@ -4,11 +4,16 @@ $title = 'Accueil';
 
 <section>
     <div class="presentation">
-        <p class="name-style">Guillaume<Br>Boukehaili<br>Développeur web</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque repellendus rem corporis numquam harum! Fuga illum nemo, nam earum rem, porro nesciunt, error delectus fugit consequuntur non inventore magnam culpa?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas voluptates ipsum possimus non nostrum, soluta dolorum quod. Suscipit quasi ex eius consequatur veniam earum molestiae nemo cum, iste, autem quis!
-        Laborum illo blanditiis aperiam sapiente, sed laboriosam asperiores impedit maiores, omnis eum minus sint commodi necessitatibus at aspernatur deserunt! Quisquam non voluptatum et alias sunt ea officiis magni explicabo dolores?
-        Et commodi ab reprehenderit corporis dolorum eligendi mollitia. Officiis perferendis atque illo itaque obcaecati expedita, temporibus nam dolorem rerum, vel amet? Sed maxime repudiandae deserunt perferendis velit iste ipsum dignissimos!
-        Voluptas assumenda deserunt officiis ipsum architecto inventore amet repellendus, expedita suscipit rem voluptatum? Nisi aspernatur itaque sit nam ut quo, aut voluptatem nesciunt deserunt, earum repudiandae non numquam, at quisquam.Inventore perferendis consequuntur illum suscipit magnam vel laborum incidunt maiores cum quo, perspiciatis facilis. Doloremque, quod accusantium? Voluptas dolorem, dolorum illum, tempora quam officia unde dolor expedita animi, consequuntur incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus illum animi harum corrupti quidem voluptatum exercitationem, molestiae quam possimus corporis. Deleniti, officia. Nisi repudiandae dolore deleniti architecto, nostrum iste? Harum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia aut facilis mollitia et, nisi, officiis commodi consequatur dicta, omnis inventore dolor ut. Tenetur sequi, commodi perspiciatis earum iusto iste voluptatem.</p>
+        <div class="name-style">
+            <p >Guillaume<Br><span class="name">Boukehaili</span></p>
+           
+            <span class="work">Développeur<span><span> web</span></span>
+           
+        </div>
+        
+        <p class="text-style">
+            <span class="">Salut !</span><br> je m'appelle guillaume et je suis ravi de vous accueillir dans mon monde. Après 16 ans d'activité dans le médical, je me suis reconvertis dans le web
+            afin de rallier ma passion et le monde professionnel. Diplômé d'une formation certifiante d'un titre professionnel de niveau V de développeur web et web mobile, je suis à l'écoute et étudie toutes les possibilités de projets pour lesquels nous pourrions travailler ensemble.<br> Vous avez une un projet en tête ? Une refonte complète d'un site ? Un problème technique ? Je prends en charge aussi bien la partie front end de votre site, des maquettes et intégration, à la partie back end de votre projet jusqu'à la livraison de celui-ci. Un planning surchargé ? La possibilité de venir à vous afin de vous libérer de ce stress et de vous faire évoluer dans les meilleures conditions. 
+            <br>Ma disponibilité est mise à contribution afin de trouver les solutions les plus adéquates qui vous permettront d'évoluer comme vous l'avez toujours souhaité. Alors, à très vite ...</p>
     </div>
 </section>

@@ -1,13 +1,19 @@
 // Règles globales
+@use '../utils/variables' as color ;
+
 *{
     box-sizing: border-box;
-    color: white;
+    color: color.$color_font;
     font-family: "Montserrat", sans-serif;
     font-style: normal;
 }
+html, body{
+    height: 100vh;
+}
 
 body{
-    background-color: #131212;
+    background-color: color.$color_bg;
+    padding: 0 15px;
 }
 
 .wrapper{
@@ -16,6 +22,9 @@ body{
     margin: 0 auto;
 }
 
+ul{
+    padding-left: 0;
+}
 li{
     list-style-type: none;
 }

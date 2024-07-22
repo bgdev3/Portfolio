@@ -25,7 +25,7 @@
             </nav>
         </header>
         <main><?= $content ?></main>
-        <footer>
+        <footer class="footer">
             <ul>
                 <!-- facebook -->
                 <li><a href="https://www.facebook.com/boo.ka.5"><i class="fa-brands fa-facebook-f"></i></a></li>
@@ -34,6 +34,9 @@
                 <!-- Github -->
                 <li><a href="github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
             </ul>
+            <div>
+                <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés</p>
+            </div>
         </footer>
     </div>   
 </body>
