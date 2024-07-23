@@ -1,11 +1,15 @@
+@use '../utils/mixins';
 
 .footer{
+    // maintien le footer en pied de page
     position: relative;
-    // width: 100%;
     bottom: 0;
-    // left: 0;
-    // right: 0;
-  
+    @include mixins.desktop {
+        position: fixed;
+        left: 0;
+        right: 0;
+    }
+
     ul {
         text-align: center;
         a{
@@ -15,5 +19,10 @@
 
     p {
         text-align: center;
+    }
+
+    .social-footer {
+        @include mixins.flex-row(row, center, center);
+        gap: 1%;
     }
 }

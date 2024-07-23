@@ -1,0 +1,6 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+.production-container {
+    display: grid;
+}

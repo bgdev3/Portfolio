@@ -3,9 +3,8 @@
 
 .presentation {
     @include mixins.desktop{
-        @include mixins.flex-row(row, space-between, start);
+        @include mixins.flex-row(row, space-between, center);
     }
-
     margin: 8% 0;
 }
 

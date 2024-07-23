@@ -26,7 +26,7 @@
         </header>
         <main><?= $content ?></main>
         <footer class="footer">
-            <ul>
+            <ul class="social-footer">
                 <!-- facebook -->
                 <li><a href="https://www.facebook.com/boo.ka.5"><i class="fa-brands fa-facebook-f"></i></a></li>
                 <!-- LinkedIn -->
