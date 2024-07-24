@@ -1,0 +1,41 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+.form-contact {
+    width: 80%;
+    margin:8% auto;
+    & h1 {
+        margin-bottom: 3%;
+    }
+    & .flex-form{
+        margin-top: 1%;
+        @include mixins.flex-row(row, space-between, start);
+        gap: 5%;
+
+        & :first-child, & :last-child{
+            flex: 0 1 50%;
+        }
+    }
+
+    input:not(.btn), textarea{
+        display: inline-block;
+        padding: 2%;
+        width: 100%;
+        background-color: color.$color_input;
+        margin-bottom: 4%;
+        border-radius: 5px;
+        border: none;
+    }
+  
+    .btn{
+        display: block;
+        width: 15%;
+        margin: 0 auto;
+        background-color: color.$color_input;
+        color: color.$color_pink;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        padding:.7em .4em .7em .4em;
+    }
+}
