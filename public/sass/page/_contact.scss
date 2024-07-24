@@ -4,9 +4,11 @@
 .form-contact {
     width: 80%;
     margin:8% auto;
+
     & h1 {
         margin-bottom: 3%;
     }
+    
     & .flex-form{
         margin-top: 1%;
         @include mixins.flex-row(row, space-between, start);
