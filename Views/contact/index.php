@@ -28,7 +28,7 @@ $title = 'Contact';
                     <input type="text" id="obj" name="obj" required>
 
                     <label for="message">Message*</label>
-                    <textarea id="message" name="message" rows="8" required></textarea>
+                    <textarea id="message" name="message" rows="9" required></textarea>
                 
                 </div>
             </div>

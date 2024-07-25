@@ -7,6 +7,8 @@
 }
 .header h1 {
   flex: 1 1 auto;
+}
+.header h1 > a {
   color: #97004f;
 }
 
@@ -40,6 +42,12 @@
 
 nav:has(.nav-header) {
   flex: 1;
+  display: none;
+}
+@media only screen and (min-width: 1024px) {
+  nav:has(.nav-header) {
+    display: block;
+  }
 }
 
 .nav-header {
@@ -57,6 +65,84 @@ nav:has(.nav-header) {
 }
 .nav-header li:hover::after {
   transform: scaleX(1);
+}
+
+.header__burger {
+  width: 5.5%;
+  height: 5.5%;
+  position: relative;
+  z-index: 999;
+  transition: transform 0.5s;
+}
+@media only screen and (min-width: 576px) {
+  .header__burger {
+    transform: translateX(0%);
+    width: 4.5%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .header__burger {
+    display: none;
+  }
+}
+.header__burger-position {
+  position: absolute;
+  top: 15.4%;
+  right: 0%;
+}
+@media only screen and (min-width: 576px) {
+  .header__burger-position {
+    position: initial;
+  }
+}
+.header__burger span {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  background-color: #97004f;
+  width: 100%;
+  height: 0.15em;
+  transform: translateX(-50%) translateY(-50%);
+  transition: 0.5s;
+}
+.header__burger span::before, .header__burger span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-6px);
+  display: block;
+  width: 100%;
+  height: 0.15em;
+  background-color: #97004f;
+  transform-origin: 50% 50%;
+  transition: background 0.5s, transform 0.5s;
+}
+@media only screen and (min-width: 576px) {
+  .header__burger span::before, .header__burger span::after {
+    transform: translateY(-8px);
+  }
+}
+.header__burger span::after {
+  transform: translateY(6px);
+}
+@media only screen and (min-width: 576px) {
+  .header__burger span::after {
+    transform: translateY(8px);
+  }
+}
+.header__burger.burger span {
+  background-color: transparent;
+}
+.header__burger.burger span::before, .header__burger.burger span::after {
+  background-color: #97004f;
+}
+.header__burger.burger span::before {
+  transform: rotate(-45deg) translateY(0);
+}
+.header__burger.burger span::after {
+  transform: rotate(45deg) translateY(0);
 }
 
 .presentation {
@@ -106,22 +192,38 @@ nav:has(.nav-header) {
 }
 
 .form-contact {
-  width: 80%;
+  width: 100%;
   margin: 8% auto;
+}
+@media only screen and (min-width: 576px) {
+  .form-contact {
+    width: 80%;
+  }
 }
 .form-contact h1 {
   margin-bottom: 3%;
 }
 .form-contact .flex-form {
   margin-top: 1%;
+  gap: 5%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  gap: 5%;
 }
-.form-contact .flex-form :first-child, .form-contact .flex-form :last-child {
-  flex: 0 1 50%;
+.form-contact .flex-form :last-child {
+  width: 100%;
+}
+@media only screen and (min-width: 1024px) {
+  .form-contact .flex-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+  }
+  .form-contact .flex-form :first-child, .form-contact .flex-form :last-child {
+    flex: 0 1 50%;
+  }
 }
 .form-contact input:not(.btn), .form-contact textarea {
   display: inline-block;
@@ -134,7 +236,7 @@ nav:has(.nav-header) {
 }
 .form-contact .btn {
   display: block;
-  width: 15%;
+  width: 80%;
   margin: 0 auto;
   background-color: #292929;
   color: #97004f;
@@ -142,6 +244,16 @@ nav:has(.nav-header) {
   border: none;
   border-radius: 5px;
   padding: 0.7em 0.4em 0.7em 0.4em;
+}
+@media only screen and (min-width: 576px) {
+  .form-contact .btn {
+    width: 20%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .form-contact .btn {
+    width: 15%;
+  }
 }
 
 * {

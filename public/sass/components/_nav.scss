@@ -4,6 +4,10 @@
 
 nav:has(.nav-header) {
     flex: 1;
+    display: none;
+    @include mixins.desktop{
+        display: block;
+    }
 }
 
 .nav-header {

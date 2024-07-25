@@ -10,12 +10,13 @@
     <script src="https://kit.fontawesome.com/878534cf28.js" crossorigin="anonymous"></script>
     <!-- inclut la feuille de style -->
     <link rel="stylesheet"  href="sass/style.css">
+    <script src="js/main.js"></script>
     <title><?php echo $title; ?></title>
 </head>
 <body>
     <div class="wrapper">
         <header class="header">
-            <h1>Portfolio</h1>
+            <h1><a href="index.php">Portfolio</a></h1>
             <nav>
                 <ul class="nav-header">
                     <li><a href="index.php">Accueil</a></li>
@@ -23,8 +24,14 @@
                     <li><a href="index.php?controller=contact&action=index">Contact</a></li>
                 </ul>
             </nav>
+                                 <!-- MENU BURGER -->
+            <div class="header__burger">
+                <span></span>
+            </div>
         </header>
+
         <main><?= $content ?></main>
+
         <footer class="footer">
             <ul class="social-footer">
                 <!-- facebook -->

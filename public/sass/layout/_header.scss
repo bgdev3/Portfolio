@@ -6,6 +6,6 @@
      
     h1 {
         flex: 1 1 auto;
-        color:color.$color_pink;
+       & > a { color:color.$color_pink; }
     }
 }
