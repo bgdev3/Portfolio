@@ -13,38 +13,38 @@
     <script  type="module" src="js/main.js"></script>
     <title><?php echo $title; ?></title>
 </head>
+
 <body>
-    <div class="wrapper">
-        <header class="header">
-            <h1><a href="index.php">Portfolio</a></h1>
-            <nav>
-                <ul class="nav-header">
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="index.php?controller=productions&action=index">Productions</a></li>
-                    <li><a href="index.php?controller=contact&action=index">Contact</a></li>
-                </ul>
-            </nav>
-                                 <!-- MENU BURGER -->
-            <div class="header__burger">
-                <span></span>
-            </div>
-        </header>
-
-        <main><?= $content ?></main>
-
-        <footer class="footer">
-            <ul class="social-footer">
-                <!-- facebook -->
-                <li><a href="https://www.facebook.com/boo.ka.5"><i class="fa-brands fa-facebook-f"></i></a></li>
-                <!-- LinkedIn -->
-                <li><a href="www.linkedin.com/in/guillaume-boukehaili-919656238"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                <!-- Github -->
-                <li><a href="github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
+    <header class="header">
+        <h1><a href="index.php">Portfolio</a></h1>
+        <nav>
+            <ul class="nav-header">
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="index.php?controller=productions&action=index">Productions</a></li>
+                <li><a href="index.php?controller=contact&action=index">Contact</a></li>
             </ul>
-            <div>
-                <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés</p>
-            </div>
+        </nav>
+                                <!-- MENU BURGER -->
+        <div class="header__burger">
+            <span></span>
+        </div>
+    </header>
+    
+    <main class="content"><?= $content ?></main>
+    
+    <footer class="footer">
+        <ul class="social-footer">
+            <!-- facebook -->
+            <li><a href="https://www.facebook.com/boo.ka.5"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <!-- LinkedIn -->
+            <li><a href="www.linkedin.com/in/guillaume-boukehaili-919656238"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <!-- Github -->
+            <li><a href="github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
+        </ul>
+        <div>
+            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés <a href="" class="hide-link"> admin</a></p>
+        </div>
         </footer>
-    </div>   
+
 </body>
 </html>

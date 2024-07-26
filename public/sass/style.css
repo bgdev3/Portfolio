@@ -12,17 +12,6 @@
   color: #97004f;
 }
 
-.footer {
-  position: relative;
-  bottom: 0;
-}
-@media only screen and (min-width: 1024px) {
-  .footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-  }
-}
 .footer ul {
   text-align: center;
 }
@@ -37,7 +26,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1%;
+  gap: 5%;
+}
+@media only screen and (min-width: 1024px) {
+  .footer .social-footer {
+    gap: 2%;
+  }
 }
 
 nav:has(.nav-header) {
@@ -331,7 +325,9 @@ nav:has(.nav-header) {
   }
 }
 .form-contact .msgError {
-  color: #9b1616;
+  display: block;
+  text-align: center;
+  color: #6d0f0f;
 }
 .form-contact .inputForm.validate {
   border: 1px solid #094709;
@@ -351,22 +347,31 @@ nav:has(.nav-header) {
 }
 
 html, body {
-  height: 100vh;
+  height: 100%;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   background-color: #131212;
   padding: 0 15px;
   opacity: 0;
   transition: 0.5s;
 }
 
-.wrapper {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+/****  permet de maintenir le footer en pied de page*/
+.content {
+  flex: 1 0 auto;
 }
 
+.footer {
+  flex-shrink: 0;
+}
+
+/************************/
 img {
   height: auto;
   width: 100%;
@@ -388,4 +393,24 @@ a {
 .delayBody {
   opacity: 1;
   transition: 0.5s;
+}
+
+.section-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+@media only screen and (min-width: 576px) {
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
+
+.errorForm {
+  text-align: center;
+  color: #6d0f0f;
+}
+
+.hide-link {
+  opacity: 0;
 }/*# sourceMappingURL=style.css.map */

@@ -2,16 +2,13 @@ export function verif() {
    
     let btnSend = document.getElementById('btnSend');
     let agree =  document.getElementById('agree');
-        let validationCheck = document.querySelector('input + small');
-        console.log(validationCheck);
+    let validationCheck = document.querySelector('input + small');
+
      function validateForm(e){
         const chps = document.querySelectorAll('[required]');
-        
-        console.log(chps);
-        e.preventDefault();
-
         let valid = true;
 
+        e.preventDefault();
         chps.forEach(el =>{
             el.addEventListener('focus', ()=>{
                 reset();
@@ -21,6 +18,7 @@ export function verif() {
                 validation(el);
             });
         });
+
         chps.forEach( el => {
             if(!validation(el))
                 valid = false;
@@ -60,5 +58,6 @@ export function verif() {
             span.remove();
      }
 
-     btnSend.addEventListener('click', validateForm);
+     if(btnSend)
+         btnSend.addEventListener('click', validateForm);
 }
