@@ -42,29 +42,66 @@
 
 nav:has(.nav-header) {
   flex: 1;
-  display: none;
-}
-@media only screen and (min-width: 1024px) {
-  nav:has(.nav-header) {
-    display: block;
-  }
 }
 
 .nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  opacity: 0;
+  background-color: #131212;
+  transition: 0.5s;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  gap: 4%;
 }
 .nav-header li::after {
   content: "";
   display: block;
-  border-bottom: 3px solid #97004f;
-  transform: scaleX(0);
-  transition: transform 250ms ease-in-out;
 }
-.nav-header li:hover::after {
-  transform: scaleX(1);
+.nav-header li a {
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+@media only screen and (min-width: 1024px) {
+  .nav-header {
+    position: initial;
+    height: initial;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 1;
+  }
+  .nav-header li a {
+    font-size: initial;
+    display: initial;
+    text-transform: inherit;
+    letter-spacing: 0;
+  }
+  .nav-header li::after {
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    border-bottom: 3px solid #97004f;
+  }
+  .nav-header li:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.show-menu {
+  opacity: 1;
+  z-index: 998;
+}
+
+.unScroll {
+  overflow-y: hidden;
 }
 
 .header__burger {
@@ -73,6 +110,7 @@ nav:has(.nav-header) {
   position: relative;
   z-index: 999;
   transition: transform 0.5s;
+  z-index: 999;
 }
 @media only screen and (min-width: 576px) {
   .header__burger {
@@ -159,32 +197,66 @@ nav:has(.nav-header) {
 
 .name-style {
   flex: 1 0 50%;
-  font-size: 4em;
+  font-size: 2em;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
 }
+@media only screen and (min-width: 576px) {
+  .name-style {
+    font-size: 4em;
+  }
+}
 .name-style .name {
   text-transform: uppercase;
-  font-size: 3.5rem;
+  font-size: 1.75rem;
+}
+@media only screen and (min-width: 576px) {
+  .name-style .name {
+    font-size: 3.5rem;
+  }
 }
 .name-style .work {
-  font-size: 2rem;
+  font-size: 1.15rem;
   text-transform: uppercase;
   letter-spacing: 0.5em;
 }
 .name-style .work span {
   color: #97004f;
 }
+@media only screen and (min-width: 576px) {
+  .name-style .work {
+    font-size: 1.72rem;
+  }
+}
 
 .text-style {
+  margin: 10% 0;
   line-height: 2em;
 }
 .text-style span {
-  font-size: 2em;
-  line-height: 2em;
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
   color: #97004f;
+}
+@media only screen and (min-width: 1024px) {
+  .text-style span {
+    font-size: 2rem;
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .text-style {
+    width: 80%;
+    margin: 10% auto;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .text-style {
+    margin: 0;
+  }
 }
 
 .production-container {
@@ -225,35 +297,50 @@ nav:has(.nav-header) {
     flex: 0 1 50%;
   }
 }
-.form-contact input:not(.btn), .form-contact textarea {
+.form-contact .inputForm {
+  position: relative;
   display: inline-block;
   padding: 2%;
   width: 100%;
-  background-color: #292929;
+  background-color: #1b1b1b;
   margin-bottom: 4%;
   border-radius: 5px;
-  border: none;
+  border: 1px solid transparent;
 }
-.form-contact .btn {
+.form-contact .btnForm {
   display: block;
   width: 80%;
-  margin: 0 auto;
-  background-color: #292929;
+  margin: 5% auto;
+  background-color: #1b1b1b;
   color: #97004f;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   padding: 0.7em 0.4em 0.7em 0.4em;
+  cursor: pointer;
 }
 @media only screen and (min-width: 576px) {
-  .form-contact .btn {
-    width: 20%;
+  .form-contact .btnForm {
+    width: 30%;
   }
 }
 @media only screen and (min-width: 1024px) {
-  .form-contact .btn {
+  .form-contact .btnForm {
+    margin: 2% auto;
     width: 15%;
   }
+}
+.form-contact .msgError {
+  color: #9b1616;
+}
+.form-contact .inputForm.validate {
+  border: 1px solid #094709;
+}
+.form-contact .inputForm.error {
+  border: 1px solid #6d0f0f;
+}
+.form-contact .errorCheck {
+  color: #6d0f0f;
 }
 
 * {
@@ -270,6 +357,8 @@ html, body {
 body {
   background-color: #131212;
   padding: 0 15px;
+  opacity: 0;
+  transition: 0.5s;
 }
 
 .wrapper {
@@ -294,4 +383,9 @@ li {
 
 a {
   text-decoration: none;
+}
+
+.delayBody {
+  opacity: 1;
+  transition: 0.5s;
 }/*# sourceMappingURL=style.css.map */

@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/878534cf28.js" crossorigin="anonymous"></script>
     <!-- inclut la feuille de style -->
     <link rel="stylesheet"  href="sass/style.css">
-    <script src="js/main.js"></script>
+    <script  type="module" src="js/main.js"></script>
     <title><?php echo $title; ?></title>
 </head>
 <body>

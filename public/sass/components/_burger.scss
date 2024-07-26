@@ -9,7 +9,8 @@
     position: relative;
     z-index: 999;
     transition: transform .5s;
-
+    z-index: 999; 
+    
     @include mixins.tablet{
       transform: translateX(0%);
       width: 4.5%;

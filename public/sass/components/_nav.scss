@@ -4,25 +4,64 @@
 
 nav:has(.nav-header) {
     flex: 1;
-    display: none;
-    @include mixins.desktop{
-        display: block;
-    }
 }
 
 .nav-header {
-    @include mixins.flex-row(row, space-between, center);
-    
+    position:fixed;
+    top: 0;
+    left: 0;
+    height:100vh;
+    width: 100%;
+    opacity: 0;
+    background-color: color.$color_bg;
+    transition: .5s;
+    @include mixins.flex-row(column, center, center);
+    gap: 4%;
+
+    li::after{
+        content: '';
+        display: block;
+      
+    }
+   
+    li a {
+        display: block;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: .5em;
+    }
+
+    @include mixins.desktop() {
+       
+        position: initial;
+        height: initial;
+        @include mixins.flex-row(row, space-between, center);
+        opacity: 1;
+
+        li a {
+            font-size: initial;
+            display: initial;
+            text-transform: inherit;
+            letter-spacing: 0;
+        }
+
         li::after{
-            content: '';
-            display: block;
-            border-bottom: 3px solid color.$color_pink;
             transform: scaleX(0);
             transition: transform 250ms ease-in-out;
+            border-bottom: 3px solid color.$color_pink;
         }
         
         li:hover::after{
         transform: scaleX(1);
-        }
+        }  
+    }
 }
 
+.show-menu{
+    opacity: 1;
+    z-index: 998;
+}
+
+.unScroll{
+    overflow-y: hidden;
+}
