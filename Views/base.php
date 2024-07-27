@@ -42,7 +42,7 @@
             <li><a href="github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
-            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés <a href="" class="hide-link"> admin</a></p>
+            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés <a href="index.php?controller=adminProduction&action=index" class="hide-link"> admin</a></p>
         </div>
         </footer>
 

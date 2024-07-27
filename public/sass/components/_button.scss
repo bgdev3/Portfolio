@@ -1,0 +1,22 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+.btnForm{
+    display: block;
+    width: 80%;
+    margin: 5% auto;
+    @include mixins.tablet{ 
+       
+        width: 30%; }
+    @include mixins.desktop{
+        margin: 2% auto;
+         width: 15%; }
+  
+    background-color: color.$color_input;
+    color: color.$color_pink;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding:.7em .4em .7em .4em;
+    cursor: pointer;
+}

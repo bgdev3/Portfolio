@@ -177,6 +177,30 @@ nav:has(.nav-header) {
   transform: rotate(45deg) translateY(0);
 }
 
+.btnForm {
+  display: block;
+  width: 80%;
+  margin: 5% auto;
+  background-color: #1b1b1b;
+  color: #97004f;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 0.7em 0.4em 0.7em 0.4em;
+  cursor: pointer;
+}
+@media only screen and (min-width: 576px) {
+  .btnForm {
+    width: 30%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .btnForm {
+    margin: 2% auto;
+    width: 15%;
+  }
+}
+
 .presentation {
   margin: 8% 0;
 }
@@ -291,7 +315,8 @@ nav:has(.nav-header) {
     flex: 0 1 50%;
   }
 }
-.form-contact .inputForm {
+
+.inputForm {
   position: relative;
   display: inline-block;
   padding: 2%;
@@ -301,42 +326,18 @@ nav:has(.nav-header) {
   border-radius: 5px;
   border: 1px solid transparent;
 }
-.form-contact .btnForm {
+
+form:has(.form-admin) {
+  width: 50%;
+  margin: 8% auto;
+}
+
+.form-admin .inputForm {
+  padding: 1.5%;
+}
+.form-admin .btnForm {
   display: block;
-  width: 80%;
-  margin: 5% auto;
-  background-color: #1b1b1b;
-  color: #97004f;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  padding: 0.7em 0.4em 0.7em 0.4em;
-  cursor: pointer;
-}
-@media only screen and (min-width: 576px) {
-  .form-contact .btnForm {
-    width: 30%;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .form-contact .btnForm {
-    margin: 2% auto;
-    width: 15%;
-  }
-}
-.form-contact .msgError {
-  display: block;
-  text-align: center;
-  color: #6d0f0f;
-}
-.form-contact .inputForm.validate {
-  border: 1px solid #094709;
-}
-.form-contact .inputForm.error {
-  border: 1px solid #6d0f0f;
-}
-.form-contact .errorCheck {
-  color: #6d0f0f;
+  width: 100%;
 }
 
 * {
@@ -346,7 +347,7 @@ nav:has(.nav-header) {
   font-style: normal;
 }
 
-html, body {
+html {
   height: 100%;
 }
 
@@ -406,11 +407,29 @@ a {
   }
 }
 
+.hide-link {
+  opacity: 0;
+}
+
 .errorForm {
   text-align: center;
   color: #6d0f0f;
 }
 
-.hide-link {
-  opacity: 0;
+.msgError {
+  display: block;
+  text-align: center;
+  color: #6d0f0f;
+}
+
+.inputForm.validate {
+  border: 1px solid #094709;
+}
+
+.inputForm.error {
+  border: 1px solid #6d0f0f;
+}
+
+.errorCheck {
+  color: #6d0f0f;
 }/*# sourceMappingURL=style.css.map */

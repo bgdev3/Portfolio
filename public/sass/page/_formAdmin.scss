@@ -1,0 +1,19 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+form:has(.form-admin){
+    width: 50%;
+   margin: 8% auto;
+}
+
+.form-admin{
+   
+    .inputForm{
+        padding: 1.5%;
+    }
+
+    .btnForm{
+        display: block;
+        width: 100%;
+    }
+}

@@ -1,6 +1,6 @@
 export function verif() {
    
-    let btnSend = document.getElementById('btnSend');
+    let btnSend = document.querySelectorAll('btnSend');
     let agree =  document.getElementById('agree');
     let validationCheck = document.querySelector('input + small');
 
@@ -58,6 +58,12 @@ export function verif() {
             span.remove();
      }
 
-     if(btnSend)
-         btnSend.addEventListener('click', validateForm);
+     
+        btnSend.forEach(btn=>{
+            btn == null ?  btn == 'undefined' : btn.addEventListener('click', validateForm);
+        });
+   
+     
+    //  if(btnSend)
+    //      btnSend.addEventListener('click', validateForm);
 }

@@ -4,8 +4,7 @@ export function burger() {
         let burger = document.querySelector('.header__burger');
         let nav = document.querySelector('.nav-header');
         let win = document.querySelector('html');
-        console.log(burger);
-
+        
         if(burger) {
             burger.addEventListener('click', ()=>{
                 burger.classList.toggle('burger');

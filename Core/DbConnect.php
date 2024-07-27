@@ -23,7 +23,7 @@ class DbConnect
         // Si la connexion se déroule bien on se connecte
         // sinon on capture une exception
         try {
-            $this->connexion = new PDO('mysqlhost=' . self::SERVEUR . ';dbname=' . self::BASE, self::USER, self::PASSWORD);
+            $this->connexion = new PDO('mysql:host=' . self::SERVEUR . ';dbname=' . self::BASE, self::USER, self::PASSWORD);
             // Activation des erreurs PDO
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // Retour des requêtes en tableau objet

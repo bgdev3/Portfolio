@@ -8,7 +8,7 @@ class Production
     private $title;
     private $path;
     private $description;
-    private $createAt;
+    private $createdAt;
     private $idUser;
     
 
@@ -95,9 +95,9 @@ class Production
     /**
      * Get the value of createAt
      */ 
-    public function getCreateAt()
+    public function getCreatedAt()
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
     /**
@@ -105,9 +105,9 @@ class Production
      *
      * @return  self
      */ 
-    public function setCreateAt($createAt)
+    public function setCreatedAt($createdAt)
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
