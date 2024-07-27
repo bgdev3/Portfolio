@@ -1,19 +1,25 @@
 @use '../utils/mixins';
 @use '../utils/variables' as color ;
 
-form:has(.form-admin){
-    width: 50%;
-   margin: 8% auto;
-}
 
 .form-admin{
-   
+    width: 100%;
+    @include mixins.tablet{ width: 80%;}
+    @include mixins.desktop{ width: 60%;}
+
+    margin: 8% auto;
+
+    & h1 { margin-bottom: 8%;
+        @include mixins.desktop{ margin-bottom: 3%;} 
+    }
+
     .inputForm{
-        padding: 1.5%;
+        padding: 2%;
+        @include mixins.desktop{ padding: 1.25%;}
     }
 
     .btnForm{
-        display: block;
-        width: 100%;
+        margin-top: 10%;
+        @include mixins.tablet{ margin-top: initial;}
     }
 }

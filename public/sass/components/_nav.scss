@@ -13,6 +13,7 @@ nav:has(.nav-header) {
     height:100vh;
     width: 100%;
     opacity: 0;
+    z-index: -1;
     background-color: color.$color_bg;
     transition: .5s;
     @include mixins.flex-row(column, center, center);

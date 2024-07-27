@@ -45,6 +45,7 @@ nav:has(.nav-header) {
   height: 100vh;
   width: 100%;
   opacity: 0;
+  z-index: -1;
   background-color: #131212;
   transition: 0.5s;
   display: flex;
@@ -327,17 +328,43 @@ nav:has(.nav-header) {
   border: 1px solid transparent;
 }
 
-form:has(.form-admin) {
-  width: 50%;
+.form-admin {
+  width: 100%;
   margin: 8% auto;
 }
-
+@media only screen and (min-width: 576px) {
+  .form-admin {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .form-admin {
+    width: 60%;
+  }
+}
+.form-admin h1 {
+  margin-bottom: 8%;
+}
+@media only screen and (min-width: 1024px) {
+  .form-admin h1 {
+    margin-bottom: 3%;
+  }
+}
 .form-admin .inputForm {
-  padding: 1.5%;
+  padding: 2%;
+}
+@media only screen and (min-width: 1024px) {
+  .form-admin .inputForm {
+    padding: 1.25%;
+  }
 }
 .form-admin .btnForm {
-  display: block;
-  width: 100%;
+  margin-top: 10%;
+}
+@media only screen and (min-width: 576px) {
+  .form-admin .btnForm {
+    margin-top: initial;
+  }
 }
 
 * {
@@ -347,7 +374,7 @@ form:has(.form-admin) {
   font-style: normal;
 }
 
-html {
+html, body {
   height: 100%;
 }
 

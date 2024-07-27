@@ -7,6 +7,11 @@ use portfolio\Entities\Pictures;
 
 class PicturesModel extends DbConnect
 {
+    /**
+     * Créer un nouvel enregistrement
+     * 
+     * @param object $picture Injection de dépendance
+     */
     public function create(Pictures $picture)
     {
         $this->request = $this->connexion->prepare("INSERT INTO pictures VALUES (NULL, :size_slide, :path, :idProduction)");
@@ -17,7 +22,9 @@ class PicturesModel extends DbConnect
         $this->ExecuteTryCatch();
     }
 
-
+    /**
+     * Teste l'execution de la requête dans un TryCatch
+     */
     private function ExecuteTryCatch(): void
     {
         try {

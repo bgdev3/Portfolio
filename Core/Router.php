@@ -11,7 +11,7 @@ class Router
         $controller = (isset($_GET['controller'])) ? ucfirst(array_shift($_GET)) : 'Home';
         $controller = '\\Portfolio\\Controllers\\' . $controller . 'Controller';
 
-          // On teste si la superGlobale est déclaré et non vide puis on ajoute le premier index 
+        // On teste si la superGlobale est déclaré et non vide puis on ajoute le premier index 
         // à la variable $action, sinon index.
         $action = (isset($_GET['action'])) ? array_shift($_GET) : 'index';
         

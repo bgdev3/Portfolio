@@ -1,3 +1,5 @@
+// Charge les modules une fois le DOM chargé
+
 window.addEventListener('DOMContentLoaded', async () => {
 
     document.querySelector('body').classList.add('delayBody'); 

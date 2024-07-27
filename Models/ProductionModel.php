@@ -1,22 +1,35 @@
 <?php 
-
 namespace Portfolio\Models;
 
 use Portfolio\Core\DbConnect;
-use Exception;
 use Portfolio\Entities\Production;
+use Exception;
 
 class ProductionModel  extends DbConnect
 {
 
-    public function find($id): object
+    /**
+     * Récupère un eneregistrement par le titre de la création
+     * 
+     * @param string $title Titre de la production à récupérer
+     * @return object
+     */
+    public function find(string $title): object
     {
-        $this->request = $this->connexion->prepare('SELECT * FROM production WHERE id = :id');
-        $this->request->bindParam(':id', $id);
+        $this->request = $this->connexion->prepare('SELECT * FROM production WHERE title = :title');
+        $this->request->bindParam(':title', $title);
+        $this->request->execute();
+
         $prod = $this->request->fetch();
-         return $prod;
+        return $prod;
     }
-    // Créé un nouvel enregistrement dans la table
+
+    
+    /**
+     * Créé un nouvel enregistrement dans la table
+     * 
+     * @param object $production Injection de dépendance
+     */
     public function create(Production $production): void
     {
         $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :description, :createdAt, :idUser)');
@@ -28,6 +41,24 @@ class ProductionModel  extends DbConnect
         $this->ExecuteTryCatch();
     }
 
+
+    /**
+     * Supprime un enregistrement
+     * 
+     * @param int $id Id de l'enregistrement à supprimer
+     */
+    public function delete($id)
+    {
+        $this->request = $this->connexion->prepare('DELETE FROM production WHERE idProduction = :idProduction');
+        $this->request->bindParam(':idProduction', $id);
+        $this->ExecuteTryCatch();
+    }
+
+
+    /**
+     * Teste l'execution de l arequpete dans un try catch
+     *
+     */
     private function ExecuteTryCatch(): void
     {
         try {

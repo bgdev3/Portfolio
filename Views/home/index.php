@@ -1,3 +1,4 @@
+                                                    <!-- Vue de la page d'accueil -->
 <?php
 $title = 'Accueil';
 ?>
