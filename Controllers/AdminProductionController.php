@@ -9,13 +9,20 @@ session_start();
 class AdminProductionController extends Controller
 {
 
+    public function index(): void{
+        
+        $model = new ProductionModel();
+        $list = $model->findAll();
+
+        $this->render('admin/productions/index', ['list' => $list]);
+    }
     /**
      * Traite les données formulaire 
      * Récupère les données en POST, les traites puis hydate l'entité afin de les stocker en BDD
      * puis renvoi à la vue.
      * 
      */
-    public function index(): void
+    public function add(): void
     {
         global $error;
         // Si les champs POST et FILES ne sont pas vides
@@ -53,7 +60,7 @@ class AdminProductionController extends Controller
         }
         $this->render('admin/productions/add', ['error' => $error]);
     }
-   
+    
 
      /**
      * Vérifie que les données du formulaire ne sont pas vides.
@@ -210,5 +217,10 @@ class AdminProductionController extends Controller
             imagedestroy($new_image);
         }
         return  $destination;
+    }
+
+    public function update(): void
+    {
+
     }
 }

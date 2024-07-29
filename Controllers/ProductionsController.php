@@ -12,10 +12,10 @@ class ProductionsController extends Controller
     {
 
        global $pictures;
-        if (isset($_SESSION['data'])) {
+       
             $model = new ProductionModel();
             $pictures = $model->findAll();
-        }
+      
         
         $this->render('productions/index', ['pictures' => $pictures]);
     }

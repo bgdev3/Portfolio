@@ -1,0 +1,54 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color;
+
+.realisation-admin{
+
+    width: 80%;
+    margin: 8% auto;
+
+    & h1{
+        margin-bottom: 3%;
+    }
+    & > a{
+        text-align: center;
+        display: block;
+        padding: .5em;
+        border: 1px solid color.$color_pink;
+        width: 25%;
+        margin: 5% auto;
+        transition: .5s;
+        &:hover{
+            border: 1px solid color.$color_font;
+            color: color.$color_pink;
+        }
+    }
+   
+
+    table{
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    th{
+        color: color.$color_pink;
+    }
+
+    tr:nth-child(even){
+        background-color: color.$color_input;
+    }
+
+    tr:hover:not(thead tr:first-child){
+        background-color: #252424;;
+    }
+    th, td{
+        border: 1px solid #252424;
+       padding: .5em;
+    }
+
+    .color-delete{
+        color: color.$color_pink;
+    }
+}
+
+
+

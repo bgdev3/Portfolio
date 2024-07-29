@@ -420,6 +420,48 @@ nav:has(.nav-header) {
   border: 1px solid transparent;
 }
 
+.realisation-admin {
+  width: 80%;
+  margin: 8% auto;
+}
+.realisation-admin h1 {
+  margin-bottom: 3%;
+}
+.realisation-admin > a {
+  text-align: center;
+  display: block;
+  padding: 0.5em;
+  border: 1px solid #97004f;
+  width: 25%;
+  margin: 5% auto;
+  transition: 0.5s;
+}
+.realisation-admin > a:hover {
+  border: 1px solid #b6b6b6;
+  color: #97004f;
+}
+.realisation-admin table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.realisation-admin th {
+  color: #97004f;
+}
+.realisation-admin tr:nth-child(even) {
+  background-color: #1b1b1b;
+}
+.realisation-admin tr:hover:not(thead tr:first-child) {
+  background-color: #252424;
+}
+.realisation-admin th, .realisation-admin td {
+  border: 1px solid #252424;
+  padding: 0.5em;
+}
+.realisation-admin .color-delete {
+  color: #97004f;
+}
+
 .form-admin {
   width: 100%;
   margin: 8% auto;
@@ -511,7 +553,7 @@ a {
 
 .delayBody {
   opacity: 1;
-  transition: 0.5s;
+  transition: 1s;
 }
 
 .section-title {
