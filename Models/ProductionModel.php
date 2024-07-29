@@ -14,14 +14,12 @@ class ProductionModel  extends DbConnect
      * @param string $title Titre de la production à récupérer
      * @return object
      */
-    public function find(string $title): object
+    public function findAll(): array
     {
-        $this->request = $this->connexion->prepare('SELECT * FROM production WHERE title = :title');
-        $this->request->bindParam(':title', $title);
+        $this->request = $this->connexion->prepare('SELECT * FROM production');
         $this->request->execute();
-
-        $prod = $this->request->fetch();
-        return $prod;
+        $list = $this->request->fetchAll();
+        return $list;
     }
 
     
@@ -32,9 +30,10 @@ class ProductionModel  extends DbConnect
      */
     public function create(Production $production): void
     {
-        $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :description, :createdAt, :idUser)');
+        $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :description, :path, :createdAt, :idUser)');
         $this->request->bindValue(':title', $production->getTitle());
         $this->request->bindValue(':description', $production->getDescription());
+        $this->request->bindValue(':path', $production->getPath());
         $this->request->bindValue(':createdAt', $production->getCreatedAt());
         $this->request->bindValue(':idUser', $production->getIdUser());
 

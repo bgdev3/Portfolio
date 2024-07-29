@@ -1,9 +1,7 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Entities\Pictures;
 use Portfolio\Entities\Production;
-use Portfolio\Models\PicturesModel;
 use Portfolio\Models\ProductionModel;
 
 session_start();
@@ -23,67 +21,32 @@ class AdminProductionController extends Controller
         // Si les champs POST et FILES ne sont pas vides
         if ($this->validatePost($_POST, ['title', 'description', 'createdAt']) && $this->validateFiles($_FILES, ['file'])) {
             // Type de fichier uploadé acceptés
-            $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp');
+            $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
             // S'il y à une erreur elle est récupéré
             $error = empty($erreur) ? $this->errorUpload($_FILES, ['file'], $type) : "" ;
             // Formate le nom de fichier stocké dans un fichier séparé
             $file = $this->formateFile($_FILES, ['file']);
 
-             // Array associatif de données permettant de stocker le bon format d'image RWD
-             $dataTest = array('normal'=> array('w' => 1350,'h' => 495, 'normal/'),
-             'medium' => array('w' => 800,'h' => 300, 'medium/'),
-             'small' => array('w' => 500,'h' => 183, 'small/'));
-            
             // Si l'erreur est vide
             if (empty($error)) {
-
-                // hydrate entité
-                $production = new Production();
-                $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
-                $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
-                $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
-                $production->setIdUser(1);
-                
-                $productionModel = new ProductionModel();
-                $productionModel->create($production);
-
-                // Récupère l'enregistrement afin d'obtenir la clé primaire 
-                // et la passé en clé étrangère à la relation
-                $prod = $productionModel->find(htmlspecialchars($_POST['title'], ENT_QUOTES));
-                $id = $prod->idProduction;
-              
-                 // Boucle sur le premier index
-                 foreach ($dataTest as $key => $val) {
-                  
-                    // Permet de stocker les données du sous-tableau
-                    $size = [];
-                    // Si l'index est bien présent
-                    if (is_array($val)) {
-                        // On assigne dans $size les dimensions et le nom du sous dossier
-                        foreach ($val as $k => $value) {
-                           array_push($size, $value);
-                        }
-                    }
-
-                    $path =  $size[2] . $file;                              // (small/medium/normal) + le nom du fichier formaté
-                    // Récupère le path de l'image
-                    $path = $this->imageSize($path, $size[0],  $size[1]);
-                    // Si la méthode retourne une erreur ( si le fichier est déja existant)
-                    if (!empty($_SESSION['error'])) {
-                        // Supprime l'enregistrement de la table production et assigne l'erreur
-                        $productionModel->delete($id);
-                        $error = $_SESSION['error'];
-                    } else {
-                        // Sino hydrate l'entité
-                        $picture = new Pictures();
-                        $picture->setPath($path);
-                        $picture->setSize_slide($key);
-                        $picture->setIdProduction($id); 
-
-                        $pictureModel = new PicturesModel();
-                        $pictureModel->create($picture);
-                    }
-                }
+                // récupère le chemin de l'image formaté
+                $path = $this->imageSize($file, 500,  500);
+                // Si l'image est uploadé et déplacé
+                if (empty($_SESSION['error'])) {
+                    // hydrate entité
+                    $production = new Production();
+                    $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
+                    $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
+                    $production->setPath($path);
+                    $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
+                    $production->setIdUser(1);
+                    
+                    $productionModel = new ProductionModel();
+                    $productionModel->create($production);
+                // Récupère et affiche le message de l'image dupliqué
+                } else {
+                    $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
+                }                                
             } 
         } else {
             $error = (!empty($_POST)) ? 'Merci de remplir correctment les champs' : '';
@@ -203,16 +166,15 @@ class AdminProductionController extends Controller
      * @param int [$w] Largeur de redimensionnement de l'image voulu
      * @param int [$h] Hauteur de redimensionnement de l'image voulu
      * 
-     * @return string [$destination] Retourrne le chemin de l'image redimensionnée
+     * @return string [$destination] Retourne le chemin de l'image redimensionnée
      */
     private function imageSize($path, $w, $h): string
     {
-        // Récupère le dirname, l'extension, et le nom du fichier
-        $dir = pathinfo($path, PATHINFO_DIRNAME);
+        // Récupère l'extension, et le nom du fichier
         $ext =  pathinfo($path, PATHINFO_EXTENSION);
         $name = pathinfo($path, PATHINFO_FILENAME);
         // Crée le chemin du fichier
-        $destination =  'img/' . $dir . '/' . $name . '.webp';
+        $destination =  'img/'. $name . '.webp';
 
         // Déplace le fichier dans le dossier correspondant s'il n'est pas présent
         if (file_exists( $destination)) {
@@ -220,12 +182,8 @@ class AdminProductionController extends Controller
             $_SESSION['error'] = $name . '.webp' . " déja existant !";
         } else {
 
-            move_uploaded_file($_FILES['file']["tmp_name"],  'img/normal/'. $name . '.webp');
+            move_uploaded_file($_FILES['file']["tmp_name"],  'img/'. $name . '.webp');
         
-            // Copie le fichier dans des dossier correspondant le RWD
-            $src = 'img/normal/' . $name. '.webp';
-            copy($src, $destination);
-            
             // Récupère les dimension du fichier source
             $size = getimagesize($destination);
             $width = $size[0];
@@ -246,7 +204,7 @@ class AdminProductionController extends Controller
             imagecopyresampled($new_image, $image, 0, 0, 0, 0, $w, $h, $width, $height);
             // Créer l'image dans le format voulu
             // en appelant la bonne méthode image**
-            $handler['new'][$ext]($new_image, $destination, 100);
+            $handler['new'][$ext]($new_image, $destination, 9);
         
             // Détruit l'image source de la mémoire
             imagedestroy($new_image);
