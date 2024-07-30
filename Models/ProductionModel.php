@@ -9,21 +9,6 @@ class ProductionModel  extends DbConnect
 {
 
     /**
-     * Récupère un eneregistrement par le titre de la création
-     * 
-     * @param string $title Titre de la production à récupérer
-     * @return object
-     */
-    public function findAll(): array
-    {
-        $this->request = $this->connexion->prepare('SELECT * FROM production');
-        $this->request->execute();
-        $list = $this->request->fetchAll();
-        return $list;
-    }
-
-    
-    /**
      * Créé un nouvel enregistrement dans la table
      * 
      * @param object $production Injection de dépendance
@@ -40,6 +25,57 @@ class ProductionModel  extends DbConnect
         $this->ExecuteTryCatch();
     }
 
+
+    
+    /**
+     * Récupère tous les enregistrements
+     * 
+     * @return array
+     */
+    public function findAll(): array
+    {
+        $this->request = $this->connexion->prepare('SELECT * FROM production');
+        $this->request->execute();
+        $list = $this->request->fetchAll();
+        return $list;
+    }
+
+
+    /**
+     * Récupère un enregistrement par l'id correspondnat
+     * 
+     *@param int $id correspondant de l'enregistrement sélectionné
+     * @return object
+     */
+    public function find(int $id): object
+    {
+        $this->request = $this->connexion->prepare('SELECT * FROM production WHERE idProduction = :id');
+        $this->request->bindParam(':id', $id);
+        $this->request->execute();
+        $prod = $this->request->fetch();
+        return $prod;
+    }
+
+
+    /**
+     * Récupère un enregistrement par l'id correspondnat
+     * 
+     *@param int $id correspondant de l'enregistrement sélectionné
+     * @return object
+     */
+    public function update(int $id, Production $production)
+    {
+        $this->request = $this->connexion->prepare('UPDATE production SET title = :title, description = :description, path = :path, 
+        createdAt = :createdAt WHERE idProduction = :id');
+
+        $this->request->bindValue(':id', $id);
+        $this->request->bindValue(':title', $production->getTitle());
+        $this->request->bindValue(':description', $production->getDescription());
+        $this->request->bindValue(':path', $production->getPath());
+        $this->request->bindValue(':createdAt', $production->getCreatedAt());
+        $this->ExecuteTryCatch();
+       
+    }
 
     /**
      * Supprime un enregistrement

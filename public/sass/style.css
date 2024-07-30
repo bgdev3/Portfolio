@@ -501,6 +501,18 @@ nav:has(.nav-header) {
   }
 }
 
+.update-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5%;
+}
+.update-img img {
+  width: 15%;
+  margin-bottom: 5%;
+  display: inline;
+}
+
 * {
   box-sizing: border-box;
   color: #b6b6b6;

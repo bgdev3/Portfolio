@@ -9,6 +9,10 @@ session_start();
 class AdminProductionController extends Controller
 {
 
+    
+    /**
+     * Récupère les différentes réalisations stockées
+     */
     public function index(): void{
         
         $model = new ProductionModel();
@@ -16,6 +20,8 @@ class AdminProductionController extends Controller
 
         $this->render('admin/productions/index', ['list' => $list]);
     }
+
+
     /**
      * Traite les données formulaire 
      * Récupère les données en POST, les traites puis hydate l'entité afin de les stocker en BDD
@@ -61,6 +67,83 @@ class AdminProductionController extends Controller
         $this->render('admin/productions/add', ['error' => $error]);
     }
     
+
+    /**
+     * Met à jour la réalisation selectionné
+     * 
+     * @param int $id Id correspondant à l'enregistrement à mettre à jour
+     */
+    public function update($id): void
+    {
+        global $error;
+        // Si les champs ne sont pas vides
+        if ($this->validatePost($_POST, ['title', 'description', 'createdAt', 'hidden'])) {
+
+            // Hydrate l'entité
+            $production = new Production();
+            $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
+            $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
+            $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
+            $production->setIdUser(1);
+
+            // Si l'image ets valide
+            if($this->validateFiles($_FILES, ['file'])) {
+                // Type de fichier uploadé acceptés
+                $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
+                // S'il y à une erreur elle est récupéré
+                $error = empty($erreur) ? $this->errorUpload($_FILES, ['file'], $type) : "" ;
+                // Formate le nom de fichier stocké dans un fichier séparé
+                $file = $this->formateFile($_FILES, ['file']);
+                
+                // S'il n'y a pas d'erreur
+                if(empty($error)) {
+                    // récupère le chemin de l'image formaté
+                    $path = $this->imageSize($file, 500,  500);
+                    // Si l'image est uploadé et déplacé
+                    if (empty($_SESSION['error'])) {
+                        $production->setPath($path);
+                    // Sinon assigne l'erreur
+                    } else {
+                        $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
+                    }
+                } 
+            // Sinon assigne l'image par défaut
+             } else {
+                $production->setPath($_POST['hidden']);
+            }                                
+            // Mise à jour de la bdd
+            $productionModel = new ProductionModel();
+            $productionModel->update($id, $production);
+        // Si les champs ne sont pas correctement remplis
+        } else {
+            $error = (!empty($_POST)) ? 'Merci de remplir correctment les champs' : '';
+        }
+        // Récupère l'enregistrement correspondant par l'id
+        if (isset($id)) {
+            $model = new ProductionModel();
+            $realisation = $model->find($id);
+        }
+       
+        
+        // Renvois vers la vue
+        $this->render('admin/productions/update', ['realisation' => $realisation, 'error' => $error]);
+    }
+
+
+    /**
+     * Supprime l'enregistrement sélectionné en bdd
+     * 
+     * @param int $id Id correspondant à l'enregistrement à supprimer
+     */
+    public function delete(int $id): void
+    {
+        if (isset($id)) {
+            $model = new ProductionModel();
+            $model->delete($id);
+            header('location:index.php?controller=adminProduction&action=index');
+        }
+    }
+
 
      /**
      * Vérifie que les données du formulaire ne sont pas vides.
@@ -217,10 +300,5 @@ class AdminProductionController extends Controller
             imagedestroy($new_image);
         }
         return  $destination;
-    }
-
-    public function update(): void
-    {
-
     }
 }

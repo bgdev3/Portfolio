@@ -1,5 +1,5 @@
 <?php
-$page = 'Réalisations';
+$title = 'Réalisations';
 ?>
 
 <section>
@@ -24,8 +24,8 @@ $page = 'Réalisations';
                                 <td class="data"><?php echo $val->title; ?></td>
                                 <td class="data"><?php echo $val->description; ?></td>
                                 <td class="data"><?php echo $val->createdAt; ?></td>
-                                <td class="flexTd"><a href="" class=""><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href=""><i class="fa-regular fa-circle-xmark color-delete"></i></a></td>
+                                <td class="flexTd"><a href="index.php?controller=adminProduction&action=update&id=<?php echo $val->idProduction; ?>"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="index.php?controller=adminProduction&action=delete&id=<?php echo $val->idProduction; ?>"><i class="fa-regular fa-circle-xmark color-delete"></i></a></td>
                             </tr>
                         <?php  } 
                         ?>

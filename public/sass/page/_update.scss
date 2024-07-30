@@ -1,0 +1,14 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+.update-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5%;
+    img{
+        width: 15%;
+      margin-bottom: 5%;
+        display: inline;
+    }  
+}
