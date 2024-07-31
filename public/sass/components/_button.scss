@@ -11,12 +11,16 @@
     @include mixins.desktop{
         margin: 2% auto;
          width: 15%; }
-  
+    border: 1px solid transparent;
     background-color: color.$color_input;
     color: color.$color_pink;
     font-weight: bold;
-    border: none;
     border-radius: 5px;
     padding:.7em .4em .7em .4em;
     cursor: pointer;
+    transition: .5s;
+    &:hover{
+        border: 1px solid color.$color_pink;
+        color: color.$color_font;
+    }
 }

@@ -182,13 +182,14 @@ nav:has(.nav-header) {
   display: block;
   width: 80%;
   margin: 5% auto;
+  border: 1px solid transparent;
   background-color: #1b1b1b;
   color: #97004f;
   font-weight: bold;
-  border: none;
   border-radius: 5px;
   padding: 0.7em 0.4em 0.7em 0.4em;
   cursor: pointer;
+  transition: 0.5s;
 }
 @media only screen and (min-width: 576px) {
   .btnForm {
@@ -200,6 +201,10 @@ nav:has(.nav-header) {
     margin: 2% auto;
     width: 15%;
   }
+}
+.btnForm:hover {
+  border: 1px solid #97004f;
+  color: #b6b6b6;
 }
 
 .presentation {
@@ -432,13 +437,24 @@ nav:has(.nav-header) {
   display: block;
   padding: 0.5em;
   border: 1px solid #97004f;
-  width: 25%;
-  margin: 5% auto;
+  width: 100%;
+  margin: 8% auto;
   transition: 0.5s;
 }
 .realisation-admin > a:hover {
   border: 1px solid #b6b6b6;
   color: #97004f;
+}
+@media only screen and (min-width: 576px) {
+  .realisation-admin > a {
+    width: 40%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .realisation-admin > a {
+    width: 25%;
+    margin: 5% auto;
+  }
 }
 .realisation-admin table {
   width: 100%;
@@ -462,6 +478,66 @@ nav:has(.nav-header) {
   color: #97004f;
 }
 
+@media screen and (max-width: 1024px) {
+  .table-responsive .table, .table-responsive thead,
+  .table-responsive tbody,
+  .table-responsive th,
+  .table-responsive tr,
+  .table-responsive td:not(.flexTd) {
+    display: block;
+  }
+  .main__content_table .table {
+    border: none;
+  }
+  .table-responsive tr {
+    padding: 0;
+    margin-bottom: 1.5rem;
+    border: 1px solid #252424;
+  }
+  .table-responsive thead {
+    display: none;
+  }
+  .table-responsive td:not(td.flexTd) {
+    padding-left: 130px;
+    position: relative;
+    margin-top: -1;
+    border: 2px solid #252424;
+    background: #131212;
+  }
+  .table-responsive td:not(td.flexTd):nth-child(odd) {
+    background-color: #131212;
+  }
+  .table-responsive td:not(td.flexTd):not(td.flexTd)::before {
+    border-right: 4px solid #252424;
+    padding: 10px;
+    content: attr(data-label);
+    background-color: #131212;
+    color: #97004f;
+    font-weight: bold;
+    font-size: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+  }
+  .flexTd {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+  }
+  .flexTd a {
+    font-size: 1.5em;
+  }
+  .table-responsive td.flexTd::before, .table-responsive tbody td:last-child {
+    border: 2px solid #252424;
+    background-color: #131212;
+    width: 100%;
+  }
+}
 .form-admin {
   width: 100%;
   margin: 8% auto;
@@ -508,9 +584,53 @@ nav:has(.nav-header) {
   gap: 5%;
 }
 .update-img img {
-  width: 15%;
+  width: 30%;
+  margin-bottom: 10%;
+  align-self: center;
+  justify-content: center;
+}
+@media only screen and (min-width: 576px) {
+  .update-img img {
+    align-self: initial;
+    width: 25%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .update-img img {
+    margin-bottom: 5%;
+    width: 20%;
+  }
+}
+
+.confirm-container {
+  width: 100%;
+  margin: 8% auto;
+  text-align: center;
+}
+@media only screen and (min-width: 1024px) {
+  .confirm-container {
+    width: 30%;
+  }
+}
+.confirm-container h1 {
   margin-bottom: 5%;
-  display: inline;
+}
+.confirm-container form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5%;
+}
+.confirm-container form input {
+  border: 1px solid #97004f;
+  color: #b6b6b6;
+  border-radius: initial;
+  transition: 0.5s;
+}
+.confirm-container form input:hover {
+  border: 1px solid #b6b6b6;
+  color: #97004f;
 }
 
 * {

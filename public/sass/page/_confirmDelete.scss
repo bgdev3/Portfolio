@@ -1,0 +1,35 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+.confirm-container{
+  
+    width: 100%;
+    margin: 8% auto;
+    text-align: center;
+
+    @include mixins.desktop{
+        width: 30%;
+    }
+    h1{
+        margin-bottom: 5%;
+    }
+
+    form{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 5%;
+        input{
+            border: 1px solid color.$color_pink;
+            color: color.$color-font;
+            border-radius: initial;
+            transition: .5s;
+            &:hover{
+                border: 1px solid color.$color_font;
+                color: color.$color-pink;
+            }
+        }
+    }
+}
+

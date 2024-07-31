@@ -14,16 +14,22 @@
         display: block;
         padding: .5em;
         border: 1px solid color.$color_pink;
-        width: 25%;
-        margin: 5% auto;
+        width: 100%;
+        margin: 8% auto;
         transition: .5s;
         &:hover{
             border: 1px solid color.$color_font;
             color: color.$color_pink;
         }
+        @include mixins.tablet{
+            width: 40%;
+        }
+        @include mixins.desktop{
+            width: 25%;
+            margin: 5% auto;
+        }
     }
    
-
     table{
         width: 100%;
         text-align: center;
@@ -49,6 +55,79 @@
         color: color.$color_pink;
     }
 }
+
+
+@media screen and (max-width: 1024px) {
+   
+    .table-responsive .table, .table-responsive thead,
+    .table-responsive tbody,
+    .table-responsive th,
+    .table-responsive tr,
+    .table-responsive td:not(.flexTd) {
+    display: block;
+}
+
+    .main__content_table .table{
+        border: none;
+    }
+
+    .table-responsive tr{
+        padding: 0;
+        margin-bottom: 1.5rem;
+        border: 1px solid #252424;
+    }
+
+    .table-responsive thead{
+        display: none;
+        
+    }
+
+    .table-responsive td:not( td.flexTd){
+
+        padding-left: 130px;
+        position: relative;
+        margin-top: -1;
+        border: 2px solid #252424;;
+        background: color.$color-bg;
+        &:nth-child(odd){
+            background-color: color.$color_bg;
+        }
+        &:not( td.flexTd)::before{
+            border-right: 4px solid #252424;;
+            padding: 10px;
+            content: attr(data-label);
+            background-color: color.$color_bg;
+            color: color.$color_pink;
+            font-weight: bold;
+            font-size:1em;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 130px;
+            
+        }
+    }
+
+    .flexTd{
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+        a{
+            font-size: 1.5em;
+        }
+    }
+
+    .table-responsive td.flexTd::before, .table-responsive tbody td:last-child{
+        border: 2px solid #252424;;
+        background-color: color.$color_bg;
+        width:100%;
+    }        
+}
+
 
 
 

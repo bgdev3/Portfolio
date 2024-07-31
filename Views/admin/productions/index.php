@@ -1,3 +1,4 @@
+                                        <!-- Vue de la liste des réalisation en cours -->
 <?php
 $title = 'Réalisations';
 ?>
@@ -7,7 +8,7 @@ $title = 'Réalisations';
         <h1  class="section-title">Liste réalisations</h1>
         <a href="index.php?controller=adminProduction&action=add">Nouvelle réalisation</a>
         <div class="table-responsive">
-            <table class="">
+            <table class="table">
                 <thead class="">
                     <tr>
                         <!-- <th scope="col">#</th> -->

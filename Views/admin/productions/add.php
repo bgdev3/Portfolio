@@ -7,7 +7,7 @@ $title = 'Admin - Ajout';
    
     <div class="form-admin">
 
-        <h1 class="section-title">Nouvelle production</h1>
+        <h1 class="section-title">Nouvelle réalisation</h1>
         <?php if (!empty($error)) { ?>
 
             <div class="msgError"> <?php echo $error; ?> </div>

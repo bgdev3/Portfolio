@@ -137,11 +137,20 @@ class AdminProductionController extends Controller
      */
     public function delete(int $id): void
     {
-        if (isset($id)) {
+        // Si yes et déclaré et l'id aussi
+        if(isset($_POST['yes']) && isset($id)) {
+            // Supression de la réalisation sélectionné
             $model = new ProductionModel();
             $model->delete($id);
+            // Renvoi vers la liste des réalisations
             header('location:index.php?controller=adminProduction&action=index');
-        }
+        // Si no est déclaré, redirige vers la liste des réalisations
+        } elseif( isset($_POST['no'])) {
+            header('location:index.php?controller=adminProduction&action=index');
+        // sinon renvoi vers la confirmation de suppression d'une réalisation
+        } else {
+            $this->render('admin/productions/confirmDelete');
+        }    
     }
 
 

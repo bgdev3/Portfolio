@@ -7,8 +7,18 @@
     justify-content: center;
     gap: 5%;
     img{
-        width: 15%;
-      margin-bottom: 5%;
-        display: inline;
+        width: 30%;
+        margin-bottom: 10%;
+        align-self: center;
+        justify-content: center;
+        // display: inline;
+        @include mixins.tablet{
+          align-self: initial;
+          width: 25%;
+        }
+        @include mixins.desktop{
+          margin-bottom: 5%;
+          width: 20%;
+        }
     }  
 }
