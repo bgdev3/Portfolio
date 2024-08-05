@@ -33,6 +33,7 @@
     <main class="content"><?= $content ?></main>
     
     <footer class="footer">
+       
         <ul class="social-footer">
             <!-- facebook -->
             <li><a href="https://www.facebook.com/boo.ka.5"><i class="fa-brands fa-facebook-f"></i></a></li>
@@ -42,7 +43,7 @@
             <li><a href="https://github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
-            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés <a href="index.php?controller=adminProduction&action=index" class="hide-link"> admin</a></p>
+            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés  <a href="index.php?controller=adminProduction&action=index"><i class="fa-solid fa-right-to-bracket color-link"></i></a></p>
         </div>
         </footer>
 

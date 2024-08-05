@@ -21,7 +21,7 @@ $date = new DateTime($realisation->createdAt);
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" class="inputForm" value="<?php echo $realisation->title; ?>" required>
             <label for="description">Description</label>
-            <input type="text" id="decription" name="description" class="inputForm"  value="<?php echo $realisation->description; ?>" required>
+            <input type="text" id="description" name="description" class="inputForm"  value="<?php echo $realisation->description; ?>" required>
             <label for="createdAt">Date de création</label> 
             <input type="date" id="createdAt" name="createdAt" class="inputForm"  value="<?php echo $date->format('Y-m-d'); ?>" required>
             <label for="file">Fichier</label>/           

@@ -20,7 +20,12 @@
             & :first-child, & :last-child{ flex: 0 1 50%; }
         }
     } 
+
+    textarea{
+        resize: none;
+    }
 }
+
 
 .inputForm{
     position: relative;
@@ -31,4 +36,13 @@
     margin-bottom: 4%;
     border-radius: 5px;
     border: 1px solid transparent;
+}
+
+
+input.validate{
+    border: 1px solid #094709;
+  }
+
+input.error{
+    border: 1px solid #6d0f0f;
 }

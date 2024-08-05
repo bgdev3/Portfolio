@@ -33,6 +33,9 @@
     gap: 2%;
   }
 }
+.footer .color-link {
+  color: #1b1b1b;
+}
 
 nav:has(.nav-header) {
   flex: 1;
@@ -284,11 +287,19 @@ nav:has(.nav-header) {
 }
 
 .realisation-container {
-  width: 80%;
+  width: 100%;
   margin: 8% auto;
 }
 .realisation-container h1 {
-  margin-bottom: 3%;
+  margin-bottom: 5%;
+}
+@media only screen and (min-width: 576px) {
+  .realisation-container {
+    width: 80%;
+  }
+  .realisation-container h1 {
+    margin-bottom: 3%;
+  }
 }
 
 .project-container {
@@ -413,6 +424,9 @@ nav:has(.nav-header) {
     flex: 0 1 50%;
   }
 }
+.form-contact textarea {
+  resize: none;
+}
 
 .inputForm {
   position: relative;
@@ -423,6 +437,14 @@ nav:has(.nav-header) {
   margin-bottom: 4%;
   border-radius: 5px;
   border: 1px solid transparent;
+}
+
+input.validate {
+  border: 1px solid #094709;
+}
+
+input.error {
+  border: 1px solid #6d0f0f;
 }
 
 .realisation-admin {
@@ -697,10 +719,6 @@ a {
   .section-title {
     font-size: 1.2rem;
   }
-}
-
-.hide-link {
-  opacity: 0;
 }
 
 .errorForm {

@@ -1,4 +1,5 @@
 @use '../utils/mixins';
+@use '../utils/variables' as color ;
 
 .footer{
     ul {
@@ -16,5 +17,9 @@
         @include mixins.flex-row(row, center, center);
         gap: 5%;
         @include mixins.desktop{ gap: 2%}
+    }
+
+    .color-link{
+        color: color.$color_input;
     }
 }
