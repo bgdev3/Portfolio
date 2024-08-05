@@ -1,6 +1,7 @@
 <?php
 namespace Portfolio\Controllers;
 
+use Portfolio\Core\Form;
 use Portfolio\Core\Mailer;
 
 class ContactController extends Controller
@@ -15,7 +16,7 @@ class ContactController extends Controller
     {
         global $error;
         // Si les champs ne sont pas vides
-        if ($this->validatePost($_POST, ['name', 'surname', 'email', 'phone', 'object', 'message'])) {
+        if (Form::validatePost($_POST, ['name', 'surname', 'email', 'phone', 'object', 'message'])) {
 
             // Si le format de tel correspond
             if (!preg_match("#^(\+33|0)[67][0-9]{8}$#", $_POST['phone'])) {
@@ -41,22 +42,22 @@ class ContactController extends Controller
     }
 
 
-    /**
-     * Vérifie que les données du formulaire ne sont pas vides.
-     * 
-     * @param array $post methode d'envoi envoyé par le formulaire
-     * @param array fields Données envoyées par le formulaire
-     * 
-     */
-    private function validatePost(array $post, array $fields): bool
-    {
-         // Chaque champs est parcouru
-         foreach( $fields as $field){
-            // On teste si les champs sont vides ou déclarés
-            if (empty($post[$field]) || !isset($post[$field])) {
-                return false;
-            }
-        }
-        return true;
-    }
+    // /**
+    //  * Vérifie que les données du formulaire ne sont pas vides.
+    //  * 
+    //  * @param array $post methode d'envoi envoyé par le formulaire
+    //  * @param array fields Données envoyées par le formulaire
+    //  * 
+    //  */
+    // private function validatePost(array $post, array $fields): bool
+    // {
+    //      // Chaque champs est parcouru
+    //      foreach( $fields as $field){
+    //         // On teste si les champs sont vides ou déclarés
+    //         if (empty($post[$field]) || !isset($post[$field])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 }

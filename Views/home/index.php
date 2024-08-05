@@ -1,6 +1,24 @@
                                                     <!-- Vue de la page d'accueil -->
 <?php
+session_start();
 $title = 'Accueil';
+
+
+// if(isset($_SESSION['admin']))
+// unset($_SESSION['admin']);  
+// Token créé avant la page d'authentification afin qu'il soit intégrer dans le hidden du formulaire
+if (!isset($_SESSION['token'])) {
+    // Si le token n'existe pas, on en assigne un
+    $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+    // Enregistrement du timestamp pour identifier le moment precis de la creation du token
+    $_SESSION['token_time'] = time();
+} else {
+    unset($_SESSION['token']);
+    unset( $_SESSION['token_time']);
+    $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+    $_SESSION['token_time'] = time();
+}
+
 ?>
 
 <section>

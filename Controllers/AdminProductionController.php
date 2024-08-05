@@ -3,6 +3,7 @@ namespace Portfolio\Controllers;
 
 use Portfolio\Entities\Production;
 use Portfolio\Models\ProductionModel;
+use Portfolio\Core\Form;
 
 session_start();
 
@@ -32,13 +33,13 @@ class AdminProductionController extends Controller
     {
         global $error;
         // Si les champs POST et FILES ne sont pas vides
-        if ($this->validatePost($_POST, ['title', 'description', 'createdAt']) && $this->validateFiles($_FILES, ['file'])) {
+        if (Form::validatePost($_POST, ['title', 'description', 'createdAt']) && Form::validateFiles($_FILES, ['file'])) {
             // Type de fichier uploadé acceptés
             $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
             // S'il y à une erreur elle est récupéré
-            $error = empty($erreur) ? $this->errorUpload($_FILES, ['file'], $type) : "" ;
+            $error = empty($erreur) ? Form::errorUpload($_FILES, ['file'], $type) : "" ;
             // Formate le nom de fichier stocké dans un fichier séparé
-            $file = $this->formateFile($_FILES, ['file']);
+            $file = Form::formateFile($_FILES, ['file']);
 
             // Si l'erreur est vide
             if (empty($error)) {
@@ -77,7 +78,7 @@ class AdminProductionController extends Controller
     {
         global $error;
         // Si les champs ne sont pas vides
-        if ($this->validatePost($_POST, ['title', 'description', 'createdAt', 'hidden'])) {
+        if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'hidden'])) {
 
             // Hydrate l'entité
             $production = new Production();
@@ -87,13 +88,13 @@ class AdminProductionController extends Controller
             $production->setIdUser(1);
 
             // Si l'image ets valide
-            if($this->validateFiles($_FILES, ['file'])) {
+            if(Form::validateFiles($_FILES, ['file'])) {
                 // Type de fichier uploadé acceptés
                 $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
                 // S'il y à une erreur elle est récupéré
-                $error = empty($erreur) ? $this->errorUpload($_FILES, ['file'], $type) : "" ;
+                $error = empty($erreur) ? Form::errorUpload($_FILES, ['file'], $type) : "" ;
                 // Formate le nom de fichier stocké dans un fichier séparé
-                $file = $this->formateFile($_FILES, ['file']);
+                $file = Form::formateFile($_FILES, ['file']);
                 
                 // S'il n'y a pas d'erreur
                 if(empty($error)) {
@@ -154,106 +155,106 @@ class AdminProductionController extends Controller
     }
 
 
-     /**
-     * Vérifie que les données du formulaire ne sont pas vides.
-     * 
-     * @param array $post methode d'envoi envoyé par le formulaire
-     * @param array fields Données envoyées par le formulaire
-     * 
-     * @return bool
-     */
-    private function validatePost(array $post, array $fields): bool
-    {
-         // Chaque champs est parcouru
-         foreach( $fields as $field){
-            // On teste si les champs sont vides ou déclarés
-            if (empty($post[$field]) || !isset($post[$field])) {
-                return false;
-            }
-        }
-        return true;
-    }
+    //  /**
+    //  * Vérifie que les données du formulaire ne sont pas vides.
+    //  * 
+    //  * @param array $post methode d'envoi envoyé par le formulaire
+    //  * @param array fields Données envoyées par le formulaire
+    //  * 
+    //  * @return bool
+    //  */
+    // private function validatePost(array $post, array $fields): bool
+    // {
+    //      // Chaque champs est parcouru
+    //      foreach( $fields as $field){
+    //         // On teste si les champs sont vides ou déclarés
+    //         if (empty($post[$field]) || !isset($post[$field])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
 
-    /**
-     * Tester si le fichier est bien présent et s'il n'ya pas d'erreur d'envoi
-     * 
-     * @param array $files Récupère la methode d'envoi
-     * @param array $fields Récupère les champs de fichier 
-     * 
-     * @return bool
-     */
-    private function validateFiles(array $files, array $fields): bool  
-    {
-        foreach ( $fields as $field) {
-           if (isset($files[$field]) && $files[$field]['error'] == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // /**
+    //  * Tester si le fichier est bien présent et s'il n'ya pas d'erreur d'envoi
+    //  * 
+    //  * @param array $files Récupère la methode d'envoi
+    //  * @param array $fields Récupère les champs de fichier 
+    //  * 
+    //  * @return bool
+    //  */
+    // private function validateFiles(array $files, array $fields): bool  
+    // {
+    //     foreach ( $fields as $field) {
+    //        if (isset($files[$field]) && $files[$field]['error'] == 0) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
         
 
-    /**
-     * Tester le fichier en cas d'envoi validé
-     * et retourne un message d'erreur si le fichier ne correspond pas.
-     * 
-     * @param array $files Méthode d'envoi
-     * @param array $fields les fichier à tester
-     * @param array $type Type de fichier acceptées afin de tester les extensions de fichier
-     * 
-     * @return string $erreur Message d'erreur retourné
-     * 
-     */
-    private function errorUpload(array $files, array $fields, array $type): string 
-    {
-        $erreur ='';
-        // Parcours chaque champs
-        foreach ($fields as $field) {
-            // Récupère l'extension du fichier
-            $ext =  pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
+    // /**
+    //  * Tester le fichier en cas d'envoi validé
+    //  * et retourne un message d'erreur si le fichier ne correspond pas.
+    //  * 
+    //  * @param array $files Méthode d'envoi
+    //  * @param array $fields les fichier à tester
+    //  * @param array $type Type de fichier acceptées afin de tester les extensions de fichier
+    //  * 
+    //  * @return string $erreur Message d'erreur retourné
+    //  * 
+    //  */
+    // private function errorUpload(array $files, array $fields, array $type): string 
+    // {
+    //     $erreur ='';
+    //     // Parcours chaque champs
+    //     foreach ($fields as $field) {
+    //         // Récupère l'extension du fichier
+    //         $ext =  pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
 
-            if (isset($files[$field]) && $files[$field]['error'] == 0) {    
-                // Si l'extension correspond aux extensions autorisées
-                if (in_array($_FILES[$field]['type'], $type)) {
-                    // On delimite une taille max
-                    $maxSize = 2 * 1024 * 1024;
-                    // On teste si le format correspond, la taille du fichier
-                    if (!array_key_exists($ext, $type)) {
-                        $erreur = "Le format du fichier est incorrect !";
-                        // Si le fichier est trop lourd
-                    } elseif ($files[$field]['size'] > $maxSize) {
-                        $erreur = "Le fichier est trop volumineux !";
-                    }
-                } else {
-                    $erreur = "Le type et/ou le format du document n'est pas valide !";
-                }
-            } else {
-                // Si $_Files est > 0, on affiche l'erreur correspondante
-                $erreur = $files[$field]['error'];
-            }
-        }
-        return $erreur;
-    }
+    //         if (isset($files[$field]) && $files[$field]['error'] == 0) {    
+    //             // Si l'extension correspond aux extensions autorisées
+    //             if (in_array($_FILES[$field]['type'], $type)) {
+    //                 // On delimite une taille max
+    //                 $maxSize = 2 * 1024 * 1024;
+    //                 // On teste si le format correspond, la taille du fichier
+    //                 if (!array_key_exists($ext, $type)) {
+    //                     $erreur = "Le format du fichier est incorrect !";
+    //                     // Si le fichier est trop lourd
+    //                 } elseif ($files[$field]['size'] > $maxSize) {
+    //                     $erreur = "Le fichier est trop volumineux !";
+    //                 }
+    //             } else {
+    //                 $erreur = "Le type et/ou le format du document n'est pas valide !";
+    //             }
+    //         } else {
+    //             // Si $_Files est > 0, on affiche l'erreur correspondante
+    //             $erreur = $files[$field]['error'];
+    //         }
+    //     }
+    //     return $erreur;
+    // }
 
     
-    /**
-     * Méthode qui formate le fichier avant stockage
-     * @param array $files Méthode d'envoi
-     * @param array $fields fichier à formater
-     * 
-     * @return string $file nouveau nom de fichier formaté
-     */
-    public static function formateFile(array $files, array $fields): string 
-    {
-        // Parcours chaque champs
-        foreach ($fields as $field) {
-            // Formate le fichier
-            $uniqueName = uniqid('', true);
-            $file = $uniqueName . "." . pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
-        }
-        return $file;
-    }  
+    // /**
+    //  * Méthode qui formate le fichier avant stockage
+    //  * @param array $files Méthode d'envoi
+    //  * @param array $fields fichier à formater
+    //  * 
+    //  * @return string $file nouveau nom de fichier formaté
+    //  */
+    // public static function formateFile(array $files, array $fields): string 
+    // {
+    //     // Parcours chaque champs
+    //     foreach ($fields as $field) {
+    //         // Formate le fichier
+    //         $uniqueName = uniqid('', true);
+    //         $file = $uniqueName . "." . pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
+    //     }
+    //     return $file;
+    // }  
 
 
      /**

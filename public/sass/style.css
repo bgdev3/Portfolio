@@ -93,6 +93,33 @@ nav:has(.nav-header) {
   }
 }
 
+.nav_admin .nav-header {
+  justify-content: center;
+}
+@media only screen and (min-width: 1024px) {
+  .nav_admin .nav-header {
+    justify-content: flex-end;
+  }
+}
+.nav_admin .under_menu {
+  position: relative;
+}
+.nav_admin .under_menu .hide_nav {
+  padding: 5% 0 5% 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+.nav_admin .under_menu .hide_nav li {
+  display: none;
+  transition: 0.5s;
+  margin-bottom: 5%;
+  font-size: 0.9rem;
+}
+.nav_admin .under_menu:hover .hide_nav li {
+  display: block;
+}
+
 .show-menu {
   opacity: 1;
   z-index: 998;
@@ -653,6 +680,28 @@ input.error {
 .confirm-container form input:hover {
   border: 1px solid #b6b6b6;
   color: #97004f;
+}
+
+.form-connect {
+  width: 100%;
+  margin: 8% auto;
+}
+@media only screen and (min-width: 576px) {
+  .form-connect {
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .form-connect {
+    width: 30%;
+  }
+}
+.form-connect h1 {
+  margin-bottom: 5%;
+  text-align: center;
+}
+.form-connect .btnForm {
+  width: 50%;
 }
 
 * {

@@ -17,13 +17,19 @@
 <body>
     <header class="header">
         <h1><a href="index.php">Portfolio</a></h1>
-        <nav>
+        <!-- <nav>
             <ul class="nav-header">
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="index.php?controller=productions&action=index">Réalisations</a></li>
                 <li><a href="index.php?controller=contact&action=index">Contact</a></li>
             </ul>
-        </nav>
+        </nav> -->
+        
+        <?php if(!isset( $_SESSION['id_admin']))
+                require_once "template_header/header_user.php"; 
+            else
+                require_once "template_header/header_admin.php";
+        ?>
                                 <!-- MENU BURGER -->
         <div class="header__burger">
             <span></span>
@@ -43,7 +49,7 @@
             <li><a href="https://github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
-            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés  <a href="index.php?controller=adminProduction&action=index"><i class="fa-solid fa-right-to-bracket color-link"></i></a></p>
+            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés  <a href="index.php?controller=admin&action=index"><i class="fa-solid fa-right-to-bracket color-link"></i></a></p>
         </div>
         </footer>
 
