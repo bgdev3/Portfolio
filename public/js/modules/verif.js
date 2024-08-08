@@ -4,7 +4,7 @@
  * Vérification de formulaire 
  */
 export function verif() {
-//    Récupère les éléments
+    // Récupère les éléments
     let btnSend = document.querySelectorAll('#btnSend');
     let agree =  document.getElementById('agree');
     let validationCheck = document.querySelector('input + small');
@@ -17,9 +17,9 @@ export function verif() {
         
         // Capture l'évènement
         e.preventDefault();
-        const chps = document.querySelectorAll('[required]');
+        let chps = document.querySelectorAll('[required]');
         let valid = true;
-      
+        console.log(chps);
         // Sur chaque champs au focus un supprime l'erreur
         chps.forEach(el =>{
             el.addEventListener('focus', ()=>{
@@ -61,15 +61,13 @@ export function verif() {
         // Si le champs est valide, assigne la classe css et return true
         if (ch.checkValidity()) {
             ch.classList.add('validate');
-            // if(agree != null)
             return true;
         } else {
             // Sinon assigne la classe css correspondante
             ch.classList.add('error');
-            // if(agree != null)
+            if(agree != null)
             validationCheck.classList.add('errorCheck');
            return false;
-        
         }
      }
 
@@ -82,9 +80,11 @@ export function verif() {
         if(span !== null)
             span.remove();
      }
-
+    
     // Sur chaqeu bouton de soumission des formulaires récupérés, s' il est présent, applique l'ecouteur d'évènement.
     btnSend.forEach(btn=>{
         btn == null ?  btn == 'undefined' : btn.addEventListener('click', validateForm);
     });
+
+    // Array.from(document.querySelectorAll('form[id=myForm]')).map(loadRecaptcha);
 }

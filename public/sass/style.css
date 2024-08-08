@@ -111,13 +111,13 @@ nav:has(.nav-header) {
   left: 0;
 }
 .nav_admin .under_menu .hide_nav li {
-  display: none;
-  transition: 0.5s;
+  opacity: 0;
   margin-bottom: 5%;
   font-size: 0.9rem;
+  transition: 0.5s;
 }
 .nav_admin .under_menu:hover .hide_nav li {
-  display: block;
+  opacity: 1;
 }
 
 .show-menu {
@@ -315,7 +315,7 @@ nav:has(.nav-header) {
 
 .realisation-container {
   width: 100%;
-  margin: 8% auto;
+  margin: 5% auto;
 }
 .realisation-container h1 {
   margin-bottom: 5%;
@@ -330,13 +330,12 @@ nav:has(.nav-header) {
 }
 
 .project-container {
-  display: grid;
-  width: 80%;
-  margin: 0 auto;
-  grid-template-columns: 1fr;
-  grid-auto-rows: minmax(auto, auto);
-  grid-row-gap: 20px;
-  grid-column-gap: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 @media only screen and (min-width: 576px) {
   .project-container {
@@ -351,15 +350,29 @@ nav:has(.nav-header) {
   }
 }
 .project-container .img-project {
+  max-width: 30%;
   position: relative;
   border-radius: 5px;
+  padding: 1% 1% 0 1%;
+  background-color: rgb(24, 24, 24);
 }
 .project-container .img-project:hover > .content-realisation {
   opacity: 1;
   bottom: 0;
 }
 .project-container .img-project img {
-  border-radius: 10px;
+  border-radius: 5px;
+}
+.project-container .img-project div:last-child {
+  border-radius: 5px;
+  padding: 2% 0 3% 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.project-container .img-project div:last-child i {
+  font-size: 2em;
 }
 .project-container .content-realisation {
   opacity: 0;
@@ -409,6 +422,22 @@ nav:has(.nav-header) {
   .project-container .content-realisation a {
     width: 40%;
   }
+}
+
+.quote {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+.quote p {
+  line-height: 1.5em;
+  font-style: italic;
+}
+.quote p::before, .quote p::after {
+  content: ' "';
+  font-size: 2rem;
+  color: #97004f;
+  vertical-align: -20%;
 }
 
 .title-realisation {
@@ -523,6 +552,9 @@ input.error {
   border: 1px solid #252424;
   padding: 0.5em;
 }
+.realisation-admin td img {
+  width: 50px;
+}
 .realisation-admin .color-delete {
   color: #97004f;
 }
@@ -547,7 +579,7 @@ input.error {
     display: none;
   }
   .table-responsive td:not(td.flexTd) {
-    padding-left: 130px;
+    padding-left: 150px;
     position: relative;
     margin-top: -1;
     border: 2px solid #252424;
@@ -711,6 +743,33 @@ input.error {
   font-style: normal;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 14px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece { /* Fond */
+  background: transparent none;
+  border: solid 1px #131212;
+  border-right-width: 8px;
+  margin: 4px;
+  -webkit-box-shadow: inset 1px 1px 0 0 rgb(30, 30, 30), inset -1px -1px 0 0 rgb(30, 30, 30);
+}
+
+::-webkit-scrollbar-thumb { /* Barre */
+  border: solid 0 transparent;
+  border-right-width: 4px;
+  -webkit-border-radius: 5px;
+  -webkit-border-top-right-radius: 9px 5px;
+  -webkit-border-bottom-right-radius: 9px 5px;
+  -webkit-box-shadow: inset 0 0 0 1px rgb(40, 40, 40), inset 0 0 0 6px rgb(40, 40, 40);
+}
+
+::-webkit-scrollbar-thumb:hover { /* Barre */
+  -webkit-box-shadow: inset 0 0 0 1px rgb(30, 30, 30), inset 0 0 0 6px rgb(30, 30, 30);
+}
+
 html, body {
   height: 100%;
 }
@@ -725,6 +784,7 @@ body {
   padding: 0 15px;
   opacity: 0;
   transition: 0.5s;
+  scroll-behavior: smooth;
 }
 
 /****  permet de maintenir le footer en pied de page*/
@@ -791,4 +851,8 @@ a {
 
 .errorCheck {
   color: #6d0f0f;
+}
+
+.hide {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

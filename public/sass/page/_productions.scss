@@ -3,7 +3,7 @@
 
 .realisation-container{
     width: 100%;
-    margin: 8% auto;
+    margin: 5% auto;
 
     h1{
         margin-bottom: 5%;
@@ -17,14 +17,19 @@
 }
 
 .project-container{
-    display:grid;
-	width: 80%;
-    margin: 0 auto;
-	grid-template-columns: 1fr;
-    grid-auto-rows: minmax(auto, auto);
-  	grid-row-gap: 20px;
-	grid-column-gap: 20px;
-
+    // display:grid;
+	// width: 80%;
+    // margin: 0 auto;
+	// grid-template-columns: 1fr;
+    // grid-auto-rows: minmax(auto, auto);
+  	// grid-row-gap: 20px;
+	// grid-column-gap: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
     @include mixins.tablet{
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
@@ -36,14 +41,29 @@
     } 
 
     .img-project {
+        max-width: 30%;
         position: relative;
         border-radius: 5px;
+        padding: 1% 1% 0 1%;
+        background-color: rgb(24, 24, 24);
         &:hover > .content-realisation{
             opacity: 1;
             bottom: 0;
         }
+
         img{
-            border-radius: 10px;
+            border-radius: 5px;
+        }
+
+        & div:last-child {
+            border-radius: 5px;
+            // background-color: color.$color_bg;
+            // margin-top: 1%;
+            padding: 2% 0 3% 0;
+            @include mixins.flex-row(row, space-around, center );
+            i {
+                font-size: 2em;
+            }
         }
     }
 
@@ -94,6 +114,23 @@
    }
 }
 
+.quote{
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    p{
+        line-height: 1.5em;
+        font-style: italic;
+        &::before, &::after{
+            content: " \0022";
+            font-size: 2rem;
+            color: color.$color_pink;
+            vertical-align: -20%;
+        }
+    }
+
+    
+}
 .title-realisation {
     text-align: center;
     font-size: 1em;

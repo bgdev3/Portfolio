@@ -9,6 +9,13 @@ class Production
     private $path;
     private $description;
     private $createdAt;
+    private $html;
+    private $sass;
+    private $js;
+    private $php;
+    private $symfony;
+    private $react;
+    private $wordpress;
     private $idUser;
     
 
@@ -112,7 +119,147 @@ class Production
         return $this;
     }
 
+
     /**
+     * Get the value of html
+     */ 
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    /**
+     * Set the value of html
+     *
+     * @return  self
+     */ 
+    public function setHtml($html)
+    {
+        $this->html = $html;
+
+        return $this;
+    }
+
+     /**
+     * Get the value of html
+     */ 
+    public function getSass()
+    {
+        return $this->sass;
+    }
+
+    /**
+     * Set the value of html
+     *
+     * @return  self
+     */ 
+    public function setSass($sass)
+    {
+        $this->sass = $sass;
+
+        return $this;
+    }
+   
+    /**
+     * Get the value of html
+     */ 
+    public function getJs()
+    {
+        return $this->js;
+    }
+
+    /**
+     * Set the value of html
+     *
+     * @return  self
+     */ 
+    public function setJs($js)
+    {
+        $this->js = $js;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of html
+     */ 
+    public function getPhp()
+    {
+        return $this->php;
+    }
+
+    /**
+     * Set the value of html
+     *
+     * @return  self
+     */ 
+    public function setPhp($php)
+    {
+        $this->php = $php;
+
+        return $this;
+    }
+    /**
+     * Get the value of symfony
+     */ 
+    public function getSymfony()
+    {
+        return $this->symfony;
+    }
+
+    /**
+     * Set the value of symfony
+     *
+     * @return  self
+     */ 
+    public function setSymfony($symfony)
+    {
+        $this->symfony = $symfony;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of wordpress
+     */ 
+    public function getWordpress()
+    {
+        return $this->wordpress;
+    }
+
+    /**
+     * Set the value of wordpress
+     *
+     * @return  self
+     */ 
+    public function setWordpress($wordpress)
+    {
+        $this->wordpress = $wordpress;
+
+        return $this;
+    }
+     /**
+     * Get the value of react
+     */ 
+    public function getReact()
+    {
+        return $this->react;
+    }
+
+    /**
+     * Set the value of react
+     *
+     * @return  self
+     */ 
+    public function setReact($react)
+    {
+        $this->react = $react;
+
+        return $this;
+    }
+
+
+      /**
      * Get the value of idUser
      */ 
     public function getIdUser()
@@ -131,4 +278,5 @@ class Production
 
         return $this;
     }
+    
 }

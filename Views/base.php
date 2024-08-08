@@ -14,16 +14,9 @@
     <title><?php echo $title; ?></title>
 </head>
 
-<body>
+<body class="scroller">
     <header class="header">
         <h1><a href="index.php">Portfolio</a></h1>
-        <!-- <nav>
-            <ul class="nav-header">
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="index.php?controller=productions&action=index">Réalisations</a></li>
-                <li><a href="index.php?controller=contact&action=index">Contact</a></li>
-            </ul>
-        </nav> -->
         
         <?php if(!isset( $_SESSION['id_admin']))
                 require_once "template_header/header_user.php"; 
@@ -41,8 +34,7 @@
     <footer class="footer">
        
         <ul class="social-footer">
-            <!-- facebook -->
-            <li><a href="https://www.facebook.com/boo.ka.5"><i class="fa-brands fa-facebook-f"></i></a></li>
+    
             <!-- LinkedIn -->
             <li><a href="https://www.linkedin.com/in/guillaume-boukehaili-919656238"><i class="fa-brands fa-linkedin-in"></i></a></li>
             <!-- Github -->

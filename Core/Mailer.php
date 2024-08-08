@@ -26,7 +26,7 @@ class Mailer
             //Recipients
             // email Kevin
             $mail->setFrom('boukehaili.g@gmail.com', 'Portfolio');                      //Adresse d'envoi
-            $mail->addAddress('boukehaii.g@gmail.com');                                             //Destinatire
+            $mail->addAddress('boukehaili.g@gmail.com');                                             //Destinatire
         
             // //Attachments
                                                                         //Si le paramètre facultatif est présent        
@@ -55,7 +55,7 @@ class Mailer
 
         $content = "<html>
                         <body>
-                            <header> <h1>Nuveau contact</h1> </header>
+                            <header> <h1>Nouveau contact</h1> </header>
                             <main>
                                 <p>Infos client :<br>
                                     Nom:". $_POST['name'] ."<br>Prenom:". $_POST['surname'] ."<br>Email:". $_POST['email'] ."<br>Tel:". $_POST['phone'] ."<br>

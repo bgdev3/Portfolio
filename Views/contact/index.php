@@ -42,9 +42,14 @@ $title = 'Contact';
             <div>
                 <input type="checkbox" id="agree" required>
                 <small>J'ai lu et accepte la politique de confidentialité et les mentions légales.</small>
+                <input type="hidden" id="recaptchaResponse" name="recaptcha_response">
                 <input type="submit" id="btnSend" class="btnForm" value="Envoyer">
             </div>
         </form>
     </div>
    
 </section>
+
+
+<!-- Appel du script Re-captcha -->
+<!-- <script src="https://www.google.com/recaptcha/api.js?render=6LebG6MpAAAAAIDVxKKsnIql8WG-028Dvudz5l-k"></script> -->

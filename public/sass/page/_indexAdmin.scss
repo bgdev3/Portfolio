@@ -35,6 +35,7 @@
         text-align: center;
         border-collapse: collapse;
     }
+
     th{
         color: color.$color_pink;
     }
@@ -46,9 +47,16 @@
     tr:hover:not(thead tr:first-child){
         background-color: #252424;;
     }
+
     th, td{
         border: 1px solid #252424;
-       padding: .5em;
+        padding: .5em;
+    }
+
+    td{
+        img{
+            width: 50px;
+        }
     }
 
     .color-delete{
@@ -84,7 +92,7 @@
 
     .table-responsive td:not( td.flexTd){
 
-        padding-left: 130px;
+        padding-left: 150px;
         position: relative;
         margin-top: -1;
         border: 2px solid #252424;;

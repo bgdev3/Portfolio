@@ -6,6 +6,7 @@ window.addEventListener('load', async () => {
     const cr_burger = await import("./modules/burger.js");
     const verif = await import("./modules/verif.js");
     const realisationAdmin = await import("./modules/realisationAdmin.js");
+    // const recaptcha = await import("./modules/recpatcha.js");
 
     cr_burger.burger(); verif.verif();  realisationAdmin.responsiveArray();
 })

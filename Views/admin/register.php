@@ -1,7 +1,10 @@
 <?php
-$title = 'Admin - connexion';
-$token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null ;
+$title = 'Admin - Enregistrement';
 
+if(!isset($_SESSION['username_admin']))
+    header('location:index.php');
+
+$token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null ;
 ?>
 
 <section>
@@ -11,8 +14,10 @@ $token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null ;
             echo $error;
         }
         ?>
-        <h1 class="section-title">Connexion</h1>
+        <h1 class="section-title">Enregistrement</h1>
         <form action="" method="POST" id="myForm" novalidate>
+            <label for="surname">Pseudonyme</label>
+            <input type="text" id="surname" name="surname" class="inputForm" required>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" class="inputForm" required>
             <label for="password">Password</label>

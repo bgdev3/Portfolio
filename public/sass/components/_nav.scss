@@ -10,7 +10,7 @@ nav:has(.nav-header) {
     position:fixed;
     top: 0;
     left: 0;
-    height:100vh;
+    height: 100vh;
     width: 100%;
     opacity: 0;
     z-index: -1;
@@ -18,7 +18,6 @@ nav:has(.nav-header) {
     transition: .5s;
     @include mixins.flex-row(column, center, center);
     gap: 4%;
-
     li::after{
         content: '';
         display: block;
@@ -76,15 +75,15 @@ nav:has(.nav-header) {
                 top: 100%;
                 left: 0;
                 li {           
-                    display: none;
-                    transition: .5s;
+                    opacity: 0;
                     margin-bottom: 5%;
                     font-size: .9rem;
+                    transition: .5s;
                 }
             }
         }
         .under_menu:hover  .hide_nav  li{
-        display: block;
+        opacity: 1;
     }
 }
     

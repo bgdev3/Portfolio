@@ -1,6 +1,10 @@
 <?php
 $title = 'mise à jour';
 
+if(!isset($_SESSION['username_admin']))
+    header('location:index.php');
+
+$token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null;
 $name = pathinfo($realisation->path, PATHINFO_FILENAME);
 $date = new DateTime($realisation->createdAt);
 ?>
@@ -21,12 +25,13 @@ $date = new DateTime($realisation->createdAt);
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" class="inputForm" value="<?php echo $realisation->title; ?>" required>
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" class="inputForm"  value="<?php echo $realisation->description; ?>" required>
+            <textarea  id="description" name="description" class="inputForm" rows="8" required><?php echo $realisation->description; ?></textarea>
             <label for="createdAt">Date de création</label> 
             <input type="date" id="createdAt" name="createdAt" class="inputForm"  value="<?php echo $date->format('Y-m-d'); ?>" required>
-            <label for="file">Fichier</label>/           
-            <input type="file" id="file" name="file" class="inputForm"> 
+            <label for="file">Fichier</label>           
+            <input type="file" id="file" name="file" class="inputForm">
             <input type="hidden" id="hidden" name="hidden" class="inputForm"  value="<?php echo $realisation->path; ?>" hidden>
+            <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
             <input type="submit" id="btnSend" name="btnSend" class="btnForm">
 
         </form>
