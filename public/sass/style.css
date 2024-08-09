@@ -349,43 +349,13 @@ nav:has(.nav-header) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.project-container .img-project {
-  max-width: 30%;
-  position: relative;
-  border-radius: 5px;
-  padding: 1% 1% 0 1%;
-  background-color: rgb(24, 24, 24);
-}
-.project-container .img-project:hover > .content-realisation {
-  opacity: 1;
-  bottom: 0;
-}
-.project-container .img-project img {
-  border-radius: 5px;
-}
-.project-container .img-project div:last-child {
-  border-radius: 5px;
-  padding: 2% 0 3% 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-.project-container .img-project div:last-child i {
-  font-size: 2em;
-}
 .project-container .content-realisation {
   opacity: 0;
+  bottom: 0%;
+  left: 50%;
+  top: 50%;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  width: 100%;
-  overflow-y: scroll;
-  max-height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 90%, transparent);
-  transition: 0.5s;
-  border-radius: 10px;
+  transform: translate(-50%, -50%);
 }
 @media only screen and (min-width: 1024px) {
   .project-container .content-realisation {
@@ -397,6 +367,9 @@ nav:has(.nav-header) {
   line-height: 1.5em;
   color: #b6b6b6;
   padding: 5% 5% 0 5%;
+}
+.project-container .content-realisation p, .project-container .content-realisation p + a {
+  display: none;
 }
 .project-container .content-realisation a {
   display: block;
@@ -423,11 +396,84 @@ nav:has(.nav-header) {
     width: 40%;
   }
 }
+.project-container .img-project {
+  max-width: 80%;
+  border-radius: 5px;
+  padding: 1% 1% 0 1%;
+  background-color: rgb(24, 24, 24);
+}
+@media only screen and (min-width: 576px) {
+  .project-container .img-project {
+    max-width: 30%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .img-project {
+    max-width: 20%;
+  }
+}
+.project-container .img-project:hover > .content-realisation {
+  opacity: 1;
+  text-align: center;
+  width: 100%;
+  overflow-y: scroll;
+  height: 100%;
+  max-height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 90%, transparent);
+  transition: 0.5s;
+  border-radius: 10px;
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .img-project:hover > .content-realisation {
+    width: 50%;
+  }
+}
+.project-container .img-project:hover > .content-realisation p, .project-container .img-project:hover > .content-realisation p + a {
+  display: block;
+}
+.project-container .img-project img {
+  border-radius: 5px;
+}
+.project-container .img-project div:nth-child(3) {
+  border-radius: 5px;
+  padding: 2% 0 3% 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.project-container .img-project div:nth-child(3) i {
+  font-size: 1em;
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .img-project div:nth-child(3) i {
+    font-size: 2rem;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .img-project .btn-realisation {
+    display: none;
+  }
+}
+.project-container .img-project .btn-realisation .btnForm {
+  margin: 0 auto 3%;
+  padding: 1%;
+}
 
 .quote {
   text-align: center;
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
+}
+@media only screen and (min-width: 576px) {
+  .quote {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .quote {
+    width: 50%;
+  }
 }
 .quote p {
   line-height: 1.5em;

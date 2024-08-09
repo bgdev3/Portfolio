@@ -14,10 +14,12 @@ $title = 'Réalisation';
             
             <div class="img-project">
                 <img src="<?php echo $picture->path;  ?>" alt=" <?php echo $picture->title; ?>">
+               
                 <div class=" content-realisation" >
                     <p> <?php echo $picture->description; ?> </p>
                     <a href="https://abcdtaxi.fr">Accès au site</a>
                 </div>
+                
                 <div>
 
                 <?php
@@ -35,6 +37,10 @@ $title = 'Réalisation';
                 ?>
 
                 </div>
+                <div class=" btn-realisation" > 
+                    <input type="button" class="btnForm" value="+">
+                </div>
+                
             </div>
            
             <?php  } ?>
