@@ -10,7 +10,9 @@ $title = 'Réalisation';
         <h1 class="section-title">Réalisations</h1>
         <div class="project-container">
        
-            <?php foreach($pictures as $picture) { ?>
+            <?php 
+            if(isset($pictures))
+                foreach($pictures as $picture) { ?>
             
             <div class="img-project">
                 <img src="<?php echo $picture->path;  ?>" alt=" <?php echo $picture->title; ?>">

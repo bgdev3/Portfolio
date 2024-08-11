@@ -16,6 +16,7 @@ class AdminProductionController extends Controller
      */
     public function index(): void{
         
+        /**@var  */
         $model = new ProductionModel();
         $list = $model->findAll();
 

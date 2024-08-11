@@ -10,6 +10,7 @@ class ProductionsController extends Controller
     
     public function index(): void 
     {
+       
 
        global $pictures;
        

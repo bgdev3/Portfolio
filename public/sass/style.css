@@ -351,6 +351,7 @@ nav:has(.nav-header) {
 }
 .project-container .content-realisation {
   opacity: 0;
+  transition: 1s;
   bottom: 0%;
   left: 50%;
   top: 50%;
@@ -392,7 +393,7 @@ nav:has(.nav-header) {
   background-color: #131212;
   color: #97004f;
   border-radius: 5px;
-  transition: 0.5s;
+  transition: 1s;
 }
 .project-container .content-realisation a:hover {
   background-color: #131212;
@@ -432,7 +433,7 @@ nav:has(.nav-header) {
   overflow-y: scroll;
   height: 100vh;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 90%, transparent);
-  transition: 0.5s;
+  transition: 1s;
   border-radius: 10px;
 }
 @media only screen and (min-width: 1024px) {
