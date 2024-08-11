@@ -16,8 +16,11 @@ $title = 'Réalisation';
                 <img src="<?php echo $picture->path;  ?>" alt=" <?php echo $picture->title; ?>">
                
                 <div class=" content-realisation" >
-                    <p> <?php echo $picture->description; ?> </p>
-                    <a href="https://abcdtaxi.fr">Accès au site</a>
+                    <div>
+                        <p> <?php echo $picture->description; ?> </p>
+                        <a href="https://abcdtaxi.fr">Accès au site</a>
+                    </div>
+                   
                 </div>
                 
                 <div>

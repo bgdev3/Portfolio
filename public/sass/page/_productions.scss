@@ -38,6 +38,7 @@
         bottom: 0%;
         left: 50%;
         top: 50%;
+        z-index:-1;
         // Absolue au body afin de centrer sur la fenetre
         position: absolute;
         transform: translate(-50%,-50%);
@@ -45,11 +46,21 @@
             overflow-y: initial;
         }
 
+        div:first-child{
+            width: 80%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
         & p {
             font-size: .9em;
             line-height: 1.5em;
             color: color.$color_font;
-            padding: 5% 5% 0 5%;
+            @include mixins.desktop{
+                padding: 5% 5% 0 5%;
+            }   
         }
 
         p, p+a {
@@ -93,11 +104,12 @@
 
         &:hover > .content-realisation {
             opacity: 1;
+            z-index: 9999;
             text-align: center;
             width: 100%;
             overflow-y: scroll;
-            height: 100%;
-            max-height: 50%;
+            height: 100vh;
+            // max-height: 50%;
             background: linear-gradient(to top,  rgba(0, 0, 0, 0.8) 90%, transparent);
             transition: .5s;
             border-radius: 10px;

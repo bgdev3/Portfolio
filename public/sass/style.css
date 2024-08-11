@@ -354,6 +354,7 @@ nav:has(.nav-header) {
   bottom: 0%;
   left: 50%;
   top: 50%;
+  z-index: -1;
   position: absolute;
   transform: translate(-50%, -50%);
 }
@@ -362,11 +363,22 @@ nav:has(.nav-header) {
     overflow-y: initial;
   }
 }
+.project-container .content-realisation div:first-child {
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .project-container .content-realisation p {
   font-size: 0.9em;
   line-height: 1.5em;
   color: #b6b6b6;
-  padding: 5% 5% 0 5%;
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .content-realisation p {
+    padding: 5% 5% 0 5%;
+  }
 }
 .project-container .content-realisation p, .project-container .content-realisation p + a {
   display: none;
@@ -414,11 +426,11 @@ nav:has(.nav-header) {
 }
 .project-container .img-project:hover > .content-realisation {
   opacity: 1;
+  z-index: 9999;
   text-align: center;
   width: 100%;
   overflow-y: scroll;
-  height: 100%;
-  max-height: 50%;
+  height: 100vh;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 90%, transparent);
   transition: 0.5s;
   border-radius: 10px;
