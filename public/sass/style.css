@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 .header {
   display: flex;
@@ -313,6 +314,15 @@ nav:has(.nav-header) {
   }
 }
 
+body {
+  position: relative;
+}
+@media only screen and (min-width: 576px) {
+  body {
+    position: initial;
+  }
+}
+
 .realisation-container {
   width: 100%;
   margin: 5% auto;
@@ -339,74 +349,9 @@ nav:has(.nav-header) {
 }
 @media only screen and (min-width: 576px) {
   .project-container {
-    grid-template-columns: repeat(2, 1fr);
     width: 100%;
     margin: 0 auto;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .project-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.project-container .content-realisation {
-  opacity: 0;
-  transition: 1s;
-  bottom: 0%;
-  left: 50%;
-  top: 50%;
-  z-index: -1;
-  position: absolute;
-  transform: translate(-50%, -50%);
-}
-@media only screen and (min-width: 1024px) {
-  .project-container .content-realisation {
-    overflow-y: initial;
-  }
-}
-.project-container .content-realisation div:first-child {
-  width: 80%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.project-container .content-realisation p {
-  font-size: 0.9em;
-  line-height: 1.5em;
-  color: #b6b6b6;
-}
-@media only screen and (min-width: 1024px) {
-  .project-container .content-realisation p {
-    padding: 5% 5% 0 5%;
-  }
-}
-.project-container .content-realisation p, .project-container .content-realisation p + a {
-  display: none;
-}
-.project-container .content-realisation a {
-  display: block;
-  width: 80%;
-  margin: 5% auto;
-  padding: 0.5em;
-  border: none;
-  background-color: #131212;
-  color: #97004f;
-  border-radius: 5px;
-  transition: 1s;
-}
-.project-container .content-realisation a:hover {
-  background-color: #131212;
-  color: #b6b6b6;
-}
-@media only screen and (min-width: 576px) {
-  .project-container .content-realisation a {
-    width: 60%;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .project-container .content-realisation a {
-    width: 40%;
+    position: inherit;
   }
 }
 .project-container .img-project {
@@ -425,21 +370,72 @@ nav:has(.nav-header) {
     max-width: 20%;
   }
 }
+.project-container .img-project .content-realisation {
+  opacity: 0;
+  transition: 1s;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  text-align: center;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 90%, transparent);
+  position: absolute;
+  border-radius: 10px;
+}
+.project-container .img-project .content-realisation div:first-child {
+  width: 80%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 35vh; /* poussé de la moitié de hauteur de viewport */
+  transform: translateY(-50%);
+  transform: translateX(12%);
+}
+.project-container .img-project .content-realisation p {
+  font-size: 0.9em;
+  line-height: 1.5em;
+  color: #b6b6b6;
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .img-project .content-realisation p {
+    padding: 5% 5% 0 5%;
+  }
+}
+.project-container .img-project .content-realisation p, .project-container .img-project .content-realisation p + a {
+  display: none;
+}
+.project-container .img-project .content-realisation a {
+  display: block;
+  width: 80%;
+  margin: 5% auto;
+  padding: 0.5em;
+  border: none;
+  background-color: #131212;
+  color: #97004f;
+  border-radius: 5px;
+  transition: 1s;
+}
+.project-container .img-project .content-realisation a:hover {
+  background-color: #131212;
+  color: #b6b6b6;
+}
+@media only screen and (min-width: 576px) {
+  .project-container .img-project .content-realisation a {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .project-container .img-project .content-realisation a {
+    width: 40%;
+  }
+}
 .project-container .img-project:hover > .content-realisation {
   opacity: 1;
   z-index: 9999;
-  text-align: center;
-  width: 100%;
-  overflow-y: scroll;
-  height: 100vh;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 90%, transparent);
   transition: 1s;
-  border-radius: 10px;
-}
-@media only screen and (min-width: 1024px) {
-  .project-container .img-project:hover > .content-realisation {
-    width: 50%;
-  }
 }
 .project-container .img-project:hover > .content-realisation p, .project-container .img-project:hover > .content-realisation p + a {
   display: block;
@@ -830,7 +826,7 @@ input.error {
 }
 
 html, body {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {

@@ -53,6 +53,6 @@ $title = 'Réalisation';
     </div>
 
     <div class="quote">
-        <p class=""> Aujourd'hui j'estime à 35% le volume d'activité directement ou indirectement lié à la bonne visibilité de mon entreprise, et à 50% de ces 35% le taux de concrétisation des devis réalisés en trajets effectués. - ABCD Taxi</p>
+        <p> Aujourd'hui j'estime à 35% le volume d'activité directement ou indirectement lié à la bonne visibilité de mon entreprise, et à 50% de ces 35% le taux de concrétisation des devis réalisés en trajets effectués. - ABCD Taxi</p>
     </div>
 </section>

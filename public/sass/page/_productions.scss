@@ -1,10 +1,18 @@
 @use '../utils/mixins';
 @use '../utils/variables' as color ;
 
+
+body{
+    position: relative;
+    @include mixins.tablet{
+        position: initial;
+    }
+   
+}
+
 .realisation-container{
     width: 100%;
     margin: 5% auto;
-
     h1{
         margin-bottom: 5%;
     }
@@ -23,75 +31,13 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+
     @include mixins.tablet{
-        grid-template-columns: repeat(2, 1fr);
         width: 100%;
         margin: 0 auto;
+        position: inherit;
     }
-
-    @include mixins.desktop{
-        grid-template-columns: repeat(3, 1fr);
-    } 
-
-    .content-realisation {
-        opacity: 0;
-        transition: 1s;
-        bottom: 0%;
-        left: 50%;
-        top: 50%;
-        z-index:-1;
-        // Absolue au body afin de centrer sur la fenetre
-        position: absolute;
-        transform: translate(-50%,-50%);
-       
-        @include mixins.desktop{
-            overflow-y: initial;
-        }
-
-        div:first-child{
-            width: 80%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-        }
-
-        & p {
-            font-size: .9em;
-            line-height: 1.5em;
-            color: color.$color_font;
-            @include mixins.desktop{
-                padding: 5% 5% 0 5%;
-            }   
-        }
-
-        p, p+a {
-            display: none;
-        }
-
-        & a{
-            display: block;
-            width: 80%;
-            margin: 5% auto;
-            padding: .5em;
-            border: none;
-            background-color: color.$color_bg;
-            color: color.$color_pink;
-            border-radius: 5px;
-            transition: 1s;
-            &:hover{
-                background-color: color.$color_bg;
-                color: color.$color_font;
-            }
-
-            @include mixins.tablet{
-                width: 60%;
-            }
-            @include mixins.desktop{
-                width: 40%;
-            }
-        }
-   }
+    
     .img-project {
         max-width: 80%;
         border-radius: 5px;
@@ -104,20 +50,77 @@
             max-width: 20%;
         }
 
+        .content-realisation {
+            opacity: 0;
+            transition: 1s;
+            bottom: 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+            z-index:-1;
+            text-align: center;
+            height: 100%;
+            background: linear-gradient(to top,  rgba(0, 0, 0, 0.8) 90%, transparent);
+            // Absolue au body afin de centrer sur la fenetre
+            position: absolute;
+            border-radius: 10px;
+            div:first-child{
+                width: 80%;
+                text-align: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                margin-top: 35vh; /* poussé de la moitié de hauteur de viewport */
+                transform: translateY(-50%); 
+                transform: translateX(12%); 
+               
+            }
+    
+            & p {
+                font-size: .9em;
+                line-height: 1.5em;
+                color: color.$color_font;
+                @include mixins.desktop{
+                    padding: 5% 5% 0 5%;
+                }   
+            }
+    
+            p, p+a {
+                display: none;
+            }
+    
+            & a{
+                display: block;
+                width: 80%;
+                margin: 5% auto;
+                padding: .5em;
+                border: none;
+                background-color: color.$color_bg;
+                color: color.$color_pink;
+                border-radius: 5px;
+                transition: 1s;
+                &:hover{
+                    background-color: color.$color_bg;
+                    color: color.$color_font;
+                }
+    
+                @include mixins.tablet{
+                    width: 60%;
+                }
+                @include mixins.desktop{
+                    width: 40%;
+                }
+            }
+       }
+
         &:hover > .content-realisation {
             opacity: 1;
             z-index: 9999;
-            text-align: center;
-            width: 100%;
-            overflow-y: scroll;
-            height: 100vh;
-            // max-height: 50%;
-            background: linear-gradient(to top,  rgba(0, 0, 0, 0.8) 90%, transparent);
+          
             transition: 1s;
-            border-radius: 10px;
-            @include mixins.desktop{
-                width: 50%;
-            }
+        
+
+         
 
             p, p+a{
                 display: block;
@@ -149,15 +152,9 @@
             .btnForm{
                 margin: 0 auto 3%;
                 padding: 1%;
-                // width: initial;
-                // padding: 0;
-                // border-radius: 50%;
             }
         }
-    }
-
-    
-
+    }  
 }
 
 .quote{

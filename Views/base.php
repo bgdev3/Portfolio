@@ -43,7 +43,7 @@
         <div>
             <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés  <a href="index.php?controller=admin&action=index"><i class="fa-solid fa-right-to-bracket color-link"></i></a></p>
         </div>
-        </footer>
+    </footer>
 
 </body>
 </html>

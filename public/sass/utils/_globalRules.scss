@@ -38,7 +38,7 @@
 }
 
 html, body{
-    height: 100%;
+    min-height: 100vh;
 }
 
 body{
@@ -49,6 +49,7 @@ body{
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
+    // align-items: stretch;
     // style body
     background-color: color.$color_bg;
     padding: 0 15px;
@@ -64,6 +65,7 @@ body{
 
 .footer{
     flex-shrink: 0;
+    
 }
  /************************/
  
