@@ -1,9 +1,11 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Entities\Production;
-use Portfolio\Models\ProductionModel;
 use Portfolio\Core\Form;
+use Portfolio\Entities\Template;
+use Portfolio\Entities\Production;
+use Portfolio\Models\TemplateModel;
+use Portfolio\Models\ProductionModel;
 
 session_start();
 
@@ -19,7 +21,7 @@ class AdminProductionController extends Controller
         /**@var  */
         $model = new ProductionModel();
         $list = $model->findAll();
-
+        
         $this->render('admin/productions/index', ['list' => $list]);
     }
 
@@ -29,33 +31,51 @@ class AdminProductionController extends Controller
      * Récupère les données en POST, les traites puis hydate l'entité afin de les stocker en BDD
      * puis renvoi à la vue.
      * 
+     * @var string $error Récupère les message d'erreur
+     * @var array $paths Récupère les chemins de fichier
+     * @var array $arrayFiles Récupère les fichier formatés
+     * @var int $nb Incrémente la boucle afin de fournir le bon nom de fichier
      */
     public function add($token): void
     {
-        global $error;
+        global $error; 
+        $paths =[]; $arrayFiles = [];
+        $nb = 1;
+    
         // Si les champs POST et FILES ne sont pas vides
-        if (Form::validatePost($_POST, ['title', 'description', 'createdAt']) && Form::validateFiles($_FILES, ['file'])) {
+        if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'comment']) && Form::validateFiles($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'])) {
             // Type de fichier uploadé acceptés
             $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
-            // S'il y à une erreur elle est récupéré
-            $error = empty($erreur) ? Form::errorUpload($_FILES, ['file'], $type) : "" ;
-            // Formate le nom de fichier stocké dans un fichier séparé
-            $file = Form::formateFile($_FILES, ['file']);
+            // Si un erreur est déclarée sur un des fichier uploadés
+            $error = empty($erreur) ? Form::errorUpload($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'], $type) : "" ;
+            // Formate les noms de fichier sformatés dans un array 
+            $files = Form::formateFile($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4']);
+
+            $arrayFiles =  [1 => 'file', 2 => 'tmp1', 3=> 'tmp2', 4 =>  'tmp3', 5 => 'tmp4'];
+
             // Si les tokens correspondent afin de contrer une faille CSRF
             if (isset($_SESSION['token']) && $_POST['token'] == $_SESSION['token']) {
                 // Si l'erreur est vide
                 if (empty($error)) {
-                    // récupère le chemin de l'image formaté
-                    $path = $this->imageSize($file, 500,  500);
+                    // Boucle sur chaque fichier image  récupérés
+                    foreach($files as $file){
+                        // A chaque itération, reformate l ataille et l'extension de chacun
+                        $file = $this->imageSize($file, $arrayFiles[$nb], 500,  500);
+                        // Incrémente afin de fournir la bon name de fichier à chaque itération
+                        $nb++;
+                        // Stocke le chemin de fichier formater dans un array
+                        array_push($paths, $file);
+                    }
+                   
                     // Si l'image est uploadé et déplacé
                     if (empty($_SESSION['error'])) {
     
                         // hydrate entité
                         $production = new Production();
-                        $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
-                        $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
-                        $production->setPath($path);
-                        $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
+                        $production->setTitle( htmlspecialchars($_POST['title'], ENT_QUOTES) );
+                        $production->setDescription( htmlspecialchars($_POST['description'], ENT_QUOTES) );
+                        $production->setPath($paths[0]);
+                        $production->setCreatedAt( htmlspecialchars($_POST['createdAt'], ENT_QUOTES) );
                         $production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
                         $production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
                         $production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
@@ -64,9 +84,24 @@ class AdminProductionController extends Controller
                         $production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
                         $production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
                         $production->setIdUser($_SESSION['id_admin']);
-                        
+                        // Crée l'enregistrement
                         $productionModel = new ProductionModel();
                         $productionModel->create($production);
+
+                        // Récupère le dernier enregistrement de la table afin de récupérer
+                        // l'id pour hydratrer la clé étrangère
+                        $prod = $productionModel->findLast();
+
+                        $template = new Template();
+                        $template->setPath1($paths[1]);
+                        $template->setPath2($paths[2]);
+                        $template->setPath3($paths[3]);
+                        $template->setPath4($paths[4]);
+                        $template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
+                        $template->setIdProduction($prod->idProduction);
+                        // Crée l'enregistrement des templates relatifs à la production
+                        $templateModel = new TemplateModel();
+                        $templateModel->create($template);
                 
                     } else {
                         $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
@@ -77,7 +112,7 @@ class AdminProductionController extends Controller
                 session_unset();
                 session_destroy();
                 header('location:index.php');
-            }
+            }  
         } else {
             $error = (!empty($_POST)) ? 'Merci de remplir correctment les champs' : '';
         }
@@ -92,47 +127,94 @@ class AdminProductionController extends Controller
      */
     public function update(int $id, string $token): void
     {
-        global $error;
+        global $error; 
+        $paths =[]; $arrayFiles = [];
+        $nb = 0;
+        // $files ="";
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'hidden'])) {
+        if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'comment'])) {
             // Si les tokens correspondent afin d'éviter une faille XSS
             if (isset($_SESSION['token']) && isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
                  // Hydrate l'entité
                 $production = new Production();
+                $template = new Template();
+
                 $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
                 $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
                 $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
-                $production->setIdUser(1);
+                $production->setIdUser($_SESSION['id_admin']);
 
-                // Si l'image ets valide
-                if(Form::validateFiles($_FILES, ['file'])) {
-                    // Type de fichier uploadé acceptés
-                    $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
-                    // S'il y à une erreur elle est récupéré
-                    $error = empty($erreur) ? Form::errorUpload($_FILES, ['file'], $type) : "" ;
-                    // Formate le nom de fichier stocké dans un fichier séparé
-                    $file = Form::formateFile($_FILES, ['file']);
-                    
+                    $arrayFiles =  [0 => 'file', 1 => 'tmp1', 2=> 'tmp2', 3 =>  'tmp3', 4 => 'tmp4'];
+        
                     // S'il n'y a pas d'erreur
                     if(empty($error)) {
-                        // récupère le chemin de l'image formaté
-                        $path = $this->imageSize($file, 500,  500);
-                        // Si l'image est uploadé et déplacé
-                        if (empty($_SESSION['error'])) {
-                            $production->setPath($path);
-                        // Sinon assigne l'erreur
-                        } else {
-                            $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
-                        }
+                        $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
+                        
+                        foreach($arrayFiles as $file) {
+                            $setPath = "setPath" . $nb;
+                            $hiddenPath = "hidden_" . $file;
+                            if (Form::validateFiles($_FILES,  [$file])) {
+                                
+                                $error = empty($erreur) ? Form::errorUpload($_FILES, [$file], $type) : "" ;
+                                $fileItem = Form::formateFile($_FILES, [$file]);
+                                $_SESSION['test'] = $fileItem;
+                            
+                                // A chaque itération, reformate l ataille et l'extension de chacun
+                                if(!empty($file))
+                                $file = $this->imageSize($fileItem[0], $arrayFiles[$nb], 500,  500);
+                                // Incrémente afin de fournir la bon name de fichier à chaque itération
+                                
+                                // Stocke le chemin de fichier formater dans un array
+                                if (empty($_SESSION['error'])) {
+                                   
+
+                                    switch($nb) {
+                                        case 0 :
+                                            $production->setPath($file);
+                                            break;
+                                        case 1:
+                                            $template->setPath1($file);
+                                        case 2 :
+                                            $template->setPath2($file);
+                                            break;
+                                        case 3 :
+                                            $template->setPath3($file);
+                                            break;
+                                        case 4 :
+                                            $template->setPath4($file);
+                                            break;
+
+                                    }
+                                   
+                
+                                    $template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
+                                // Sinon assigne l'erreur
+                                } else {
+                                    $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
+                                }
+                            } else {
+
+                                if(!isset($_FILES['tmp1']))
+                                    $template->setPath1($_POST['hidden_tmp1']);
+                            }
+                            ++$nb;
                     } 
-                // Sinon assigne l'image par défaut
-                } else {
-                    $production->setPath($_POST['hidden']);
-                }                                
-                // Mise à jour de la bdd
+                           
+                        
+                        
+                    }
+                    
+                         // Mise à jour de la bdd
                 $productionModel = new ProductionModel();
+                $templateModel = new TemplateModel();
+
                 $productionModel->update($id, $production);
+                $templateModel->update($template, $id);
+            
                 header('location:index.php?controller=adminProduction&action=index');
+                    
+            
+               
             } else {
                 // Sinon redirige directement vers l'index en supprimant les données de connexion
                 session_unset();
@@ -143,13 +225,18 @@ class AdminProductionController extends Controller
         } else {
             $error = (!empty($_POST)) ? 'Merci de remplir correctment les champs' : '';
         }
-        // Récupère l'enregistrement correspondant par l'id
+
+        // Récupère l'enregistrement correspondant par l'id afin d'afficher dans le formulaire
         if (isset($id) && isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
             $model = new ProductionModel();
-            $realisation = $model->find($id);
+            $production = $model->join($id);
+            
+            // Récupère le premier élement de la jointure (qui sera toujours unique ici)
+            $production = $production[0];
+            $_SESSION['test'] = $production;
         }
         // Renvois vers la vue
-        $this->render('admin/productions/update', ['realisation' => $realisation, 'error' => $error]);
+        $this->render('admin/productions/update', ['production' => $production, 'error' => $error]);
     }
 
 
@@ -188,7 +275,7 @@ class AdminProductionController extends Controller
      * 
      * @return string [$destination] Retourne le chemin de l'image redimensionnée
      */
-    private function imageSize($path, $w, $h): string
+    private function imageSize($path, $tmpName, $w, $h): string
     {
         // Récupère l'extension, et le nom du fichier
         $ext =  pathinfo($path, PATHINFO_EXTENSION);
@@ -202,8 +289,8 @@ class AdminProductionController extends Controller
             $_SESSION['error'] = $name . '.webp' . " déja existant !";
         } else {
 
-            move_uploaded_file($_FILES['file']["tmp_name"],  'img/'. $name . '.webp');
-        
+            move_uploaded_file($_FILES[$tmpName]['tmp_name'],  'img/'. $name . '.webp');
+           
             // Récupère les dimension du fichier source
             $size = getimagesize($destination);
             $width = $size[0];

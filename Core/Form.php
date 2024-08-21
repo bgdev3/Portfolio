@@ -97,15 +97,20 @@ class Form
      * 
      * @return string $file nouveau nom de fichier formaté
      */
-    public static function formateFile(array $files, array $fields): string 
+    public static function formateFile(array $files, array $fields): array 
     {
+        $data = [];
         // Parcours chaque champs
         foreach ($fields as $field) {
-            // Formate le fichier
+           
+                 // Formate le fichier
             $uniqueName = uniqid('', true);
-            $file = $uniqueName . "." . pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
+            $filename =  $uniqueName . "." . pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
+            array_push($data, $filename);
+            
+           
         }
-        return $file;
+        return $data;
     }  
 
 }

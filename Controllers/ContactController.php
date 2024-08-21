@@ -40,24 +40,4 @@ class ContactController extends Controller
         // renvoi vers la vue
         $this->render('contact/index', ['error' => $error]);
     }
-
-
-    // /**
-    //  * Vérifie que les données du formulaire ne sont pas vides.
-    //  * 
-    //  * @param array $post methode d'envoi envoyé par le formulaire
-    //  * @param array fields Données envoyées par le formulaire
-    //  * 
-    //  */
-    // private function validatePost(array $post, array $fields): bool
-    // {
-    //      // Chaque champs est parcouru
-    //      foreach( $fields as $field){
-    //         // On teste si les champs sont vides ou déclarés
-    //         if (empty($post[$field]) || !isset($post[$field])) {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
 }

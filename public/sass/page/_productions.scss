@@ -2,14 +2,6 @@
 @use '../utils/variables' as color ;
 
 
-body{
-    position: relative;
-    @include mixins.tablet{
-        position: initial;
-    }
-   
-}
-
 .realisation-container{
     width: 100%;
     margin: 5% auto;
@@ -43,117 +35,114 @@ body{
         border-radius: 5px;
         padding: 1% 1% 0 1%;
         background-color: rgb(24, 24, 24);
+        position: relative;
         @include mixins.tablet{
             max-width: 30%;
         }
         @include mixins.desktop{
             max-width: 20%;
         }
-
-        .content-realisation {
-            opacity: 0;
-            transition: 1s;
-            bottom: 0;
-            left: 0;
-            top: 0;
-            width: 100%;
-            z-index:-1;
-            text-align: center;
-            height: 100%;
-            background: linear-gradient(to top,  rgba(0, 0, 0, 0.8) 90%, transparent);
-            // Absolue au body afin de centrer sur la fenetre
-            position: absolute;
-            border-radius: 10px;
-            div:first-child{
-                width: 80%;
+    
+            .content-container{
+                width: 100%;
                 text-align: center;
                 position: fixed;
                 top: 0;
                 left: 0;
-                margin-top: 35vh; /* poussé de la moitié de hauteur de viewport */
-                transform: translateY(-50%); 
-                transform: translateX(12%); 
+                height: 100%;
+                background: linear-gradient(to top,  rgba(0, 0, 0, 0.9) 90%, transparent);
+
                
-            }
-    
-            & p {
-                font-size: .9em;
-                line-height: 1.5em;
-                color: color.$color_font;
-                @include mixins.desktop{
-                    padding: 5% 5% 0 5%;
-                }   
-            }
-    
-            p, p+a {
-                display: none;
-            }
-    
-            & a{
-                display: block;
-                width: 80%;
-                margin: 5% auto;
-                padding: .5em;
-                border: none;
-                background-color: color.$color_bg;
-                color: color.$color_pink;
-                border-radius: 5px;
-                transition: 1s;
-                &:hover{
-                    background-color: color.$color_bg;
-                    color: color.$color_font;
+            .content-realisation{
+                 // templates de la productions
+                 div:first-child {
+                    width: 50%;
+                    gap: 8%;
+                    margin: 0 auto;
+                    @include mixins.flex-row(row, center, center);
+                    img{
+                        width: 50%;
+                    }
                 }
-    
+                padding: 5%;
+                margin-top: 40vh; /* poussé de la moitié de hauteur de viewport */
+                transform: translateY(-50%); 
                 @include mixins.tablet{
-                    width: 60%;
+                    padding: 20%;
                 }
                 @include mixins.desktop{
-                    width: 40%;
+                    padding: 30%;
                 }
-            }
-       }
-
-        &:hover > .content-realisation {
-            opacity: 1;
-            z-index: 9999;
-          
-            transition: 1s;
+                & p {
+                    font-size: .9em;
+                    line-height: 1.5em;
+                    color: color.$color_font;
+                    @include mixins.desktop{
+                        padding: 5% 5% 0 5%;
+                    }   
+                }
         
+                & a{
+                    display: block;
+                    width: 80%;
+                    margin: 5% auto;
+                    padding: .5em;
+                    border: none;
+                    background-color: color.$color_bg;
+                    color: color.$color_pink;
+                    border-radius: 5px;
+                    transition: 1s;
+                    &:hover{
+                        background-color: color.$color_bg;
+                        color: color.$color_font;
+                    }
+        
+                    @include mixins.tablet{
+                        width: 40%;
+                    }
+                    @include mixins.desktop{
+                        width: 20%;
+                    }
+                }
+            }  
+       }
+       .center{
+            @include mixins.flex-row(row, center, center);
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(24, 24, 24);
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: .75s;
+       }
+      
+     &:hover{
+        background-color: color.$color_bg;
+     }
 
-         
-
-            p, p+a{
-                display: block;
-            }
-        }
+     &:hover > .center{
+        opacity: 1;
+     }
 
         img{
             border-radius: 5px;
         }
 
-        & div:nth-child(3) {
+        // Icone des languages utilisés
+        & div:nth-child(4) {
             border-radius: 5px;
             padding: 2% 0 3% 0;
             @include mixins.flex-row(row, space-around, center );
             i {
                 font-size: 1em;
                 @include mixins.desktop{
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                 }
             }
-        }
-
-        .btn-realisation{
-          
-            @include mixins.desktop{
-                display: none;
-            }
-        
-            .btnForm{
-                margin: 0 auto 3%;
-                padding: 1%;
-            }
-        }
+        } 
     }  
 }
 
@@ -164,9 +153,11 @@ body{
     @include mixins.tablet{
         width: 80%;
     }
+
     @include mixins.desktop{
         width: 50%;
     }
+    
     p{
         line-height: 1.5em;
         font-style: italic;
@@ -176,13 +167,24 @@ body{
             color: color.$color_pink;
             vertical-align: -20%;
         }
-    }
-
-    
+    }   
 }
+
+.show-content{
+    opacity: 1;
+    z-index: 500;
+    transition: 1s;
+}
+
+.hide-content{
+    opacity: 0;
+    z-index: -1;
+    transition: 1s;
+
+}
+
 .title-realisation {
     text-align: center;
     font-size: 1em;
     color: color.$color_pink;
 }
-

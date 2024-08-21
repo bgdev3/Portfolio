@@ -87,6 +87,23 @@ a{
     text-decoration: none;
 }
 
+textarea{
+    resize: none;
+}
+
+.flex-form{
+
+    margin-top: 1%;
+    gap: 5%;
+    @include mixins.flex-row(column, space-between, start);
+    & :last-child{ width: 100%; }
+
+    @include mixins.desktop{
+        @include mixins.flex-row(row, space-between, start);
+        & :first-child, & :last-child{ flex: 0 1 50%; }
+    }
+} 
+
 .delayBody{
     opacity: 1;
     transition: 1s;

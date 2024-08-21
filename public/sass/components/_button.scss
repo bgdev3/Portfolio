@@ -24,3 +24,21 @@
         color: color.$color_font;
     }
 }
+
+.btn-realisation, .btn-close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    width: 2em;
+    margin: 0 auto;
+    height: 2em;
+    padding: 1em;
+    border: 2px solid color.$color_pink;
+    background-color: transparent;
+    transition: .5s;
+    &:hover{
+        border: 2px solid color.$color_font;
+        color: color.$color_pink;
+    }
+ }

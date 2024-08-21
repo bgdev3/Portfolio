@@ -6,31 +6,45 @@ $title = 'Réalisation';
 <section>
     <div class="realisation-container">
 
-    
         <h1 class="section-title">Réalisations</h1>
         <div class="project-container">
        
             <?php 
-            if(isset($pictures))
-                foreach($pictures as $picture) { ?>
-            
+            if(isset($productions))
+                foreach($productions as $production) { 
+                    foreach($production as $item) {
+            ?>
+                    
             <div class="img-project">
-                <img src="<?php echo $picture->path;  ?>" alt=" <?php echo $picture->title; ?>">
-               
-                <div class=" content-realisation" >
-                    <div>
-                        <p> <?php echo $picture->description; ?> </p>
-                        <a href="https://abcdtaxi.fr">Accès au site</a>
-                    </div>
-                   
-                </div>
                 
+                    <div class="content-container hide-content">
+                      
+                        
+                        <div class=" content-realisation " >
+                        <div>
+                            <img src="<?php echo  $item->template1;  ?>" alt=" <?php echo  $item->title; ?>">
+                            <img src="<?php echo  $item->template2;  ?>" alt=" <?php echo  $item->title; ?>">
+                            <img src="<?php echo  $item->template3;  ?>" alt=" <?php echo  $item->title; ?>">
+                            <img src="<?php echo  $item->template4;  ?>" alt=" <?php echo  $item->title; ?>">
+                        </div>
+                            <p> <?php echo  $item->description; ?> </p>
+                            <a href="https://abcdtaxi.fr">Accès au site</a>
+                            <button class="btn-close">x</button>
+                        </div>
+                       
+                    </div>
+                <img src="<?php echo  $item->path;  ?>" alt=" <?php echo  $item->title; ?>">
+               
+                <div class="center">
+                        <button class="btn-realisation ">+</button>
+                </div>
+
                 <div>
 
                 <?php
                     // Tableau pour stocker les languages
                     $languages = [];
-                    array_push($languages, $picture->html, $picture->sass, $picture->js, $picture->php, $picture->symfony, $picture->react, $picture->wordpress);
+                    array_push($languages,  $item->html,  $item->sass,  $item->js,  $item->php,  $item->symfony,  $item->react,  $item->wordpress);
                     // POur chaque languages avec une valeur non nulle
                     // on crée l'élément html en y insérant la class de l'icone fontawesome
                     foreach ($languages as $lang) {
@@ -42,13 +56,13 @@ $title = 'Réalisation';
                 ?>
 
                 </div>
-                <div class=" btn-realisation" > 
-                    <input type="button" class="btnForm" value="+">
-                </div>
+                
                 
             </div>
            
-            <?php  } ?>
+            <?php  } 
+                }
+            ?>
         </div>
     </div>
 

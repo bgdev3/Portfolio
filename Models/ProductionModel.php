@@ -51,7 +51,7 @@ class ProductionModel  extends DbConnect
     /**
      * Récupère un enregistrement par l'id correspondnat
      * 
-     *@param int $id correspondant de l'enregistrement sélectionné
+     * @param int $id correspondant de l'enregistrement sélectionné
      * @return object
      */
     public function find(int $id): object
@@ -63,6 +63,18 @@ class ProductionModel  extends DbConnect
         return $prod;
     }
 
+    /**
+     * Recuprère le dernier enregistrement de la table
+     * 
+     * @return object
+     */
+    public function findLast(): object
+    {
+        $this->request = $this->connexion->prepare('SELECT * FROM production ORDER BY idProduction DESC  LIMIT 1');
+        $this->request->execute();
+        $prod = $this->request->fetch();
+        return $prod;
+    }
 
     /**
      * Récupère un enregistrement par l'id correspondnat
@@ -82,6 +94,22 @@ class ProductionModel  extends DbConnect
         $this->request->bindValue(':createdAt', $production->getCreatedAt());
         $this->ExecuteTryCatch();
        
+    }
+
+    /**
+     * Jointure entre les tables production et template
+     * 
+     * @param int $id Id correspondnat afin d'effectuer la jointure
+     * @return array $prod jointure retournée
+     */
+    public function join(int $id): array
+    {
+        $this->request = $this->connexion->prepare('SELECT * FROM production INNER JOIN template on production.idProduction = template.idProduction  
+                                                    WHERE template.idProduction = :id');
+        $this->request->bindParam(':id', $id);
+        $this->request->execute();
+        $prod = $this->request->fetchAll();
+        return $prod;
     }
 
     /**
