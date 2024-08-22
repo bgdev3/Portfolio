@@ -12,7 +12,6 @@ session_start();
 class AdminProductionController extends Controller
 {
 
-    
     /**
      * Récupère les différentes réalisations stockées
      */
@@ -128,11 +127,12 @@ class AdminProductionController extends Controller
     public function update(int $id, string $token): void
     {
         global $error; 
-        $paths =[]; $arrayFiles = [];
+        $arrayFiles =  [0 => 'file', 1 => 'tmp1', 2=> 'tmp2', 3 =>  'tmp3', 4 => 'tmp4'];
         $nb = 0;
-        // $files ="";
+
         // Si les champs ne sont pas vides
         if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'comment'])) {
+
             // Si les tokens correspondent afin d'éviter une faille XSS
             if (isset($_SESSION['token']) && isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
                  // Hydrate l'entité
@@ -144,76 +144,52 @@ class AdminProductionController extends Controller
                 $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
                 $production->setIdUser($_SESSION['id_admin']);
 
-                    $arrayFiles =  [0 => 'file', 1 => 'tmp1', 2=> 'tmp2', 3 =>  'tmp3', 4 => 'tmp4'];
-        
-                    // S'il n'y a pas d'erreur
-                    if(empty($error)) {
-                        $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
-                        
-                        foreach($arrayFiles as $file) {
-                            $setPath = "setPath" . $nb;
-                            $hiddenPath = "hidden_" . $file;
-                            if (Form::validateFiles($_FILES,  [$file])) {
-                                
-                                $error = empty($erreur) ? Form::errorUpload($_FILES, [$file], $type) : "" ;
-                                $fileItem = Form::formateFile($_FILES, [$file]);
-                                $_SESSION['test'] = $fileItem;
-                            
-                                // A chaque itération, reformate l ataille et l'extension de chacun
-                                if(!empty($file))
-                                $file = $this->imageSize($fileItem[0], $arrayFiles[$nb], 500,  500);
-                                // Incrémente afin de fournir la bon name de fichier à chaque itération
-                                
-                                // Stocke le chemin de fichier formater dans un array
-                                if (empty($_SESSION['error'])) {
-                                   
-
-                                    switch($nb) {
-                                        case 0 :
-                                            $production->setPath($file);
-                                            break;
-                                        case 1:
-                                            $template->setPath1($file);
-                                        case 2 :
-                                            $template->setPath2($file);
-                                            break;
-                                        case 3 :
-                                            $template->setPath3($file);
-                                            break;
-                                        case 4 :
-                                            $template->setPath4($file);
-                                            break;
-
-                                    }
-                                   
+                // Format de fichier acceptés
+                $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
                 
-                                    $template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
-                                // Sinon assigne l'erreur
-                                } else {
-                                    $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
-                                }
-                            } else {
+                // Pour chaque nom de fichier stockés
+                foreach($arrayFiles as $file) {
+                    
+                    $setPath = "setPath" . $nb;      // Créer le setter avec le nb d'occurence
+                    $hiddenPath = "hidden_" . $file; // Créer le nom de fichier hidden 
 
-                                if(!isset($_FILES['tmp1']))
-                                    $template->setPath1($_POST['hidden_tmp1']);
-                            }
-                            ++$nb;
-                    } 
-                           
+                    // Si le fichier ne presente pas d'erreur d'envoi
+                    if (Form::validateFiles($_FILES,  [$file])) {
+
+                        // Vérifie le bon fomrat, la taille et l'extension du fichier
+                        $error = empty($erreur) ? Form::errorUpload($_FILES, [$file], $type) : "" ;
+                        // Formate le fichier
+                        $fileItem = Form::formateFile($_FILES, [$file]);
+                        // Redimensionne l'image avant de l'uploader sur le serveur
+                        $file = $this->imageSize($fileItem[0], $arrayFiles[$nb], 500,  500);
                         
-                        
+                        // Si le redimensionnement s'est bien dértoulé
+                        if (empty($_SESSION['error'])) {
+
+                            // $nb vaut 0 ? Hydrate l'entité Production, sinan hdrate l'entité Template
+                            $nb == 0 ? $production->setPath($file) :  $template->$setPath($file);
+                            // Hydrate les commentaires s'il y en a
+                            $template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
+
+                        // Sinon assigne l'erreur
+                        } else {
+                            $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
+                        }
+                    // Sinon hydrate par default les hiddens récupérés en post des chemins stockés en bdd
+                    } else {
+                        $nb == 0 ? $production->setPath($_POST[$hiddenPath]) :  $template->$setPath($_POST[$hiddenPath]);
                     }
-                    
-                         // Mise à jour de la bdd
-                $productionModel = new ProductionModel();
-                $templateModel = new TemplateModel();
+                ++$nb;
+            } 
+                
+            // Mise à jour de la bdd
+            $productionModel = new ProductionModel();
+            $templateModel = new TemplateModel();
 
-                $productionModel->update($id, $production);
-                $templateModel->update($template, $id);
-            
-                header('location:index.php?controller=adminProduction&action=index');
-                    
-            
+            $productionModel->update($id, $production);
+            $templateModel->update($template, $id);
+        
+            header('location:index.php?controller=adminProduction&action=index');
                
             } else {
                 // Sinon redirige directement vers l'index en supprimant les données de connexion
