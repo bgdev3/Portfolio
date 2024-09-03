@@ -85,6 +85,4 @@ export function verif() {
     btnSend.forEach(btn=>{
         btn == null ?  btn == 'undefined' : btn.addEventListener('click', validateForm);
     });
-
-    // Array.from(document.querySelectorAll('form[id=myForm]')).map(loadRecaptcha);
 }

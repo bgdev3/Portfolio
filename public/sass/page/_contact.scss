@@ -6,20 +6,8 @@
     width: 100%;
     @include mixins.tablet{ width: 80%; }
    
-    margin:8% auto;
+    margin:5% auto;
     & h1 { margin-bottom: 3%; }
-    // & .flex-form{
-
-    //     margin-top: 1%;
-    //     gap: 5%;
-    //     @include mixins.flex-row(column, space-between, start);
-    //     & :last-child{ width: 100%; }
-
-    //     @include mixins.desktop{
-    //         @include mixins.flex-row(row, space-between, start);
-    //         & :first-child, & :last-child{ flex: 0 1 50%; }
-    //     }
-    // } 
 }
 
 .inputForm{

@@ -29,12 +29,15 @@ if (!isset($_SESSION['token'])) {
         <div class="name-style">
             <p >Guillaume<Br><span class="name">Boukehaili</span></p>
             <span class="work">Développeur<span> web</span></span>
-           
+            <a href="https://www.bgdev.fr/public/img/cv.pdf" target="_blank">Télécharger cv</a>
         </div>
         
         <p class="text-style">
-            <span>Salut !</span><br> Je m'appelle guillaume et je suis ravi de vous accueillir dans mon monde&nbsp;.&nbsp; Après 16 ans d'activité dans le médical&nbsp;,&nbsp; je me suis reconvertis dans le web
-            afin de rallier ma passion et le monde professionnel&nbsp;.&nbsp; Diplômé d'une formation certifiante d'un titre professionnel de niveau V de développeur web et web mobile&nbsp;,&nbsp; je suis à l'écoute et étudie toutes les possibilités de projets pour lesquels nous pourrions travailler ensemble&nbsp;.<br> Vous avez un projet en tête&nbsp;?&nbsp; Une refonte complète d'un site&nbsp;?&nbsp; Un problème technique&nbsp;?&nbsp; Je prends en charge aussi bien la partie front end de votre site&nbsp;,&nbsp; des maquettes et intégration&nbsp;, à la partie back end de votre projet jusqu'à la livraison de celui-ci&nbsp;.&nbsp; Un planning surchargé&nbsp;?&nbsp; La possibilité de venir à vous afin de vous libérer de ce stress et de vous faire évoluer dans les meilleures conditions&nbsp;.
-            <br>Ma disponibilité est mise à contribution afin de trouver les solutions les plus adéquates qui vous permettront d'évoluer comme vous l'avez toujours souhaité&nbsp;.&nbsp; Alors, à très vite&nbsp;...</p>
+            <span></span><br>Après 16 ans d'activité dans le domaine médical,  je me suis reconverti dans le développement web afin de rallier passion et monde professionnel.<br><br> 
+                Diplômé d'une formation certifiante de niveau V de développeur web et web mobile, je suis à l'écoute et étudie toutes les possibilités de projets pour lesquels nous pourrions travailler ensemble. En effet, mon expérience acquise me permet de répondre au mieux à vos différents besoins et de vous proposer les solutions les plus adéquates à vos attentes.<br><br>
+                D'un site vitrine à un projet plus complexe, je vous ferai part de la meilleure expertise possible afin d'évoluer dans les conditions les plus optimales. Alors, à très vite …
+        </p>
+        <a href="/public/productions">Portfolio</a>  
     </div>
+   
 </section>

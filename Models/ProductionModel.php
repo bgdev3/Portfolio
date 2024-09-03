@@ -15,13 +15,14 @@ class ProductionModel  extends DbConnect
      */
     public function create(Production $production): void
     {
-        $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :description, :path, :createdAt, :html, :sass, :js, :php, :symfony, :react, :wordpress, :idUser)');
+        $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :description, :path, :createdAt, :html, :sass, :bootstrap, :js, :php, :symfony, :react, :wordpress, :idUser)');
         $this->request->bindValue(':title', $production->getTitle());
         $this->request->bindValue(':description', $production->getDescription());
         $this->request->bindValue(':path', $production->getPath());
         $this->request->bindValue(':createdAt', $production->getCreatedAt());
         $this->request->bindValue(':html', $production->getHTML());
         $this->request->bindValue(':sass', $production->getSass());
+        $this->request->bindValue(':bootstrap', $production->getBootstrap());
         $this->request->bindValue(':js', $production->getJs());
         $this->request->bindValue(':php', $production->getPhp());
         $this->request->bindValue(':symfony', $production->getSymfony());
@@ -85,13 +86,21 @@ class ProductionModel  extends DbConnect
     public function update(int $id, Production $production)
     {
         $this->request = $this->connexion->prepare('UPDATE production SET title = :title, description = :description, path = :path, 
-        createdAt = :createdAt WHERE idProduction = :id');
+        createdAt = :createdAt, html = :html, sass = :sass, bootstrap = :bootstrap, js = :js, php = :php, symfony = :symfony, react = :react, wordpress = :wordpress WHERE idProduction = :id');
 
         $this->request->bindValue(':id', $id);
         $this->request->bindValue(':title', $production->getTitle());
         $this->request->bindValue(':description', $production->getDescription());
         $this->request->bindValue(':path', $production->getPath());
         $this->request->bindValue(':createdAt', $production->getCreatedAt());
+        $this->request->bindValue(':html', $production->getHTML());
+        $this->request->bindValue(':sass', $production->getSass());
+        $this->request->bindValue(':bootstrap', $production->getBootstrap());
+        $this->request->bindValue(':js', $production->getJs());
+        $this->request->bindValue(':php', $production->getPhp());
+        $this->request->bindValue(':symfony', $production->getSymfony());
+        $this->request->bindValue(':react', $production->getReact());
+        $this->request->bindValue(':wordpress', $production->getWordpress());
         $this->ExecuteTryCatch();
        
     }

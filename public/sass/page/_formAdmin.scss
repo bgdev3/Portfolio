@@ -7,7 +7,7 @@
     @include mixins.tablet{ width: 80%;}
     @include mixins.desktop{ width: 80%;}
 
-    margin: 8% auto;
+    margin: 5% auto;
 
     & h1 { margin-bottom: 8%;
         @include mixins.desktop{ margin-bottom: 3%;} 

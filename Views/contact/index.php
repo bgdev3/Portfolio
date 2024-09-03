@@ -50,6 +50,5 @@ $title = 'Contact';
    
 </section>
 
-
 <!-- Appel du script Re-captcha -->
-<!-- <script src="https://www.google.com/recaptcha/api.js?render=6LebG6MpAAAAAIDVxKKsnIql8WG-028Dvudz5l-k"></script> -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LdBCjUqAAAAAOJSNtjby8x8H2HSBVUBfaic0jJs"></script>

@@ -10,12 +10,13 @@ nav:has(.nav-header) {
     position:fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 110vh;
     width: 100%;
     opacity: 0;
     z-index: -1;
     background-color: color.$color_bg;
     transition: .5s;
+    padding-bottom: 50%;
     @include mixins.flex-row(column, center, center);
     gap: 4%;
     li::after{
@@ -32,7 +33,7 @@ nav:has(.nav-header) {
     }
 
     @include mixins.desktop() {
-       
+        padding-bottom: initial;
         position: initial;
         height: initial;
         @include mixins.flex-row(row, space-between, center);

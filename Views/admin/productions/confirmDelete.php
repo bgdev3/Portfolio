@@ -2,7 +2,7 @@
 <?php 
 $title = 'Confirmation';
 if(!isset($_SESSION['username_admin']))
-    header('location:index.php');
+    header('location:/public/');
 ?>
 
 <section>

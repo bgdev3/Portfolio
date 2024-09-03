@@ -23,3 +23,6 @@ $token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null ;
     </div>
     
 </section>
+
+<!-- Appel du script Re-captcha -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LdBCjUqAAAAAOJSNtjby8x8H2HSBVUBfaic0jJs"></script>

@@ -11,6 +11,7 @@ class Production
     private $createdAt;
     private $html;
     private $sass;
+    private $bootstrap;
     private $js;
     private $php;
     private $symfony;
@@ -160,6 +161,28 @@ class Production
         return $this;
     }
    
+
+    /**
+     * Get the value of bootstrap
+     */ 
+    public function getBootstrap()
+    {
+        return $this->bootstrap;
+    }
+
+    /**
+     * Set the value of bootstrap
+     *
+     * @return  self
+     */ 
+    public function setBootstrap($bootstrap)
+    {
+        $this->bootstrap = $bootstrap;
+
+        return $this;
+    }
+
+    
     /**
      * Get the value of html
      */ 
@@ -278,5 +301,4 @@ class Production
 
         return $this;
     }
-    
 }

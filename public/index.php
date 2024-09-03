@@ -7,7 +7,7 @@ require '../vendor/autoload.php';
 
 use Portfolio\Core\Router;
 
-// On instancie le routeur
+// Instancie le routeur
 $route = new Router();
-// On lance l'application
+// lance l'application
 $route->routes();

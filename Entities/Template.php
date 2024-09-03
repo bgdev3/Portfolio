@@ -12,7 +12,6 @@ class Template
     private $idProduction;
 
     
-
     /**
      * Get the value of idTemplate
      */ 

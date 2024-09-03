@@ -9,14 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/878534cf28.js" crossorigin="anonymous"></script>
     <!-- inclut la feuille de style -->
-    <link rel="stylesheet"  href="sass/style.css">
-    <script  type="module" src="js/main.js"></script>
+    <link rel="stylesheet"  href="/public/sass/style.css">
+    <script  type="module" src="/public/js/main.js"></script>
     <title><?php echo $title; ?></title>
 </head>
 
 <body class="scroller">
     <header class="header">
-        <h1><a href="index.php">Portfolio</a></h1>
+        <h1><a href="/public/">BgDev</a></h1>
         
         <?php if(!isset( $_SESSION['id_admin']))
                 require_once "template_header/header_user.php"; 
@@ -41,7 +41,7 @@
             <li><a href="https://github.com/charlieGui"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
-            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés  <a href="index.php?controller=admin&action=index"><i class="fa-solid fa-right-to-bracket color-link"></i></a></p>
+            <p><a href="">Mentions légales</a>  | &copy;Tous droit réservés  <a href="/public/admin"><i class="fa-solid fa-right-to-bracket color-link"></i></a></p>
         </div>
     </footer>
 

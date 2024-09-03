@@ -1,20 +1,53 @@
 @use '../utils/mixins';
 @use '../utils/variables' as color ;
 
+
+
 .presentation {
+    margin: 3% 0;
+    @include mixins.flex-row(column, space-between, center);
     @include mixins.desktop{
         @include mixins.flex-row(row, space-between, center);
+        margin: 8% 0;
     }
-    margin: 8% 0;
+
+    span+a{
+        margin-top: 3%;
+        padding: .7em .5em .7em;
+        font-size: 1rem;
+        border: 1px solid color.$color_pink;
+        transition: .5s;
+        text-align: center;
+        &:hover{
+            border: 1px solid color.$color_font;
+            color: color.$color_pink;
+        }
+    }
+
+    p+a{
+       width: 90%;
+       text-align: center;
+       letter-spacing: .5em;
+       text-transform: uppercase;
+       padding: .7em .5em .7em;
+       border: 1px solid color.$color_pink;
+       color: color.$color_font;
+       margin-bottom: 7%;
+       @include mixins.tablet { width: 80%; }
+       @include mixins.desktop{ display: none; }
+    }
 }
 
 .name-style {
-    flex: 1 0 50%;
+   
     font-size: 2em;
     // Centre l'identité
     @include mixins.flex-row(column, start, center);
     @include mixins.tablet{
         font-size: 4em;
+    }
+    @include mixins.desktop{
+        flex: 1 0 50%;
     }
 
     .name {
@@ -36,19 +69,28 @@
             font-size: 1.72rem;
         }
     }
+
+   
+
 }
 
 .text-style {
-    margin: 10% 0;
-    line-height: 2em;
+    width: 95%;
+    margin: 10% auto;
+    line-height: 1.75em;
+
+    // bdi = color: white
     & span{
         display: block;
+        height: .75em; /* Evite le décalage du texte "salut" lors de l'intégration en js*/
         text-align: center;
         font-size: 1.5em;
         color: color.$color_pink;
+        margin-bottom: .5em;
         @include mixins.desktop{
+            height: .5em;
             font-size: 2rem;
-            display: inline-block;
+            // display: inline-block; ? permet l'lalignement à gauche de Salut
         }
     }
 
@@ -60,6 +102,11 @@
     @include mixins.desktop{
        margin: 0;
     }
-    
+
+    .hideLetter{
+        opacity: 0;
+       
+    }   
 }
+
 

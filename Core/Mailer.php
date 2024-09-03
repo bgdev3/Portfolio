@@ -19,18 +19,14 @@ class Mailer
             $mail->Host       = 'smtp.gmail.com';                                       //Adresse serveur SMTP
             $mail->SMTPAuth   = true;                                                   //Active l'authentification
             $mail->Username   = 'boukehaili.g@gmail.com';                               //Identifiant SMTP
-            $mail->Password   = 'hekfmufaowzithcv';                                     //password de l'application
+            $mail->Password   = 'hpyw cblj uayp qeah';                                     //password de l'application
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                            //Active l'encriptage de l'envoi
             $mail->Port       = 465;                                                    //port SMTP
         
             //Recipients
             // email Kevin
             $mail->setFrom('boukehaili.g@gmail.com', 'Portfolio');                      //Adresse d'envoi
-            $mail->addAddress('boukehaili.g@gmail.com');                                             //Destinatire
-        
-            // //Attachments
-                                                                        //Si le paramètre facultatif est présent        
-        //   $mail->addAttachment($file['file']['tmp_name'], $file['file']['name']);     //Pièce jointe : chemin du fichier temporaire, nom du fichier
+            $mail->addAddress('boukehaili.g@gmail.com');                                //Destinatire
         
             //Content
             $mail->isHTML(true);                                                        //Format HTML activé

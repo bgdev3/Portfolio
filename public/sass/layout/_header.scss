@@ -3,9 +3,13 @@
 
 .header {
     @include mixins.flex-row(row, space-between, center);
-     
+    
     h1 {
         flex: 1 1 auto;
+        margin-left: -.25%; /* Corrige le décalage de 0.25% à gauche par rapport au flex du menu  */
+        @include mixins.tablet{
+            margin-left: initial;
+        }
        & > a { color:color.$color_pink; }
     }
 }

@@ -3,7 +3,7 @@
 $title = 'Admin - Ajout';
 $token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null;
 if(!isset($_SESSION['username_admin']))
-    header('location:index.php');
+    header('location:/public/');
 ?>
 
 <section >
@@ -54,6 +54,10 @@ if(!isset($_SESSION['username_admin']))
                     <label for="sass">Sass</label>
                 </div>
                 <div>
+                    <input type="checkbox" id="boot" name="boot" value="fa-brands fa-bootstrap">
+                    <label for="boot">Bootstrap</label>
+                </div>
+                <div>
                     <input type="checkbox" id="js" name="js" value="fa-brands fa-square-js">
                     <label for="js">JS Vanilla</label>
                 </div>
@@ -79,3 +83,6 @@ if(!isset($_SESSION['username_admin']))
         </form>
     </div>
 </section>
+
+<!-- Appel du script Re-captcha -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LdBCjUqAAAAAOJSNtjby8x8H2HSBVUBfaic0jJs"></script>

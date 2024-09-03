@@ -8,7 +8,7 @@
     gap: 5%;
     img{
         width: 30%;
-        margin-bottom: 10%;
+        margin-bottom: 8%;
         align-self: center;
         justify-content: center;
         // display: inline;
@@ -17,8 +17,8 @@
           width: 25%;
         }
         @include mixins.desktop{
-          margin-bottom: 5%;
-          width: 20%;
+          margin-bottom: 2%;
+          width: 10%;
         }
     }  
 }

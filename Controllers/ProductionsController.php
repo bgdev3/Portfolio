@@ -17,14 +17,14 @@ class ProductionsController extends Controller
     {
        $productions = [];
         // Récupère toutes les productions
-       $model = new ProductionModel();
-       $lists = $model->findAll();
+        $model = new ProductionModel();
+        $lists = $model->findAll();
 
         //Sur chacune d'elles, effectue une jointure stockés dans un array
         foreach($lists as $list) {
-         array_push($productions,  $model->join($list->idProduction));
+        array_push($productions,  $model->join($list->idProduction));
         }
-
+       
         // Renvoi les jointures à la vue correspondante
        $this->render('productions/index', ['productions' => $productions]);
     }
