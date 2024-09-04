@@ -15,8 +15,8 @@ nav:has(.nav-header) {
     opacity: 0;
     z-index: -1;
     background-color: color.$color_bg;
-    transition: .5s;
     padding-bottom: 50%;
+    @include mixins.transition;
     @include mixins.flex-row(column, center, center);
     gap: 4%;
     li::after{
@@ -79,7 +79,7 @@ nav:has(.nav-header) {
                     opacity: 0;
                     margin-bottom: 5%;
                     font-size: .9rem;
-                    transition: .5s;
+                    @include mixins.transition;
                 }
             }
         }
@@ -88,12 +88,13 @@ nav:has(.nav-header) {
     }
 }
     
-
 .show-menu{
     opacity: 1;
     z-index: 998;
 }
 
 .unScroll{
-    overflow-y: hidden;
+    overflow: hidden;
+    /* Comptabilité safari  */
+    -webkit-overflow-scrolling : hidden;
 }

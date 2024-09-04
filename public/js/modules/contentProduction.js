@@ -5,6 +5,7 @@ export function showContentProduction(){
     let btnAdd = document.querySelectorAll('button.btn-realisation');
     let body = document.querySelector('body');
     let btnClose = document.querySelectorAll('button.btn-close');
+    let centers = document.querySelectorAll('.img-project .center');
     let content =  document.querySelectorAll('div.content-container');
     let contentQuote = document.querySelector('aside.quote');
     let comments = document.querySelectorAll('aside.quote p');
@@ -17,6 +18,16 @@ export function showContentProduction(){
      * Affiche le contenu personnalisé aux productions
      */
     function contentProduction() {
+        
+        // Snippet pour rendre la transition valide sur safari mobile
+        if(screen.width <= 1024) {
+            centers.forEach(el => {
+                el.addEventListener('touchstart', (e)=>{
+                    el.classList.toggle('hoverMobile');
+                })
+            })
+        }
+                
         // Boucle sur chaque bouton voirplus, si l'index du tableau correspond à l'index du tableau content,
         // Alors applique les classes correspondante.
         btnAdd.forEach((el, index) => {

@@ -39,7 +39,7 @@
         height: .15em;
         transform: rotate(180deg);
         transform: translateX(-50%) translateY(-50%);
-        transition: .5s;
+        @include mixins.transition;
         &::before, &::after{
             content: "";
             position: absolute;

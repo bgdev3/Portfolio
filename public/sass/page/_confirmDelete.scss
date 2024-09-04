@@ -24,7 +24,7 @@
             border: 1px solid color.$color_pink;
             color: color.$color-font;
             border-radius: initial;
-            transition: .5s;
+            @include mixins.transition;
             &:hover{
                 border: 1px solid color.$color_font;
                 color: color.$color-pink;

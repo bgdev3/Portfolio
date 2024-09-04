@@ -11,8 +11,12 @@ function loadRecaptchaToken() {
     });
 }
 
+
 // Exporte la fonction 
  export function loadRecaptcha() {
-    loadRecaptchaToken();
-    setInterval(function(){loadRecaptchaToken();}, 100000);
+    if(document.querySelector('#myForm')) {
+        loadRecaptchaToken();
+        setInterval(function(){loadRecaptchaToken();}, 100000);
+    }
+   
 }
