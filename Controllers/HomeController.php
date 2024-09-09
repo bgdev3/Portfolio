@@ -7,4 +7,10 @@ class HomeController extends Controller{
 
         $this->render('home/index');
     }   
+
+     // Renvoi vers les mentions légales
+     public function mentions(): void 
+     {
+        $this->render('home/mentions');
+     }
 }

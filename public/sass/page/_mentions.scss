@@ -1,0 +1,21 @@
+@use '../utils/mixins';
+@use '../utils/variables' as color ;
+
+.mentions{
+    width: 95%;
+    margin: 3% auto 0;
+    padding: .5em .5em;
+    background-color:  color.$color_input;
+    border-radius: 10px;
+    @include mixins.desktop{
+        width: 80%;
+        padding: .5em 2em;
+    }
+    h1{
+        text-align: center;
+    }
+    h2{
+        color: color.$color_pink;
+        text-align: center;
+    }
+}

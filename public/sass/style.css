@@ -519,7 +519,6 @@ nav:has(.nav-header) {
     transform: scale(2);
   }
   .img-project .content-container .content-realisation .template div:has(img):hover img {
-    padding: 0;
     border-radius: 2px;
     padding: 0.25em;
     border: none;
@@ -1097,6 +1096,27 @@ input.error {
 }
 .form-connect .btnForm {
   width: 50%;
+}
+
+.mentions {
+  width: 95%;
+  margin: 3% auto 0;
+  padding: 0.5em 0.5em;
+  background-color: #1b1b1b;
+  border-radius: 10px;
+}
+@media only screen and (min-width: 1024px) {
+  .mentions {
+    width: 80%;
+    padding: 0.5em 2em;
+  }
+}
+.mentions h1 {
+  text-align: center;
+}
+.mentions h2 {
+  color: #97004f;
+  text-align: center;
 }
 
 * {
