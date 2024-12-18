@@ -56,7 +56,7 @@ nav:has(.nav-header) {
   width: 100%;
   opacity: 0;
   z-index: -1;
-  background-color: rgb(19, 18, 18);
+  background-color: #131212;
   padding-bottom: 50%;
   transition: all 0.5s ease-out;
   display: flex;
@@ -463,7 +463,7 @@ nav:has(.nav-header) {
   top: 0;
   left: 0;
   height: 100%;
-  background-color: rgb(19, 18, 18);
+  background-color: #131212;
 }
 .img-project .content-container h3 {
   width: 60%;
@@ -930,16 +930,16 @@ input.error {
     position: relative;
     margin-top: -1;
     border: 2px solid #252424;
-    background: rgb(19, 18, 18);
+    background: #131212;
   }
   .table-responsive td:not(td.flexTd):nth-child(odd) {
-    background-color: rgb(19, 18, 18);
+    background-color: #131212;
   }
   .table-responsive td:not(td.flexTd):not(td.flexTd)::before {
     border-right: 4px solid #252424;
     padding: 10px;
     content: attr(data-label);
-    background-color: rgb(19, 18, 18);
+    background-color: #131212;
     color: #97004f;
     font-weight: bold;
     font-size: 1em;
@@ -962,7 +962,7 @@ input.error {
   }
   .table-responsive td.flexTd::before, .table-responsive tbody td:last-child {
     border: 2px solid #252424;
-    background-color: rgb(19, 18, 18);
+    background-color: #131212;
     width: 100%;
   }
 }
@@ -1134,7 +1134,7 @@ input.error {
 
 ::-webkit-scrollbar-track-piece { /* Fond */
   background: transparent none;
-  border: solid 1px rgb(19, 18, 18);
+  border: solid 1px #131212;
   border-right-width: 8px;
   margin: 4px;
   -webkit-box-shadow: inset 1px 1px 0 0 rgb(30, 30, 30), inset -1px -1px 0 0 rgb(30, 30, 30);
@@ -1163,7 +1163,7 @@ body {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  background-color: rgb(19, 18, 18);
+  background-color: #131212;
   padding: 0 15px;
   opacity: 0;
   transition: all 0.5s ease-out;
@@ -1227,7 +1227,7 @@ textarea {
 
 .delayBody {
   opacity: 1;
-  transition: 1s;
+  transition: 0.25s;
 }
 
 .section-title {
@@ -1245,6 +1245,11 @@ textarea {
 .errorForm {
   text-align: center;
   color: #6d0f0f;
+}
+
+.sentMailMessage {
+  color: #094709;
+  text-align: center;
 }
 
 .msgError {

@@ -11,5 +11,5 @@ window.addEventListener('load', async () => {
     const recaptcha = await import("./modules/recaptcha.js");
 
     cr_burger.burger(); verif.verif();  realisationAdmin.responsiveArray(); contentProduction.showContentProduction();
-    animationTitle.animateTitle(); recaptcha.loadRecaptcha();
+    animationTitle.animateTitle(); recaptcha.loadRecaptcha(); 
 })

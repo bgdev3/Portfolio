@@ -11,7 +11,9 @@ $title = 'Contact';
 
             <div class="errorForm">  <?php echo $error; ?> </div>
        
-        <?php } ?>
+        <?php } elseif(!empty($message)) { ?>
+            <div class="sentMailMessage">  <?php echo $message; ?> </div>
+       <?php } ?>
 
         <form action="" method="POST" id="myForm" novalidate>
             <small>(*)Champs obligatoire</small>

@@ -37,7 +37,7 @@ class Mailer
                                 
             $mail->send();                                                              //Envoi
             $message="";
-            // Si l'envoi ne s'effectue pas un eexception est levé et on affiche un message d'erreur
+            // Si l'envoi ne s'effectue pas une exception est levé et on affiche un message d'erreur
         } catch (Exception $e) {
             $message =  "Votre message n'a pu être envoyé.";
         }
@@ -61,6 +61,5 @@ class Mailer
 
          $content = array ('subject' => $subject, 'content' => $content);
          return $content;                       
-
       }
     }

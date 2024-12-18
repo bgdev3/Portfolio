@@ -15,18 +15,18 @@ class ContactController extends Controller
      */
     public function index(): void
     {
-        global $error;
+        global $error, $message;
         // Si les champs ne sont pas vides
         if (Form::validatePost($_POST, ['name', 'surname', 'email', 'phone', 'object', 'message'])) {
 
-            // Instance du reCpatcha
+            // // Instance du reCpatcha
             $captcha = new Captcha();
 
-            // si la clé en post de vérifiaction du captcha est déclaré
+            // // si la clé en post de vérifiaction du captcha est déclaré
             if (isset($_POST['recaptcha_response']))
                 $captcha = $captcha->verify($_POST['recaptcha_response']);
             
-            // Si la reponse du captcha est valide
+            // // Si la reponse du captcha est valide
             if ($captcha == true) {
                 // Si le format de tel correspond
                 if (!preg_match("#^(\+33|0)[67][0-9]{8}$#", $_POST['phone'])) {
@@ -37,12 +37,13 @@ class ContactController extends Controller
                     // Stocke le message d'erreur
                     $error = 'Le format de l\'email n\'est pas valide.';
                 }  
+
                 // Envoi du mail
                 $mailer = new Mailer();
                 $mailer = $mailer->sendMail($_POST);
 
-                // Si l'envoi du mail s'est bien déroulé, sinon on stocke le message d'erreur.
-                $error = !(empty($mailer)) ? $mailer : '';
+                // Selon le bon déroulement de l'email, une notifictaion est spécifié
+                !empty($mailer) ? $error = $mailer : $message = "Votre messsage a bien été envoyé. <br> Votre demande sera traitée dans les plus brefs délais.";
             } else {
                 $error = "Le reCpatcha n'est pas valide.";
             }  
@@ -51,6 +52,6 @@ class ContactController extends Controller
             $error = !(empty($_POST)) ? 'Merci de remplir tous les champs' : '';  
         }
         // renvoi vers la vue
-        $this->render('contact/index', ['error' => $error]);
+        $this->render('contact/index', ['error' => $error, 'message' => $message]);
     }
 }
