@@ -20,14 +20,14 @@ class AdminController extends Controller
         if(Form::validatePost($_POST, ['email', 'password'])) {
 
             // Instance du reCpatcha
-            $captcha = new Captcha();
+            // $captcha = new Captcha();
 
             // si la clé en post de vérifiaction du captcha est déclaré
-            if (isset($_POST['recaptcha_response']))
-                $captcha = $captcha->verify($_POST['recaptcha_response']);
+            // if (isset($_POST['recaptcha_response']))
+            //     $captcha = $captcha->verify($_POST['recaptcha_response']);
             
             // Si la reponse du captcha est valide
-            if ($captcha == true) {
+            // if ($captcha == true) {
                 // Filtre le bon format d'email
                 if (!(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))) {
                     // Stocke le message d'erreur
@@ -51,9 +51,9 @@ class AdminController extends Controller
                     session_destroy();
                     header('location:/public/');
                 }
-            } else {
-                $error = "Le reCaptcha n'est pas valide";
-            }
+            // } else {
+            //     $error = "Le reCaptcha n'est pas valide";
+            // }
            
         } else {
             $error = !empty($_POST) ?  "Veuillez remplir tous les champs" : "";
