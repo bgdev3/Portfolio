@@ -47,7 +47,7 @@ $comments = [];
                             </ul>
                         </div>
                         
-                        <a href="https://abcdtaxi.fr">Accès au site</a>
+                        <a href="https://<?php echo $item->url; ?>">Accès au site</a>
                         <button class="btn-close">x</button>
                     </div>
                 </div>

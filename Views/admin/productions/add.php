@@ -26,6 +26,8 @@ if(!isset($_SESSION['username_admin']))
                     <input type="date" id="createdAt" name="createdAt" class="inputForm" required>
                     <label for="file">Screenshot</label>
                     <input type="file" id="file" name="file" class="inputForm">
+                    <label for="url">URL</label>
+                    <input type="text" id="url" name="url" class="inputForm" required>
                     <label for="description">Description</label>
                     <textarea id="description" name="description" class="inputForm" rows="8" required></textarea>
                 </div>

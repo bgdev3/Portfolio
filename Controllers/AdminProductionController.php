@@ -43,7 +43,7 @@ class AdminProductionController extends Controller
         $nb = 1;
     
         // Si les champs POST et FILES ne sont pas vides
-        if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'comment']) && Form::validateFiles($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'])) {
+        if (Form::validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment']) && Form::validateFiles($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'])) {
             // Type de fichier uploadé acceptés
             $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
             // Si un erreur est déclarée sur un des fichier uploadés
@@ -82,6 +82,7 @@ class AdminProductionController extends Controller
                             // hydrate entité
                             $production = new Production();
                             $production->setTitle( htmlspecialchars($_POST['title'], ENT_QUOTES) );
+                            $production->setUrl( htmlspecialchars($_POST['url'], ENT_QUOTES) );
                             $production->setDescription( htmlspecialchars($_POST['description'], ENT_QUOTES) );
                             $production->setPath($paths[0]);
                             $production->setCreatedAt( htmlspecialchars($_POST['createdAt'], ENT_QUOTES) );
@@ -145,7 +146,7 @@ class AdminProductionController extends Controller
         $nb = 0;
 
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['title', 'description', 'createdAt', 'comment'])) {
+        if (Form::validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment'])) {
 
              // Instance du reCpatcha
              $captcha = new Captcha();
@@ -164,6 +165,7 @@ class AdminProductionController extends Controller
                     $template = new Template();
 
                     $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
+                    $production->setUrl(htmlspecialchars($_POST['url'], ENT_QUOTES));
                     $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
                     $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
                     $production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );

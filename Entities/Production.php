@@ -6,6 +6,7 @@ class Production
 {
     private $idProduction;
     private $title;
+    private $url;
     private $path;
     private $description;
     private $createdAt;
@@ -54,6 +55,26 @@ class Production
      * @return  self
      */ 
     public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     */ 
+    public function getUrl()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set the value of title
+     *
+     * @return  self
+     */ 
+    public function setUrl($title)
     {
         $this->title = $title;
 
