@@ -31,7 +31,7 @@ $date = new DateTime($production->createdAt);
                     <label for="file">Fichier</label>           
                     <input type="file" id="file" name="file" class="inputForm">
                     <label for="url">URL</label>
-                    <input type="text" id="url" name="url" class="inputForm" required>
+                    <input type="text" id="url" name="url" class="inputForm" value="<?php echo $production->url; ?>" required>
                     <label for="description">Description</label>
                     <textarea  id="description" name="description" class="inputForm" rows="8" required> <?php echo $production->description; ?> </textarea>
                 </div>
