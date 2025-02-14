@@ -20,6 +20,9 @@ if (!isset($_SESSION['token'])) {
     unset( $_SESSION['token_time']);
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
     $_SESSION['token_time'] = time();
+    
+    // Ajoute le chemin du pdf à l'url pour l'affichage du pdf
+    $url = "https://www.bgdev.fr/public/" . $cv->pathCv;
 }
 ?>
 
@@ -28,7 +31,7 @@ if (!isset($_SESSION['token'])) {
         <div class="name-style">
             <p >Guillaume<Br><span class="name">Boukehaili</span></p>
             <span class="work">Développeur<span> web</span></span>
-            <a href="https://www.bgdev.fr/public/img/cv.pdf" target="_blank" title="cv">Télécharger cv</a>
+            <a href=<?php echo $url;?> target="_blank" title="cv">Télécharger cv</a>
         </div>
         
         <p class="text-style">

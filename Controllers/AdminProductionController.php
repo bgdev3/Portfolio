@@ -49,7 +49,7 @@ class AdminProductionController extends Controller
             // Si un erreur est déclarée sur un des fichier uploadés
             $error = empty($erreur) ? Form::errorUpload($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'], $type) : "" ;
             // Formate les noms de fichier sformatés dans un array 
-            $files = Form::formateFile($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4']);
+            $files = Form::formateFileAdmin($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4']);
 
             $arrayFiles =  [1 => 'file', 2 => 'tmp1', 3=> 'tmp2', 4 =>  'tmp3', 5 => 'tmp4'];
 
@@ -193,7 +193,7 @@ class AdminProductionController extends Controller
                             // Vérifie le bon fomrat, la taille et l'extension du fichier
                             $error = empty($erreur) ? Form::errorUpload($_FILES, [$file], $type) : "" ;
                             // Formate le fichier
-                            $fileItem = Form::formateFile($_FILES, [$file]);
+                            $fileItem = Form::formateFileAdmin($_FILES, [$file]);
                             // Redimensionne l'image avant de l'uploader sur le serveur
                             $file = $this->imageSize($fileItem[0], $arrayFiles[$nb], 457,  475);
                             

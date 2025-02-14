@@ -6,6 +6,7 @@ class Admin
     private $idUser;
     private $surname;
     private $email;
+    private $pathCv;
     private $password;
 
     /**
@@ -64,6 +65,26 @@ class Admin
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+     /**
+     * Get the value of email
+     */ 
+    public function getPathCv()
+    {
+        return $this->pathCv;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setPathCv($pathCv)
+    {
+        $this->pathCv = $pathCv;
 
         return $this;
     }

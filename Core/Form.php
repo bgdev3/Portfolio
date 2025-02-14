@@ -97,20 +97,49 @@ class Form
      * 
      * @return string $file nouveau nom de fichier formaté
      */
-    public static function formateFile(array $files, array $fields): array 
+    public static function formateFileAdmin(array $files, array $fields): mixed
     {
         $data = [];
         // Parcours chaque champs
         foreach ($fields as $field) {
            
-                 // Formate le fichier
+            // Formate le fichier
             $uniqueName = uniqid('', true);
             $filename =  $uniqueName . "." . pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
             array_push($data, $filename);
-            
-           
         }
-        return $data;
-    }  
+
+      
+            return $data;
+       
+        // return $filename;
+    }
+    
+     
+    /**
+     * Méthode qui formate le fichier avant stockage
+     * @param array $files Méthode d'envoi
+     * @param array $fields fichier à formater
+     * 
+     * @return string $file nouveau nom de fichier formaté
+     */
+    public static function formateFileCv(array $files, array $fields): mixed
+    {
+        // $data = [];
+        // Parcours chaque champs
+        foreach ($fields as $field) {
+           
+            // Formate le fichier
+            $uniqueName = uniqid('', true);
+            $filename =  $uniqueName . "." . pathinfo($files[$field]['name'], PATHINFO_EXTENSION);
+            // array_push($data, $filename);
+        }
+
+      
+            return $filename;
+       
+        // return $filename;
+    }
+    
 
 }

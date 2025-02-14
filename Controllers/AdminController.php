@@ -63,12 +63,25 @@ class AdminController extends Controller
     }
 
 
+
     public function register($token)
     {
         global $error;
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['surname', 'email', 'password'])) {
+        if (Form::validatePost($_POST, ['surname', 'email', 'password']) && Form::validateFiles($_FILES, ['cv'])) {
 
+            $type = array('jpg' => 'image/jpg', 'pdf'=>'image/pdf');
+             // Si un erreur est déclarée sur un des fichier uploadés
+             $error = empty($erreur) ? Form::errorUpload($_FILES, ['cv'], $type) : "" ;
+             // Formate les noms de fichier sformatés dans un array 
+             $file = Form::formateFileCv($_FILES, ['cv']);
+
+             if (file_exists('img/'. $file)) {
+                $erreur = $file . " déja existant !";
+            } else {
+                move_uploaded_file($_FILES['cv']["tmp_name"], "img/" . $file);
+            }
+            $cv = "img/" . $file;
              // Instance du reCpatcha
              $captcha = new Captcha();
 
@@ -89,12 +102,14 @@ class AdminController extends Controller
                     if(!ctype_alnum($password) && preg_match('#([a-z][0-9])#', $password)) {
                         // Si les tokens correspondent afin de contrer une faile CSRF
                         if(isset($_GET['token']) && isset($_SESSION['token']) && $_POST['token'] == $_SESSION['token']) {
+                           
                             // Instance de l'entité
                             $admin = new Admin();
                             // Hash le mdp avec l'algo le plus récent et hydrate
                             $password = password_hash($password, PASSWORD_DEFAULT);
                             $admin->setSurname($surname);
                             $admin->setEmail($email);
+                            $admin->setPathCv($cv);
                             $admin->setPassword($password);
                             // Effectue la mise à jour
                             $adminModel = new AdminUserModel();
