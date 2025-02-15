@@ -20,10 +20,9 @@ if (!isset($_SESSION['token'])) {
     unset( $_SESSION['token_time']);
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
     $_SESSION['token_time'] = time();
-    
-    // Ajoute le chemin du pdf à l'url pour l'affichage du pdf
-    $url = "https://www.bgdev.fr/public/" . $cv->pathCv;
 }
+ // Ajoute le chemin du pdf à l'url pour l'affichage du pdf
+ $url = "https://www.bgdev.fr/public/" . $cv->pathCv;
 ?>
 
 <section>
