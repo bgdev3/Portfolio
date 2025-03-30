@@ -667,7 +667,7 @@ aside.quote {
 }
 aside.quote > a {
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-85%);
   display: flex;
   justify-content: center;
@@ -691,12 +691,14 @@ aside.quote > a:hover {
     height: 1.5em;
     padding-bottom: 1%;
     transform: translateY(-65%);
+    top: 50%;
   }
 }
 @media only screen and (min-width: 1024px) {
   aside.quote > a {
     width: 2em;
     height: 2em;
+    top: 50%;
   }
 }
 aside.quote .quote__next {
@@ -732,10 +734,12 @@ aside.quote .content-quote {
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 20%;
 }
 @media only screen and (min-width: 576px) {
   aside.quote .content-quote {
     height: 110px;
+    margin-bottom: initial;
   }
 }
 aside.quote p {

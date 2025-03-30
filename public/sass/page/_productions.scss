@@ -245,7 +245,7 @@ aside.quote{
 
      > a{
         position: absolute;
-        top: 50%;
+        top: 40%;
         transform: translateY(-85%);
         display: flex;
         justify-content: center;
@@ -269,10 +269,12 @@ aside.quote{
             height: 1.5em; 
             padding-bottom: 1%;
             transform: translateY(-65%);
+            top: 50%;
         }
         @include mixins.desktop{
             width: 2em;
             height: 2em;
+            top: 50%;
         }
     }
 
@@ -303,8 +305,10 @@ aside.quote{
         align-items: center;
         justify-content: center;
         position: relative;
+        margin-bottom: 20%;
         @include mixins.tablet{
             height: 110px;
+            margin-bottom: initial;
         }
     }
 

@@ -14,7 +14,7 @@ class DbConnect
     // Constante
     const SERVEUR = 'localhost'/*'127.0.0.1:3306'*/;
     const USER = 'root'/*'u572485290_bgdev'*/;
-    const PASSWORD = ''/*'7b!YonNh=X'*/;
+    const PASSWORD = 'password'/*'7b!YonNh=X'*/;
     const BASE = 'portfolio'/*'u572485290_portfolio'*/;
 
     // Constructeur qui initialise la connexion lors de l'instanciation de la classe
