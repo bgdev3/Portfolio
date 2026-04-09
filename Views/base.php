@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Application de présentation des projets web de BgDev">
+    <!-- Meta tags for reCAPTCHA -->
     <meta name="recaptcha-key" content="<?= getenv('RECAPTCHA_PUBLIC_KEY') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon//apple-touch-icon.png">
@@ -44,7 +45,7 @@
             <!-- LinkedIn -->
             <li><a href="https://www.linkedin.com/in/guillaume-boukehaili-919656238" title="Linkedin"><i class="fa-brands fa-linkedin-in"></i></a></li>
             <!-- Github -->
-            <li><a href="https://github.com/charlieGui" title="Github"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://github.com/bgdev3" title="Github"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
             <p><a href="/public/home/mentions" title="Mentions légales">Mentions légales</a>  | &copy;Tous droit réservés. 2024 - 2026  <a href="/public/admin"><i class="fa-solid fa-right-to-bracket color-link" title="Admin"></i></a></p>
