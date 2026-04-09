@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Application de présentation des projets web de BgDev">
+    <meta name="recaptcha-key" content="<?= getenv('RECAPTCHA_PUBLIC_KEY') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon//apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
@@ -46,7 +47,7 @@
             <li><a href="https://github.com/charlieGui" title="Github"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
-            <p><a href="/public/home/mentions" title="Mentions légales">Mentions légales</a>  | &copy;Tous droit réservés - 2024  <a href="/public/admin"><i class="fa-solid fa-right-to-bracket color-link" title="Admin"></i></a></p>
+            <p><a href="/public/home/mentions" title="Mentions légales">Mentions légales</a>  | &copy;Tous droit réservés. 2024 - 2026  <a href="/public/admin"><i class="fa-solid fa-right-to-bracket color-link" title="Admin"></i></a></p>
         </div>
     </footer>
 

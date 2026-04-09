@@ -39,11 +39,11 @@ class Form
     public static function validateFiles(array $files, array $fields): bool  
     {
         foreach ( $fields as $field) {
-           if (isset($files[$field]) && $files[$field]['error'] == 0) {
-                return true;
+           if (isset($files[$field]) && $files[$field]['error'] !== 0) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
         
 

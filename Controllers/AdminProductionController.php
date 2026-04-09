@@ -19,6 +19,7 @@ class AdminProductionController extends Controller
     public function index(): void{
         
         /**@var  */
+        
         $model = new ProductionModel();
         $list = $model->findAll();
         
@@ -38,7 +39,7 @@ class AdminProductionController extends Controller
      */
     public function add($token): void
     {
-        global $error; 
+        $error = '';
         $paths =[]; $arrayFiles = []; 
         $nb = 1;
     
@@ -141,7 +142,7 @@ class AdminProductionController extends Controller
      */
     public function update(int $id, string $token): void
     {
-        global $error; 
+         $error = '';
         $arrayFiles =  ['file','tmp1', 'tmp2',  'tmp3',  'tmp4'];
         $nb = 0;
 
@@ -322,10 +323,10 @@ class AdminProductionController extends Controller
             imagecopyresampled($new_image, $image, 0, 0, 0, 0, $w, $h, $width, $height);
             // Créer l'image dans le format voulu
             // en appelant la bonne méthode image**
-            $handler['new'][$ext]($new_image, $destination, 100);
+            $handler['new'][$ext]($new_image, $destination, 9);
         
             // Détruit l'image source de la mémoire
-            imagedestroy($new_image);
+            // imagedestroy($new_image);
         }
         return  $destination;
     }

@@ -3,8 +3,9 @@
  */
 function loadRecaptchaToken() {
     
+    const key = document.querySelector('meta[name="recaptcha-key"]').content;
     grecaptcha.ready(function () {
-        grecaptcha.execute('6LdBCjUqAAAAAOJSNtjby8x8H2HSBVUBfaic0jJs', { action: 'myForm' }).then(function (token) {
+        grecaptcha.execute(key, { action: 'myForm' }).then(function (token) {
             var recaptchaResponse = document.getElementById('recaptchaResponse');
             recaptchaResponse.value = token;
         });

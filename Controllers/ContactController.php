@@ -15,7 +15,9 @@ class ContactController extends Controller
      */
     public function index(): void
     {
-        global $error, $message;
+          $message = '';
+          $error = '';
+      
         // Si les champs ne sont pas vides
         if (Form::validatePost($_POST, ['name', 'surname', 'email', 'phone', 'object', 'message'])) {
 

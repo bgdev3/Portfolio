@@ -18,15 +18,14 @@ class Mailer
             $mail->isSMTP();                                                            //Envoi en SMTP
             $mail->Host       = 'smtp.gmail.com';                                       //Adresse serveur SMTP
             $mail->SMTPAuth   = true;                                                   //Active l'authentification
-            $mail->Username   = 'boukehaili.g@gmail.com';                               //Identifiant SMTP
-            $mail->Password   = 'hpyw cblj uayp qeah';                                     //password de l'application
+            $mail->Username = getenv('MAIL_USERNAME');
+            $mail->Password = getenv('MAIL_PASSWORD');                                    //password de l'application
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                            //Active l'encriptage de l'envoi
             $mail->Port       = 465;                                                    //port SMTP
         
             //Recipients
-            // email Kevin
-            $mail->setFrom('boukehaili.g@gmail.com', 'Portfolio');                      //Adresse d'envoi
-            $mail->addAddress('boukehaili.g@gmail.com');                                //Destinatire
+            $mail->setFrom(getenv('MAIL_USERNAME'), 'Portfolio');                      //Adresse d'envoi
+            $mail->addAddress(getenv('MAIL_USERNAME'));                                //Destinatire
         
             //Content
             $mail->isHTML(true);                                                        //Format HTML activé
@@ -47,17 +46,24 @@ class Mailer
 
       private function contentMail(array $post): array
       {
-        $subject = $_POST['object'];
+        $subject = htmlspecialchars($post['object'], ENT_QUOTES, 'UTF-8');
+        $name    = htmlspecialchars($post['name'],    ENT_QUOTES, 'UTF-8');
+        $surname = htmlspecialchars($post['surname'], ENT_QUOTES, 'UTF-8');
+        $email   = filter_var($post['email'], FILTER_SANITIZE_EMAIL);
+        $phone   = htmlspecialchars($post['phone'],   ENT_QUOTES, 'UTF-8');
+        $message = htmlspecialchars($post['message'], ENT_QUOTES, 'UTF-8');
 
         $content = "<html>
                         <body>
                             <header> <h1>Nouveau contact</h1> </header>
                             <main>
                                 <p>Infos client :<br>
-                                    Nom:". $_POST['name'] ."<br>Prenom:". $_POST['surname'] ."<br>Email:". $_POST['email'] ."<br>Tel:". $_POST['phone'] ."<br>
+                                    Nom:". $name ."<br>Prenom:". $surname ."<br>Email:". $email ."<br>Tel:". $phone ."<br>
                                     </p>
-                                    <p>Message:<br>" .$_POST['message']. "
-                            </main>";
+                                    <p>Message:<br>" . $message . "
+                            </main>
+                        </body>
+                    </html>";
 
          $content = array ('subject' => $subject, 'content' => $content);
          return $content;                       

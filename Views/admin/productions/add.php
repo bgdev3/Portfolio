@@ -75,7 +75,7 @@ if(!isset($_SESSION['username_admin']))
                 </div>
                 <div>
                     <input type="checkbox" id="wp" name="wp" value="fa-brands fa-wordpress-simple">
-                    <label for="wordpress">Wordpress</label>
+                    <label for="wp">Wordpress</label>
                 </div>   
             </div>
 

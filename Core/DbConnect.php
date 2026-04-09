@@ -11,29 +11,32 @@ class DbConnect
     protected $connexion;
     protected $request;
 
-    // Constante
-    const SERVEUR = 'localhost'/*'127.0.0.1:3306'*/;
-    const USER = 'root'/*'u572485290_bgdev'*/;
-    const PASSWORD = 'password'/*'7b!YonNh=X'*/;
-    const BASE = 'portfolio'/*'u572485290_portfolio'*/;
-
-    // Constructeur qui initialise la connexion lors de l'instanciation de la classe
+   // Constructeur qui initialise la connexion lors de l'instanciation de la classe
     public function __construct()
     {
-        // Si la connexion se déroule bien on se connecte
-        // sinon on capture une exception
-        try {
-            $this->connexion = new PDO('mysql:host=' . self::SERVEUR . ';dbname=' . self::BASE, self::USER, self::PASSWORD);
-            // Activation des erreurs PDO
-            $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // Retour des requêtes en tableau objet
-            $this->connexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            // Encodag epar default en utf-8
-            $this->connexion->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAME utf8');
+        // Lecture des variables d'environnement définies dans le fichier .env
+        // (chargé via vlucas/phpdotenv dans index.php)
 
-        // Capture l'erreur
-        } catch ( exception $e) {
-            die('Erreur:' . $e->getMessage());
+        $serveur  = getenv('DB_SERVEUR')  ?: 'localhost';
+        $user     = getenv('DB_USER')     ?: 'root';
+        $password = getenv('DB_PASSWORD') ?: 'test';
+        $base     = getenv('DB_BASE')     ?: 'portfolio';
+
+        try {
+            $dsn = 'mysql:host=' . $serveur . ';dbname=' . $base . ';charset=utf8mb4';
+
+            $options = [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+                PDO::ATTR_EMULATE_PREPARES   => false, // meilleure sécurité
+            ];
+
+            $this->connexion = new PDO($dsn, $user, $password, $options);
+
+        } catch (Exception $e) {
+            // On log l'erreur sans l'exposer à l'utilisateur
+            error_log('Erreur de connexion BDD : ' . $e->getMessage());
+            die('Une erreur de connexion est survenue. Veuillez réessayer plus tard.');
         }
     }
 }

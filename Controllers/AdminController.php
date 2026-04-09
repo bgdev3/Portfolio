@@ -15,9 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        global $error;
+        $error = '';
         // Si les champs ne sont pas vides
-        if(Form::validatePost($_POST, ['email', 'password'])) {
+        if (Form::validatePost($_POST, ['email', 'password'])) {
 
             // Instance du reCpatcha
             $captcha = new Captcha();
@@ -66,7 +66,7 @@ class AdminController extends Controller
 
     public function register($token)
     {
-        global $error;
+         $error = '';
         // Si les champs ne sont pas vides
         if (Form::validatePost($_POST, ['surname', 'email', 'password']) && Form::validateFiles($_FILES, ['cv'])) {
 

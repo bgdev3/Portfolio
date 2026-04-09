@@ -1,0 +1,12 @@
+# Variables d'environnement — ne jamais commiter ce fichier
+.env
+
+# Dépendances Composer
+vendor/
+
+# Uploads
+public/img/
+
+# IDE
+.idea/
+.vscode/
