@@ -79,6 +79,7 @@ export function showContentProduction(){
         // Démarre le défilement
         function start() {
             reset();
+            comments[0].classList.add('show-quote');
             comments[0].classList.remove('hide-content');
             // comments[0].classList.add('show-content');
             currentDots[0].classList.add('active');

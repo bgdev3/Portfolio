@@ -224,14 +224,6 @@ nav:has(.nav-header) {
   display: block;
   width: 80%;
   margin: 5% auto;
-  border: 1px solid transparent;
-  background-color: #1b1b1b;
-  color: #97004f;
-  font-weight: bold;
-  border-radius: 5px;
-  padding: 0.7em 0.4em 0.7em 0.4em;
-  cursor: pointer;
-  transition: all 0.5s ease-out;
 }
 @media only screen and (min-width: 576px) {
   .btnForm {
@@ -243,6 +235,16 @@ nav:has(.nav-header) {
     margin: 2% auto;
     width: 15%;
   }
+}
+.btnForm {
+  border: 1px solid transparent;
+  background-color: #1b1b1b;
+  color: #97004f;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 0.7em 0.4em 0.7em 0.4em;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
 }
 .btnForm:hover {
   border: 1px solid #97004f;
@@ -486,7 +488,6 @@ nav:has(.nav-header) {
 }
 .img-project .content-container .content-realisation {
   margin-bottom: 5%;
-  padding: 0 5%;
 }
 .img-project .content-container .content-realisation .template {
   display: grid;
@@ -505,13 +506,13 @@ nav:has(.nav-header) {
     transition: 0.2s;
   }
 }
+.img-project .content-container .content-realisation .template div:has(img):hover > i {
+  display: none;
+}
 .img-project .content-container .content-realisation .template div:has(img):hover {
   position: absolute;
   width: 100%;
   z-index: 999;
-}
-.img-project .content-container .content-realisation .template div:has(img):hover > i {
-  display: none;
 }
 @media only screen and (min-width: 1024px) {
   .img-project .content-container .content-realisation .template div:has(img):hover {
@@ -553,6 +554,9 @@ nav:has(.nav-header) {
     padding: initial;
     padding: 1rem;
   }
+}
+.img-project .content-container .content-realisation {
+  padding: 0 5%;
 }
 @media only screen and (min-width: 576px) {
   .img-project .content-container .content-realisation {
@@ -728,7 +732,6 @@ aside.quote .quote__prev {
   }
 }
 aside.quote .content-quote {
-  height: 150px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -738,12 +741,10 @@ aside.quote .content-quote {
 }
 @media only screen and (min-width: 576px) {
   aside.quote .content-quote {
-    height: 110px;
     margin-bottom: initial;
   }
 }
 aside.quote p {
-  position: absolute;
   line-height: 1.5em;
   font-style: italic;
   width: 100%;
@@ -805,9 +806,11 @@ aside.quote p::before, aside.quote p::after {
 }
 
 .show-quote {
+  max-height: 100%;
   opacity: 1;
   z-index: 400;
   transition: 1s;
+  position: absolute;
 }
 
 .hide-content {
@@ -824,12 +827,14 @@ aside.quote p::before, aside.quote p::after {
 
 .form-contact {
   width: 100%;
-  margin: 5% auto;
 }
 @media only screen and (min-width: 576px) {
   .form-contact {
     width: 80%;
   }
+}
+.form-contact {
+  margin: 5% auto;
 }
 .form-contact h1 {
   margin-bottom: 3%;
@@ -972,7 +977,6 @@ input.error {
 }
 .form-admin {
   width: 100%;
-  margin: 5% auto;
 }
 @media only screen and (min-width: 576px) {
   .form-admin {
@@ -983,6 +987,9 @@ input.error {
   .form-admin {
     width: 80%;
   }
+}
+.form-admin {
+  margin: 5% auto;
 }
 .form-admin h1 {
   margin-bottom: 8%;
@@ -1005,7 +1012,6 @@ input.error {
   flex-direction: column;
   justify-content: space-around;
   align-items: start;
-  margin-bottom: 5%;
 }
 @media only screen and (min-width: 576px) {
   .form-admin .langages {
@@ -1014,6 +1020,9 @@ input.error {
     justify-content: space-around;
     align-items: center;
   }
+}
+.form-admin .langages {
+  margin-bottom: 5%;
 }
 .form-admin .btnForm {
   margin-top: 10%;
@@ -1236,14 +1245,16 @@ textarea {
 
 .section-title {
   font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5em;
 }
 @media only screen and (min-width: 576px) {
   .section-title {
     font-size: 1.2rem;
     margin-left: initial;
   }
+}
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
 }
 
 .errorForm {
