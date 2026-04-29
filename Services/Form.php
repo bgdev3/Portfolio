@@ -1,5 +1,5 @@
 <?php
-namespace Portfolio\Core;
+namespace Portfolio\Services;
 
 /**
  * Class qui permet la vérification des différents champs de formulaires, des uploads, du formatge des fichiers stockés
@@ -11,7 +11,7 @@ class Form
      * Vérifie que les données du formulaire ne sont pas vides.
      * 
      * @param array $post methode d'envoi envoyé par le formulaire
-     * @param array fields Données envoyées par le formulaire
+     * @param array $fields Données envoyées par le formulaire
      * 
      * @return bool
      */
@@ -94,10 +94,9 @@ class Form
      * Méthode qui formate le fichier avant stockage
      * @param array $files Méthode d'envoi
      * @param array $fields fichier à formater
-     * 
-     * @return string $file nouveau nom de fichier formaté
      */
-    public static function formateFileAdmin(array $files, array $fields): mixed
+
+    public static function formateFileAdmin(array $files, array $fields): array
     {
         $data = [];
         // Parcours chaque champs
@@ -111,8 +110,6 @@ class Form
 
       
             return $data;
-       
-        // return $filename;
     }
     
      
@@ -125,8 +122,7 @@ class Form
      */
     public static function formateFileCv(array $files, array $fields): mixed
     {
-        // $data = [];
-        // Parcours chaque champs
+         $filename = '';
         foreach ($fields as $field) {
            
             // Formate le fichier

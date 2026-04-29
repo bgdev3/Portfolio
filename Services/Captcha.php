@@ -1,13 +1,13 @@
 <?php 
-namespace Portfolio\Core;
+namespace Portfolio\Services;
 
 class Captcha {
 
     /**
      * Methode de vérification d'un test de turing 
      * 
-     * @param string [string] Chaine alphanumerique correspond à la clé re-captcha coté client
-     * @return bool [bool]
+     * @param string   $secret Token de vérification du test de turing
+     * @return bool booléen qui indique si le test de turing est réussi ou non
      */
 
     public function verify($secret): bool

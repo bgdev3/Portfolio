@@ -1,30 +1,40 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Core\Form;
-use Portfolio\Core\Captcha;
+use Portfolio\Services\Form;
+use Portfolio\Services\Captcha;
 use Portfolio\Entities\Admin;
 use Portfolio\Models\AdminUserModel;
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 class AdminController extends Controller
 {
+    public function __construct (
+        private Form $form,
+        private Captcha $captcha,
+        private AdminUserModel $adminUserModel,
+        private Admin $admin
+    ){}
+
     /**
      * Traite les données de connexion admin
      */
     public function index()
     {
         $error = '';
+        $captcha = false;
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['email', 'password'])) {
+        if ($this->form->validatePost($_POST, ['email', 'password'])) {
 
             // Instance du reCpatcha
-            $captcha = new Captcha();
+            // $captcha = new Captcha();
 
             // si la clé en post de vérifiaction du captcha est déclaré
             if (isset($_POST['recaptcha_response']))
-                $captcha = $captcha->verify($_POST['recaptcha_response']);
+                $captcha = $this->captcha->verify($_POST['recaptcha_response']);
             
             // Si la reponse du captcha est valide
             if ($captcha == true) {
@@ -40,9 +50,9 @@ class AdminController extends Controller
                 
                 // Si les tokens correspondent pour contrer une faille CSRF
                 if (isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
-                    $admin = new AdminUserModel();
+                    // $admin = new AdminUserModel();
                     // Récupère l'enregistrement correspondant
-                    $admin = $admin->find($email);
+                    $admin = $this->adminUserModel->find($email);
                     // Teste le bon mot de passe renseigné par l'administrateur
                     $error = $this->validateAuth($email, $password, $admin);
                 } else {
@@ -50,6 +60,7 @@ class AdminController extends Controller
                     session_unset();
                     session_destroy();
                     header('location:/public/');
+                    exit();
                 }
             } else {
                 $error = "Le reCaptcha n'est pas valide";
@@ -67,14 +78,15 @@ class AdminController extends Controller
     public function register($token)
     {
          $error = '';
+         $captcha = false;
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['surname', 'email', 'password']) && Form::validateFiles($_FILES, ['cv'])) {
+        if ($this->form->validatePost($_POST, ['surname', 'email', 'password']) && $this->form->validateFiles($_FILES, ['cv'])) {
 
             $type = array('jpg' => 'image/jpg', 'pdf'=>'image/pdf');
              // Si un erreur est déclarée sur un des fichier uploadés
-             $error = empty($erreur) ? Form::errorUpload($_FILES, ['cv'], $type) : "" ;
+             $error = empty($erreur) ? $this->form->errorUpload($_FILES, ['cv'], $type) : "" ;
              // Formate les noms de fichier sformatés dans un array 
-             $file = Form::formateFileCv($_FILES, ['cv']);
+             $file = $this->form->formateFileCv($_FILES, ['cv']);
 
              if (file_exists('img/'. $file)) {
                 $erreur = $file . " déja existant !";
@@ -83,12 +95,12 @@ class AdminController extends Controller
             }
             $cv = "img/" . $file;
              // Instance du reCpatcha
-             $captcha = new Captcha();
+            //  $captcha = new Captcha();
 
              // si la clé en post de vérifiaction du captcha est déclaré
              if (isset($_POST['recaptcha_response']))
-                 $captcha = $captcha->verify($_POST['recaptcha_response']);
-             
+                 $captcha = $this->captcha->verify($_POST['recaptcha_response']);
+            
              // Si la reponse du captcha est valide
              if ($captcha == true) {
                 // Récupère les valeurs POST en supprimant les espace et agissant contre la faille XSS
@@ -104,26 +116,28 @@ class AdminController extends Controller
                         if(isset($_GET['token']) && isset($_SESSION['token']) && $_POST['token'] == $_SESSION['token']) {
                            
                             // Instance de l'entité
-                            $admin = new Admin();
+                            // $admin = new Admin();
                             // Hash le mdp avec l'algo le plus récent et hydrate
                             $password = password_hash($password, PASSWORD_DEFAULT);
-                            $admin->setSurname($surname);
-                            $admin->setEmail($email);
-                            $admin->setPathCv($cv);
-                            $admin->setPassword($password);
+                            $this->admin->setSurname($surname);
+                            $this->admin->setEmail($email);
+                            $this->admin->setPathCv($cv);
+                            $this->admin->setPassword($password);
                             // Effectue la mise à jour
-                            $adminModel = new AdminUserModel();
-                            $adminModel->update($_SESSION['id_admin'], $admin);
+                            // $adminModel = new AdminUserModel();
+                            $this->adminUserModel->update($_SESSION['id_admin'], $this->admin);
 
                             // Supprime les données administrateur et redirige vers la page de connexion
                             unset( $_SESSION['username_admin']);
                             unset($_SESSION['id_admin']);
                             header('location:/public/admin');
+                            exit();
                         } else {
                             // Sinon redirige directement vers l'index en supprimant les données de connexion
                             session_unset();
                             session_destroy();
                             header('location:/public/');
+                            exit();
                         }
                         
                     } else {
@@ -144,14 +158,15 @@ class AdminController extends Controller
     /**
     * Valide l'authentification de l'administrateur 
     * 
-    * @param string [email] récupère l'email de l'admin
-    * @param string [password] récupère le mdp hashé afin de le tester
-    * @param object [admin] récupère l'objet creation AdminUserModel;
+    * @param string $email récupère l'email afin de tester si l'administrateur existe
+    * @param string $password récupère le mdp hashé afin de le tester
+    * @param object $admin récupère l'objet creation AdminUserModel;
     * 
     * @return string $error Le message d'erreur
     */
     private function validateAuth($email, $password, $admin): string
     {
+        $error ='';
         // Si la session n'existe pas
         if (!isset($_SESSION['username_admin'])) {
             // Si les champs ne sont pas vides et si token est bien déclaré
@@ -199,6 +214,7 @@ class AdminController extends Controller
             session_destroy();
 
             header('location:/public/');
+            exit();
         }
     }
 }

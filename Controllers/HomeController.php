@@ -6,13 +6,19 @@ use Portfolio\Models\AdminUserModel;
 
 class HomeController extends Controller{
 
+    public function __construct (
+        private AdminUserModel $adminUserModel
+    ){}
+
+     /**
+      * Renvoi la page d'accueil en mettant à jour le bon cv
+      */
     /**
      * Renvoi la page d'accueil en mettant à jour le bon cv
      */
     public function index(): void{
 
-        $admin = new AdminUserModel();
-        $cv = $admin->findCv();
+        $cv = $this->adminUserModel->findCv();
         $this->render('home/index', ['cv' => $cv]);
     }   
 

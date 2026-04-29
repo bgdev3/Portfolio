@@ -1,27 +1,37 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Core\Form;
-use Portfolio\Core\Captcha;
+use Portfolio\Services\Form;
+use Portfolio\Services\Captcha;
 use Portfolio\Entities\Template;
 use Portfolio\Entities\Production;
 use Portfolio\Models\TemplateModel;
 use Portfolio\Models\ProductionModel;
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 class AdminProductionController extends Controller
 {
+
+    public function __construct (
+            private Form $form,
+            private Captcha $captcha,
+            private TemplateModel $templateModel,
+            private ProductionModel $productionModel,
+            private Template $template,
+            private Production $production
+        ){}
 
     /**
      * Récupère les différentes réalisations stockées
      */
     public function index(): void{
         
-        /**@var  */
+        /**@var  ProductionModel $model */
         
-        $model = new ProductionModel();
-        $list = $model->findAll();
+        $list = $this->productionModel->findAll();
         
         $this->render('admin/productions/index', ['list' => $list]);
     }
@@ -40,28 +50,29 @@ class AdminProductionController extends Controller
     public function add($token): void
     {
         $error = '';
+        $captcha = false;
         $paths =[]; $arrayFiles = []; 
         $nb = 1;
     
         // Si les champs POST et FILES ne sont pas vides
-        if (Form::validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment']) && Form::validateFiles($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'])) {
+        if ($this->form->validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment']) && $this->form->validateFiles($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'])) {
             // Type de fichier uploadé acceptés
             $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
             // Si un erreur est déclarée sur un des fichier uploadés
-            $error = empty($erreur) ? Form::errorUpload($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'], $type) : "" ;
+            $error = empty($erreur) ? $this->form->errorUpload($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'], $type) : "" ;
             // Formate les noms de fichier sformatés dans un array 
-            $files = Form::formateFileAdmin($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4']);
+            $files = $this->form->formateFileAdmin($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4']);
 
             $arrayFiles =  [1 => 'file', 2 => 'tmp1', 3=> 'tmp2', 4 =>  'tmp3', 5 => 'tmp4'];
 
             // Si les tokens correspondent afin de contrer une faille CSRF
             if (isset($_SESSION['token']) && $_POST['token'] == $_SESSION['token']) {
                 // Instance du reCpatcha
-                $captcha = new Captcha();
+                // $captcha = new Captcha();
 
                 // si la clé en post de vérifiaction du captcha est déclaré
                 if (isset($_POST['recaptcha_response']))
-                    $captcha = $captcha->verify($_POST['recaptcha_response']);
+                    $captcha = $this->captcha->verify($_POST['recaptcha_response']);
                 
                 // Si la reponse du captcha est valide
                 if ($captcha == true) {
@@ -81,39 +92,38 @@ class AdminProductionController extends Controller
                         if (empty($_SESSION['error'])) {
         
                             // hydrate entité
-                            $production = new Production();
-                            $production->setTitle( htmlspecialchars($_POST['title'], ENT_QUOTES) );
-                            $production->setUrl( htmlspecialchars($_POST['url'], ENT_QUOTES) );
-                            $production->setDescription( htmlspecialchars($_POST['description'], ENT_QUOTES) );
-                            $production->setPath($paths[0]);
-                            $production->setCreatedAt( htmlspecialchars($_POST['createdAt'], ENT_QUOTES) );
-                            $production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
-                            $production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
-                            $production->setBootstrap( isset($_POST['boot']) ? $_POST['boot'] : null );
-                            $production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
-                            $production->setPhp( isset($_POST['php']) ? $_POST['php'] : null );
-                            $production->setSymfony( isset($_POST['symfony']) ? $_POST['symfony'] : null );
-                            $production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
-                            $production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
-                            $production->setIdUser($_SESSION['id_admin']);
+                            // $production = new Producion();
+                            $this->production->setTitle( htmlspecialchars($_POST['title'], ENT_QUOTES) );
+                            $this->production->setUrl( htmlspecialchars($_POST['url'], ENT_QUOTES) );
+                            $this->production->setDescription( htmlspecialchars($_POST['description'], ENT_QUOTES) );
+                            $this->production->setPath($paths[0]);
+                            $this->production->setCreatedAt( htmlspecialchars($_POST['createdAt'], ENT_QUOTES) );
+                            $this->production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
+                            $this->production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
+                            $this->production->setBootstrap( isset($_POST['boot']) ? $_POST['boot'] : null );
+                            $this->production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
+                            $this->production->setPhp( isset($_POST['php']) ? $_POST['php'] : null );
+                            $this->production->setSymfony( isset($_POST['symfony']) ? $_POST['symfony'] : null );
+                            $this->production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
+                            $this->production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
+                            $this->production->setIdUser($_SESSION['id_admin']);
                             // Crée l'enregistrement
-                            $productionModel = new ProductionModel();
-                            $productionModel->create($production);
+                            // $productionModel = new ProductionModel();
+                            $this->productionModel->create($this->production);
 
                             // Récupère le dernier enregistrement de la table afin de récupérer
                             // l'id pour hydratrer la clé étrangère
-                            $prod = $productionModel->findLast();
+                            $prod = $this->productionModel->findLast();
 
-                            $template = new Template();
-                            $template->setPath1($paths[1]);
-                            $template->setPath2($paths[2]);
-                            $template->setPath3($paths[3]);
-                            $template->setPath4($paths[4]);
-                            $template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
-                            $template->setIdProduction($prod->idProduction);
+                            // $template = new Template();
+                            $this->template->setPath1($paths[1]);
+                            $this->template->setPath2($paths[2]);
+                            $this->template->setPath3($paths[3]);
+                            $this->template->setPath4($paths[4]);
+                            $this->template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
+                            $this->template->setIdProduction($prod->idProduction);
                             // Crée l'enregistrement des templates relatifs à la production
-                            $templateModel = new TemplateModel();
-                            $templateModel->create($template);
+                            $this->templateModel->create($this->template);
                     
                         } else {
                             $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
@@ -127,6 +137,7 @@ class AdminProductionController extends Controller
                 session_unset();
                 session_destroy();
                 header('location:/public/');
+                exit();
             }  
         } else {
             $error = (!empty($_POST)) ? 'Merci de remplir correctment les champs' : '';
@@ -143,18 +154,19 @@ class AdminProductionController extends Controller
     public function update(int $id, string $token): void
     {
          $error = '';
-        $arrayFiles =  ['file','tmp1', 'tmp2',  'tmp3',  'tmp4'];
-        $nb = 0;
+         $captcha = false;
+         $arrayFiles =  ['file','tmp1', 'tmp2',  'tmp3',  'tmp4'];
+         $nb = 0;
 
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment'])) {
+        if ($this->form->validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment'])) {
 
              // Instance du reCpatcha
-             $captcha = new Captcha();
+            //  $captcha = new Captcha();
 
              // si la clé en post de vérifiaction du captcha est déclaré
              if (isset($_POST['recaptcha_response']))
-                 $captcha = $captcha->verify($_POST['recaptcha_response']);
+                 $captcha = $this->captcha->verify($_POST['recaptcha_response']);
              
              // Si la reponse du captcha est valide
              if ($captcha == true) {
@@ -162,22 +174,22 @@ class AdminProductionController extends Controller
                 if (isset($_SESSION['token']) && isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
 
                     // Hydrate l'entité
-                    $production = new Production();
-                    $template = new Template();
+                    // $production = new Production();
+                    // $template = new Template();
 
-                    $production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
-                    $production->setUrl(htmlspecialchars($_POST['url'], ENT_QUOTES));
-                    $production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
-                    $production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
-                    $production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
-                    $production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
-                    $production->setBootstrap( isset($_POST['boot']) ? $_POST['boot'] : null );
-                    $production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
-                    $production->setPhp( isset($_POST['php']) ? $_POST['php'] : null );
-                    $production->setSymfony( isset($_POST['symfony']) ? $_POST['symfony'] : null );
-                    $production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
-                    $production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
-                    $production->setIdUser($_SESSION['id_admin']);
+                    $this->production->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES));
+                    $this->production->setUrl(htmlspecialchars($_POST['url'], ENT_QUOTES));
+                    $this->production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
+                    $this->production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
+                    $this->production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
+                    $this->production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
+                    $this->production->setBootstrap( isset($_POST['boot']) ? $_POST['boot'] : null );
+                    $this->production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
+                    $this->production->setPhp( isset($_POST['php']) ? $_POST['php'] : null );
+                    $this->production->setSymfony( isset($_POST['symfony']) ? $_POST['symfony'] : null );
+                    $this->production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
+                    $this->production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
+                    $this->production->setIdUser($_SESSION['id_admin']);
 
                     // Format de fichier acceptés
                     $type = array('jpg'=>'image/jpg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png');
@@ -189,12 +201,12 @@ class AdminProductionController extends Controller
                         $hiddenPath = "hidden_" . $file; // Créer le nom de fichier hidden 
 
                         // Si le fichier ne presente pas d'erreur d'envoi
-                        if (Form::validateFiles($_FILES,  [$file])) {
+                        if ($this->form->validateFiles($_FILES,  [$file])) {
 
                             // Vérifie le bon fomrat, la taille et l'extension du fichier
-                            $error = empty($erreur) ? Form::errorUpload($_FILES, [$file], $type) : "" ;
+                            $error = empty($erreur) ? $this->form->errorUpload($_FILES, [$file], $type) : "" ;
                             // Formate le fichier
-                            $fileItem = Form::formateFileAdmin($_FILES, [$file]);
+                            $fileItem = $this->form->formateFileAdmin($_FILES, [$file]);
                             // Redimensionne l'image avant de l'uploader sur le serveur
                             $file = $this->imageSize($fileItem[0], $arrayFiles[$nb], 457,  475);
                             
@@ -202,7 +214,7 @@ class AdminProductionController extends Controller
                             if (empty($_SESSION['error'])) {
 
                                 // $nb vaut 0 ? Hydrate l'entité Production, sinan hdrate l'entité Template
-                                $nb == 0 ? $production->setPath($file) :  $template->$setPath($file);
+                                $nb == 0 ? $this->production->setPath($file) :  $this->template->$setPath($file);
                                 
                             // Sinon assigne l'erreur
                             } else {
@@ -210,24 +222,26 @@ class AdminProductionController extends Controller
                             }
                         // Sinon hydrate par default les hiddens récupérés en post des chemins stockés en bdd
                         } else {
-                            $nb == 0 ? $production->setPath($_POST[$hiddenPath]) :  $template->$setPath($_POST[$hiddenPath]);
+                            $nb == 0 ? $this->production->setPath($_POST[$hiddenPath]) :  $this->template->$setPath($_POST[$hiddenPath]);
                         }
                         ++$nb;
                     } 
-                    $template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
+                    $this->template->setComments( isset($_POST['comment']) ? $_POST['comment'] : null );
                     // Mise à jour de la bdd
-                    $productionModel = new ProductionModel();
-                    $templateModel = new TemplateModel();
+                    // $productionModel = new ProductionModel();
+                    // $templateModel = new TemplateModel();
 
-                    $productionModel->update($id, $production);
-                    $templateModel->update($template, $id);
+                    $this->productionModel->update($id, $this->production);
+                    $this->templateModel->update($this->template, $id);
                 
                     header('location:/public/adminProduction');
+                    exit();
                 } else {
                     // Sinon redirige directement vers l'index en supprimant les données de connexion
                     session_unset();
                     session_destroy();
                     header('location:/public/');
+                    exit();
                 }
             } else {
                 $error = "Le reCaptcha n'est pas valide";
@@ -240,8 +254,8 @@ class AdminProductionController extends Controller
 
         // Récupère l'enregistrement correspondant par l'id afin d'afficher dans le formulaire
         if (isset($id) && isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
-            $model = new ProductionModel();
-            $production = $model->join($id);
+            // $model = new ProductionModel();
+            $production = $this->productionModel->join($id);
             
             // Récupère le premier élement de la jointure (qui sera toujours unique ici)
             $production = $production[0];
@@ -262,13 +276,15 @@ class AdminProductionController extends Controller
         // Si yes, l'id et le token sont déclarés et que les tokens correspondent
         if(isset($_POST['yes']) && isset($id) && isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
             // Supression de la réalisation sélectionné
-            $model = new ProductionModel();
-            $model->delete($id);
+            // $model = new ProductionModel();
+            $this->productionModel->delete($id);
             // Renvoi vers la liste des réalisations
             header('location:/public/adminProduction');
+            exit();
         // Si no est déclaré, redirige vers la liste des réalisations
         } elseif(isset($_POST['no']) && isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
             header('location:/public/adminProduction');
+            exit();
         // sinon renvoi vers la confirmation de suppression d'une réalisation
         } else {
             $this->render('admin/productions/confirmDelete');
@@ -281,9 +297,10 @@ class AdminProductionController extends Controller
      * Permet le redimensionnement des images dans 3 formats
      * afin de l'adapter pour le RWD
      * 
-     * @param string [$path] Chemin du fichier
-     * @param int [$w] Largeur de redimensionnement de l'image voulu
-     * @param int [$h] Hauteur de redimensionnement de l'image voulu
+     * @param string $path Chemin du fichier
+     * @param int $w Largeur de redimensionnement de l'image voulu
+     * @param int $h Hauteur de redimensionnement de l'image voulu
+     * @param string $tmpName Chemin du fichier temporaire
      * 
      * @return string [$destination] Retourne le chemin de l'image redimensionnée
      */

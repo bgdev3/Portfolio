@@ -1,12 +1,18 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Core\Form;
-use Portfolio\Core\Mailer;
-use Portfolio\Core\Captcha;
+use Portfolio\Services\Form;
+use Portfolio\Services\Mailer;
+use Portfolio\Services\Captcha;
 
 class ContactController extends Controller
 {
+
+    public function __construct (
+        private Form $form,
+        private Captcha $captcha, 
+        private Mailer $mailer
+    ){}
     /**
      * Traite les données de fomrulaire
      * 
@@ -17,16 +23,15 @@ class ContactController extends Controller
     {
           $message = '';
           $error = '';
+          $captcha = false;
       
         // Si les champs ne sont pas vides
-        if (Form::validatePost($_POST, ['name', 'surname', 'email', 'phone', 'object', 'message'])) {
+        if ($this->form->validatePost($_POST, ['name', 'surname', 'email', 'phone', 'object', 'message'])) {
 
-            // // Instance du reCpatcha
-            $captcha = new Captcha();
 
             // // si la clé en post de vérifiaction du captcha est déclaré
             if (isset($_POST['recaptcha_response']))
-                $captcha = $captcha->verify($_POST['recaptcha_response']);
+                $captcha = $this->captcha->verify($_POST['recaptcha_response']);
             
             // // Si la reponse du captcha est valide
             if ($captcha == true) {
@@ -41,8 +46,7 @@ class ContactController extends Controller
                 }  
 
                 // Envoi du mail
-                $mailer = new Mailer();
-                $mailer = $mailer->sendMail($_POST);
+                $mailer = $this->mailer->sendMail($_POST);
 
                 // Selon le bon déroulement de l'email, une notifictaion est spécifié
                 !empty($mailer) ? $error = $mailer : $message = "Votre messsage a bien été envoyé. <br> Votre demande sera traitée dans les plus brefs délais.";

@@ -7,7 +7,11 @@ session_start();
 
 class ProductionsController extends Controller
 {
-    
+    public function __construct (
+
+        private ProductionModel $productionModel
+
+    ){}
     /**
      * Affiche les différentes productions en effectuant une jointure
      * sur les tables productions et templates afin d'afficher les différentes infos relatives
@@ -17,7 +21,7 @@ class ProductionsController extends Controller
     {
        $productions = [];
         // Récupère toutes les productions
-        $model = new ProductionModel();
+        $model = $this->productionModel;
         $lists = $model->findAll();
 
         //Sur chacune d'elles, effectue une jointure stockés dans un array
