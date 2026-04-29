@@ -3,11 +3,11 @@ namespace Portfolio\Entities;
 
 class Admin 
 {
-    private $idUser;
-    private $surname;
-    private $email;
-    private $pathCv;
-    private $password;
+    private int $idUser;
+    private string $surname;
+    private string $email;
+    private string $pathCv;
+    private string $password;
 
     /**
      * Get the value of idUser
@@ -22,7 +22,7 @@ class Admin
      *
      * @return  self
      */ 
-    public function setIdUser($idUser)
+    public function setIdUser(int $idUser)
     {
         $this->idUser = $idUser;
 
@@ -42,7 +42,7 @@ class Admin
      *
      * @return  self
      */ 
-    public function setSurname($surname)
+    public function setSurname(string $surname)
     {
         $this->surname = $surname;
 
@@ -62,7 +62,7 @@ class Admin
      *
      * @return  self
      */ 
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
@@ -82,7 +82,7 @@ class Admin
      *
      * @return  self
      */ 
-    public function setPathCv($pathCv)
+    public function setPathCv(string $pathCv)
     {
         $this->pathCv = $pathCv;
 
@@ -102,7 +102,7 @@ class Admin
      *
      * @return  self
      */ 
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
 

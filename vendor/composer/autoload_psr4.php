@@ -13,6 +13,7 @@ return array(
     'Portfolio\\Services\\' => array($baseDir . '/Services'),
     'Portfolio\\Models\\' => array($baseDir . '/Models'),
     'Portfolio\\Entities\\' => array($baseDir . '/Entities'),
+    'Portfolio\\DependencyInjection\\' => array($baseDir . '/DependencyInjection'),
     'Portfolio\\Core\\' => array($baseDir . '/Core'),
     'Portfolio\\Controllers\\' => array($baseDir . '/Controllers'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),

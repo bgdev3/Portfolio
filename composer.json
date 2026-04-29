@@ -13,7 +13,8 @@
             "Portfolio\\Core\\": "Core/",
             "Portfolio\\Entities\\": "Entities/",
             "Portfolio\\Models\\": "Models/",
-            "Portfolio\\Services\\": "Services/"
+            "Portfolio\\Services\\": "Services/",
+            "Portfolio\\DependencyInjection\\": "DependencyInjection/"
         }
     },
     "autoload-dev": {

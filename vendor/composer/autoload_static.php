@@ -27,6 +27,7 @@ class ComposerStaticInitb4ff92ae86c34db9b4f766e4e71f2725
             'Portfolio\\Services\\' => 19,
             'Portfolio\\Models\\' => 17,
             'Portfolio\\Entities\\' => 19,
+            'Portfolio\\DependencyInjection\\' => 30,
             'Portfolio\\Core\\' => 15,
             'Portfolio\\Controllers\\' => 22,
             'PhpParser\\' => 10,
@@ -72,6 +73,10 @@ class ComposerStaticInitb4ff92ae86c34db9b4f766e4e71f2725
         'Portfolio\\Entities\\' =>
         array (
             0 => __DIR__ . '/../..' . '/Entities',
+        ),
+        'Portfolio\\DependencyInjection\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/DependencyInjection',
         ),
         'Portfolio\\Core\\' =>
         array (

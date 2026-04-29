@@ -1,19 +1,23 @@
-<?php 
+<?php
 error_reporting(E_ALL);
 ini_set("display_errors", "on");
 
 // Importe l'autoloader de composer
 require __DIR__ . '/../vendor/autoload.php';
 
-// Charge les variables d'environnement depuis le fichier .env
+// On importe le namespace du Router
 use Dotenv\Dotenv; 
 use Portfolio\Core\Router;
+use Portfolio\DependencyInjection\Container;
 
 // Charge le .env (index.php est dans public/, .env est à la racine)
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
-// Instancie le routeur
-$route = new Router();
-// lance l'application
+// Instancie le container de dépendances
+$container = new Container();
+// On enregistre le Router dans le container pour pouvoir l'injecter dans les contrôleurs
+$route = $container->get(Router::class);
+
+// On lance l'application
 $route->routes();

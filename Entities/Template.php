@@ -3,13 +3,13 @@ namespace Portfolio\Entities;
 
 class Template 
 {
-    private $idTemplate;
-    private $path1;
-    private $path2;
-    private $path3;
-    private $path4;
-    private $comments;
-    private $idProduction;
+    private int $idTemplate;
+    private string $path1;
+    private string $path2;
+    private string $path3;
+    private string $path4;
+    private string $comments;
+    private int $idProduction;
 
     
     /**
@@ -25,7 +25,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setIdTemplate($idTemplate)
+    public function setIdTemplate(int $idTemplate)
     {
         $this->idTemplate = $idTemplate;
 
@@ -45,7 +45,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setPath1($path1)
+    public function setPath1(string $path1)
     {
         $this->path1 = $path1;
 
@@ -65,7 +65,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setPath2($path2)
+    public function setPath2(string $path2)
     {
         $this->path2 = $path2;
 
@@ -85,7 +85,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setPath3($path3)
+    public function setPath3(string $path3)
     {
         $this->path3 = $path3;
 
@@ -105,7 +105,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setPath4($path4)
+    public function setPath4(string $path4)
     {
         $this->path4 = $path4;
 
@@ -126,7 +126,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setComments($comments)
+    public function setComments(string $comments)
     {
         $this->comments = $comments;
 
@@ -146,7 +146,7 @@ class Template
      *
      * @return  self
      */ 
-    public function setIdProduction($idProduction)
+    public function setIdProduction(int $idProduction)
     {
         $this->idProduction = $idProduction;
 
