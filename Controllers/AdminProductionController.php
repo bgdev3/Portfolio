@@ -304,7 +304,7 @@ class AdminProductionController extends Controller
      * 
      * @return string [$destination] Retourne le chemin de l'image redimensionnée
      */
-    private function imageSize($path, $tmpName, $w, $h): string
+    protected function imageSize($path, $tmpName, $w, $h): string
     {
         // Récupère l'extension, et le nom du fichier
         $ext =  pathinfo($path, PATHINFO_EXTENSION);

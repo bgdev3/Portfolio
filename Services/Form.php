@@ -15,7 +15,7 @@ class Form
      * 
      * @return bool
      */
-    public static function validatePost(array $post, array $fields): bool
+    public function validatePost(array $post, array $fields): bool
     {
          // Chaque champs est parcouru
          foreach( $fields as $field){
@@ -36,7 +36,7 @@ class Form
      * 
      * @return bool
      */
-    public static function validateFiles(array $files, array $fields): bool  
+    public function validateFiles(array $files, array $fields): bool  
     {
         foreach ( $fields as $field) {
            if (isset($files[$field]) && $files[$field]['error'] !== 0) {
@@ -58,7 +58,7 @@ class Form
      * @return string $erreur Message d'erreur retourné
      * 
      */
-    public static function errorUpload(array $files, array $fields, array $type): string 
+    public function errorUpload(array $files, array $fields, array $type): string 
     {
         $erreur ='';
         // Parcours chaque champs
@@ -96,7 +96,7 @@ class Form
      * @param array $fields fichier à formater
      */
 
-    public static function formateFileAdmin(array $files, array $fields): array
+    public function formateFileAdmin(array $files, array $fields): array
     {
         $data = [];
         // Parcours chaque champs
@@ -120,7 +120,7 @@ class Form
      * 
      * @return string $file nouveau nom de fichier formaté
      */
-    public static function formateFileCv(array $files, array $fields): mixed
+    public function formateFileCv(array $files, array $fields): mixed
     {
          $filename = '';
         foreach ($fields as $field) {
@@ -133,9 +133,5 @@ class Form
 
       
             return $filename;
-       
-        // return $filename;
     }
-    
-
 }

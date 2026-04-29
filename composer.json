@@ -1,24 +1,27 @@
 {
     "name": "bouke/portfolio",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
     "require-dev": {
         "phpmailer/phpmailer": "^6.9",
         "phpunit/phpunit": "^11"
     },
     "autoload": {
         "psr-4": {
-           "Portfolio\\Controllers\\": "Controllers/",
+            "Portfolio\\Controllers\\": "Controllers/",
             "Portfolio\\Core\\": "Core/",
             "Portfolio\\Entities\\": "Entities/",
-            "Portfolio\\Models\\": "Models"
+            "Portfolio\\Models\\": "Models/",
+            "Portfolio\\Services\\": "Services/"
         }
     },
-    "authors": [
-        {
-            "name": "GuiMix",
-            "email": "boukehaili.g@gmail.com"
+    "autoload-dev": {
+        "psr-4": {
+            "Portfolio\\Tests\\": "tests/"
         }
-    ],
-    "require": {
-        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts": {
+        "test": "phpunit --testdox"
     }
 }

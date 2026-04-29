@@ -4,21 +4,21 @@ namespace Portfolio\Entities;
 
 class Production
 {
-    private $idProduction;
-    private $title;
-    private $url;
-    private $path;
-    private $description;
-    private $createdAt;
-    private $html;
-    private $sass;
-    private $bootstrap;
-    private $js;
-    private $php;
-    private $symfony;
-    private $react;
-    private $wordpress;
-    private $idUser;
+    private int $idProduction;
+    private string $title;
+    private string $url;
+    private string $path;
+    private string $description;
+    private string $createdAt;
+    private ?string $html = null;
+    private ?string $sass = null;
+    private ?string $bootstrap = null;
+    private ?string $js = null;
+    private ?string $php = null;
+    private ?string $symfony = null;
+    private ?string $react = null;
+    private ?string $wordpress = null;
+    private int $idUser;
     
 
     /**
@@ -34,7 +34,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setIdProduction($idProduction)
+    public function setIdProduction(int $idProduction)
     {
         $this->idProduction = $idProduction;
 
@@ -54,7 +54,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -62,21 +62,21 @@ class Production
     }
 
     /**
-     * Get the value of title
+     * Get the value of url
      */ 
     public function getUrl()
     {
-        return $this->title;
+        return $this->url;
     }
 
     /**
-     * Set the value of title
+     * Set the value of url
      *
      * @return  self
      */ 
-    public function setUrl($title)
+    public function setUrl(string $url)
     {
-        $this->title = $title;
+        $this->url = $url;
 
         return $this;
     }
@@ -94,7 +94,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setPath($path)
+    public function setPath(string $path)
     {
         $this->path = $path;
 
@@ -114,7 +114,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -134,7 +134,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(string $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -155,7 +155,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setHtml($html)
+    public function setHtml( ?string $html): self
     {
         $this->html = $html;
 
@@ -163,7 +163,7 @@ class Production
     }
 
      /**
-     * Get the value of html
+     * Get the value of sass
      */ 
     public function getSass()
     {
@@ -171,11 +171,11 @@ class Production
     }
 
     /**
-     * Set the value of html
+     * Set the value of sass
      *
      * @return  self
      */ 
-    public function setSass($sass)
+    public function setSass(?string $sass): self
     {
         $this->sass = $sass;
 
@@ -196,7 +196,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setBootstrap($bootstrap)
+    public function setBootstrap(?string $bootstrap): self
     {
         $this->bootstrap = $bootstrap;
 
@@ -217,7 +217,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setJs($js)
+    public function setJs(?string $js): self
     {
         $this->js = $js;
 
@@ -237,7 +237,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setPhp($php)
+    public function setPhp(?string $php): self
     {
         $this->php = $php;
 
@@ -256,7 +256,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setSymfony($symfony)
+    public function setSymfony(?string $symfony): self
     {
         $this->symfony = $symfony;
 
@@ -276,7 +276,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setWordpress($wordpress)
+    public function setWordpress(?string $wordpress): self
     {
         $this->wordpress = $wordpress;
 
@@ -295,7 +295,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setReact($react)
+    public function setReact(?string $react): self
     {
         $this->react = $react;
 
@@ -316,7 +316,7 @@ class Production
      *
      * @return  self
      */ 
-    public function setIdUser($idUser)
+    public function setIdUser(int $idUser)
     {
         $this->idUser = $idUser;
 
