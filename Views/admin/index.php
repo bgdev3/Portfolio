@@ -18,6 +18,7 @@ $token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null ;
             <label for="password">Password</label>
             <input type="text" id="password" name="password" class="inputForm" required>
             <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+             <input type="hidden" id="recaptchaResponse" name="recaptcha_response">
             <input type="submit" id="btnSend" name="btnSend" value="Connexion" class="btnForm" >
         </form>
     </div>

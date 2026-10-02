@@ -16,12 +16,12 @@ class AdminProductionController extends Controller
 {
 
     public function __construct (
-            private Form $form,
-            private Captcha $captcha,
-            private TemplateModel $templateModel,
-            private ProductionModel $productionModel,
-            private Template $template,
-            private Production $production
+            private readonly Form $form,
+            private readonly Captcha $captcha,
+            private readonly TemplateModel $templateModel,
+            private readonly ProductionModel $productionModel,
+            private readonly Template $template,
+            private readonly Production $production
         ){}
 
     /**

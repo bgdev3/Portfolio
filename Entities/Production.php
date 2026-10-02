@@ -5,19 +5,19 @@ namespace Portfolio\Entities;
 class Production
 {
     private int $idProduction;
-    private string $title;
-    private string $url;
-    private string $path;
-    private string $description;
-    private string $createdAt;
-    private ?string $html = null;
-    private ?string $sass = null;
-    private ?string $bootstrap = null;
-    private ?string $js = null;
-    private ?string $php = null;
-    private ?string $symfony = null;
-    private ?string $react = null;
-    private ?string $wordpress = null;
+    private string $title = '';
+    private string $url = '';
+    private string $path = '';
+    private string $description = '';
+    private string $createdAt = '';
+    private ?string $html = '';
+    private ?string $sass = '';
+    private ?string $bootstrap = '';
+    private ?string $js = '';
+    private ?string $php = '';
+    private ?string $symfony = '';
+    private ?string $react = '';
+    private ?string $wordpress = '';
     private int $idUser;
     
 

@@ -9,9 +9,9 @@ class ContactController extends Controller
 {
 
     public function __construct (
-        private Form $form,
-        private Captcha $captcha, 
-        private Mailer $mailer
+        private readonly Form $form,
+        private readonly Captcha $captcha, 
+        private readonly Mailer $mailer
     ){}
     /**
      * Traite les données de fomrulaire

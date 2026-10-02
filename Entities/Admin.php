@@ -4,10 +4,10 @@ namespace Portfolio\Entities;
 class Admin 
 {
     private int $idUser;
-    private string $surname;
-    private string $email;
-    private string $pathCv;
-    private string $password;
+    private string $surname = '';
+    private string $email = '';
+    private string $pathCv = '';
+    private string $password = '';
 
     /**
      * Get the value of idUser

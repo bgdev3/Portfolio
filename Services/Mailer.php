@@ -18,14 +18,14 @@ class Mailer
             $mail->isSMTP();                                                            //Envoi en SMTP
             $mail->Host       = 'smtp.gmail.com';                                       //Adresse serveur SMTP
             $mail->SMTPAuth   = true;                                                   //Active l'authentification
-            $mail->Username = getenv('MAIL_USERNAME');
-            $mail->Password = getenv('MAIL_PASSWORD');                                    //password de l'application
+            $mail->Username = $_ENV['MAIL_USERNAME'];
+            $mail->Password = $_ENV['MAIL_PASSWORD'];                                    //password de l'application
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                            //Active l'encriptage de l'envoi
             $mail->Port       = 465;                                                    //port SMTP
         
             //Recipients
-            $mail->setFrom(getenv('MAIL_USERNAME'), 'Portfolio');                      //Adresse d'envoi
-            $mail->addAddress(getenv('MAIL_USERNAME'));                                //Destinatire
+            $mail->setFrom($_ENV['MAIL_USERNAME'], 'Portfolio');                      //Adresse d'envoi
+            $mail->addAddress($_ENV['MAIL_USERNAME']);                                //Destinatire
         
             //Content
             $mail->isHTML(true);                                                        //Format HTML activé

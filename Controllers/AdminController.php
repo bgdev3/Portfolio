@@ -13,24 +13,22 @@ if (session_status() == PHP_SESSION_NONE) {
 class AdminController extends Controller
 {
     public function __construct (
-        private Form $form,
-        private Captcha $captcha,
-        private AdminUserModel $adminUserModel,
-        private Admin $admin
+        private  readonly Form $form,
+        private  readonly Captcha $captcha,
+        private  readonly AdminUserModel $adminUserModel,
+        private  readonly Admin $admin
     ){}
 
     /**
      * Traite les données de connexion admin
      */
-    public function index()
+    public function index(): void
     {
         $error = '';
         $captcha = false;
         // Si les champs ne sont pas vides
         if ($this->form->validatePost($_POST, ['email', 'password'])) {
 
-            // Instance du reCpatcha
-            // $captcha = new Captcha();
 
             // si la clé en post de vérifiaction du captcha est déclaré
             if (isset($_POST['recaptcha_response']))
@@ -75,7 +73,7 @@ class AdminController extends Controller
 
 
 
-    public function register($token)
+    public function register($token): void
     {
          $error = '';
          $captcha = false;
@@ -207,7 +205,7 @@ class AdminController extends Controller
         return $error;
     }
 
-    public function logOut($token)
+    public function logOut($token): void
     {
         if (isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
             session_unset();

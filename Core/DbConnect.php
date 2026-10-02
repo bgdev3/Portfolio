@@ -3,13 +3,14 @@
 namespace Portfolio\Core;
 
 use PDO;
+use PDOStatement;
 use Exception;
 
 class DbConnect
 {
     // Variables protégées
-    protected $connexion;
-    protected $request;
+    protected PDO $connexion;
+    protected  ?PDOStatement $request = null;
 
    // Constructeur qui initialise la connexion lors de l'instanciation de la classe
     public function __construct()
@@ -17,10 +18,10 @@ class DbConnect
         // Lecture des variables d'environnement définies dans le fichier .env
         // (chargé via vlucas/phpdotenv dans index.php)
 
-        $serveur  = getenv('DB_SERVEUR')  ?: 'localhost';
-        $user     = getenv('DB_USER')     ?: 'root';
-        $password = getenv('DB_PASSWORD') ?: 'test';
-        $base     = getenv('DB_BASE')     ?: 'portfolio';
+        $serveur  = 'localhost';
+        $user     = 'root';
+        $password =  'test';
+        $base     = 'portfolio';
 
         try {
             $dsn = 'mysql:host=' . $serveur . ';dbname=' . $base . ';charset=utf8mb4';
