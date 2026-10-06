@@ -48,7 +48,7 @@ class adminUserModel extends DbConnect
      * 
      * @param string $email Email permettant de trouver le bon utilisateur de connexion
      */
-    public function find(string $email): Admin
+    public function find(string $email): object|false
     {
         $this->request = $this->connexion->prepare('SELECT * FROM admin WHERE email = :email');
         $this->request -> bindParam(':email', $email);

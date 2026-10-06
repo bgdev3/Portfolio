@@ -85,35 +85,20 @@ export function showContentProduction(){
             currentDots[0].classList.add('active');
         }
     
-        // Affiche les éléments vers la droite
-        function startRight() {
-            // réinitialise
-            reset();
-            count++;
-            // Si count est égal à la taille du tableau
-            // count vaut 0
-            if(count == comments.length){
-                count = 0;
-            }
+     function startRight() {
+        reset();
+        count = (count + 1) % comments.length;
 
-            comments[count].classList.remove('hide-content');
-            comments[0].classList.add('show-quote');
-    
-            if(count > 0) 
-            currentDots[count - 1].classList.remove('active');
-    
-            currentDots[count].classList.add('active');
-        }
+        comments[count].classList.remove('hide-content');
+        comments[0].classList.add('show-quote');
+        currentDots[count].classList.add('active');
+    }
 
         // Affiche les éléments vers la gauche
         function startLeft() {
-            comments[count].classList.add('hide-content');
-            currentDots[count].classList.remove('active');
-            count--;
-           
-            if(count  == -1) {
-                count = comments.length - 1;
-            }
+
+             reset();
+            count = (count - 1 + comments.length) % comments.length;
 
             comments[count].classList.remove('hide-content');
             comments[0].classList.add('show-quote');

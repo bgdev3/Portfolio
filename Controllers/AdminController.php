@@ -31,11 +31,11 @@ class AdminController extends Controller
 
 
             // si la clé en post de vérifiaction du captcha est déclaré
-            if (isset($_POST['recaptcha_response']))
-                $captcha = $this->captcha->verify($_POST['recaptcha_response']);
+            // if (isset($_POST['recaptcha_response']))
+            //     $captcha = $this->captcha->verify($_POST['recaptcha_response']);
             
             // Si la reponse du captcha est valide
-            if ($captcha == true) {
+            // if ($captcha == true) {
                 // Filtre le bon format d'email
                 if (!(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))) {
                     // Stocke le message d'erreur
@@ -60,9 +60,9 @@ class AdminController extends Controller
                     header('location:/public/');
                     exit();
                 }
-            } else {
-                $error = "Le reCaptcha n'est pas valide";
-            }
+            // } else {
+            //     $error = "Le reCaptcha n'est pas valide";
+            // }
            
         } else {
             $error = !empty($_POST) ?  "Veuillez remplir tous les champs" : "";
@@ -96,11 +96,11 @@ class AdminController extends Controller
             //  $captcha = new Captcha();
 
              // si la clé en post de vérifiaction du captcha est déclaré
-             if (isset($_POST['recaptcha_response']))
-                 $captcha = $this->captcha->verify($_POST['recaptcha_response']);
+            //  if (isset($_POST['recaptcha_response']))
+                //  $captcha = $this->captcha->verify($_POST['recaptcha_response']);
             
              // Si la reponse du captcha est valide
-             if ($captcha == true) {
+            //  if ($captcha == true) {
                 // Récupère les valeurs POST en supprimant les espace et agissant contre la faille XSS
                 $surname = isset($_POST['surname']) ? trim(htmlspecialchars($_POST['surname'], ENT_QUOTES)) : "";
                 $email = isset($_POST['email']) ? trim(htmlspecialchars($_POST['email'], ENT_QUOTES)) : "";
@@ -144,9 +144,9 @@ class AdminController extends Controller
                 } else {
                     $error = "Le mot de passe doit être d'une longeure minimale de 12 caractères";
                 }
-            }else {
-                $error = "Le reCaptcha n'est pas valide";
-            }
+            // }else {
+            //     $error = "Le reCaptcha n'est pas valide";
+            // }
         }
         // Renvoi les données à la vue
         $this->render('admin/register', ['error' => $error]);

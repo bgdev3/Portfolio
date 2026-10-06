@@ -591,11 +591,11 @@ nav:has(.nav-header) {
 }
 .img-project .content-container .content-realisation a {
   display: block;
-  width: 80%;
-  margin: 8% auto;
-  padding: 0.5em;
+  width: 60%;
+  margin: 10% auto;
+  padding: 0.3em 0.5em 0.3em 0.5em;
+  border-radius: 50px;
   border: 1px solid #97004f;
-  color: #b6b6b6;
   transition: all 0.5s ease-out;
 }
 .img-project .content-container .content-realisation a:hover {
@@ -733,7 +733,7 @@ aside.quote .quote__prev {
 }
 aside.quote .content-quote {
   width: 100%;
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -744,16 +744,16 @@ aside.quote .content-quote {
     margin-bottom: initial;
   }
 }
-aside.quote p {
+aside.quote .content-quote > p {
+  grid-area: 1/1;
+  width: 100%;
   line-height: 1.5em;
   font-style: italic;
-  width: 100%;
 }
-aside.quote p::before, aside.quote p::after {
-  content: ' "';
+aside.quote .content-quote > p::before, aside.quote .content-quote > p::after {
+  content: '"';
   font-size: 2rem;
   color: #97004f;
-  vertical-align: -20%;
 }
 
 .slide__dot {
@@ -809,7 +809,7 @@ aside.quote p::before, aside.quote p::after {
   max-height: 100%;
   opacity: 1;
   z-index: 400;
-  transition: 1s;
+  transition: 0.5s;
   position: absolute;
 }
 

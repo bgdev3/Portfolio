@@ -70,7 +70,7 @@ class ProductionModel  extends DbConnect
      * 
      * @return object
      */
-    public function findLast(): Production
+    public function findLast(): object|false
     {
         $this->request = $this->connexion->prepare('SELECT * FROM production ORDER BY idProduction DESC  LIMIT 1');
         $this->request->execute();

@@ -170,11 +170,11 @@
     
             & a{
                 display: block;
-                width: 80%;
-                margin: 8% auto;
-                padding: .5em;
+                width: 60%;
+                margin: 10% auto;
+                padding: .3em .5em .3em .5em;
+                border-radius: 50px;
                 border: 1px solid color.$color_pink;
-                color: color.$color_font;
                 @include mixins.transition;
                 &:hover{
                     border: 1px solid color.$color_font;
@@ -297,33 +297,31 @@ aside.quote{
             left: -15%;
         }
     }
+.content-quote {
+    width: 100%;
+    display: grid;              // au lieu de flex
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20%;
 
-   .content-quote{
-        // height: 150px; // Permet d'offrir l'espacement necessaire aux extraits d'avis
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        margin-bottom: 20%;
-        @include mixins.tablet{
-            // height: 110px;
-            margin-bottom: initial;
-        }
+    @include mixins.tablet {
+        margin-bottom: initial;
     }
 
-    p{
-        // position: absolute;
+    > p {
+        grid-area: 1 / 1;       // tous les <p> dans la même case
+        width: 100%;
         line-height: 1.5em;
         font-style: italic;
-        width: 100%;
-        &::before, &::after{
-            content: " \0022";
+
+        &::before, &::after {
+            content: "\0022";
             font-size: 2rem;
             color: color.$color_pink;
-            vertical-align: -20%;
         }
     }
+}
 } 
   
 .slide__dot{
@@ -375,7 +373,7 @@ aside.quote{
     max-height: 100%;
     opacity: 1;
     z-index: 400;
-    transition: 1s;
+    transition: .5s;
     position: absolute;
 }
 

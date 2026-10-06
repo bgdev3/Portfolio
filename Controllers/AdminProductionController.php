@@ -1,12 +1,12 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Services\Form;
-use Portfolio\Services\Captcha;
-use Portfolio\Entities\Template;
 use Portfolio\Entities\Production;
-use Portfolio\Models\TemplateModel;
+use Portfolio\Entities\Template;
 use Portfolio\Models\ProductionModel;
+use Portfolio\Models\TemplateModel;
+use Portfolio\Services\Captcha;
+use Portfolio\Services\Form;
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -53,6 +53,7 @@ class AdminProductionController extends Controller
         $captcha = false;
         $paths =[]; $arrayFiles = []; 
         $nb = 1;
+        unset($_SESSION['error']);
     
         // Si les champs POST et FILES ne sont pas vides
         if ($this->form->validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment']) && $this->form->validateFiles($_FILES, ['file', 'tmp1', 'tmp2', 'tmp3', 'tmp4'])) {
@@ -71,21 +72,24 @@ class AdminProductionController extends Controller
                 // $captcha = new Captcha();
 
                 // si la clé en post de vérifiaction du captcha est déclaré
-                if (isset($_POST['recaptcha_response']))
-                    $captcha = $this->captcha->verify($_POST['recaptcha_response']);
+                // if (isset($_POST['recaptcha_response']))
+                //     $captcha = $this->captcha->verify($_POST['recaptcha_response']);
                 
                 // Si la reponse du captcha est valide
-                if ($captcha == true) {
+                // if ($captcha == true) {
                     // Si l'erreur est vide
                     if (empty($error)) {
                         // Boucle sur chaque fichier image  récupérés
-                        foreach($files as $file){
-                            // A chaque itération, reformate l ataille et l'extension de chacun
-                            $file = $this->imageSize($file, $arrayFiles[$nb], 500,  500);
-                            // Incrémente afin de fournir la bon name de fichier à chaque itération
+                       foreach ($files as $i => $file) {
+                            $key = $arrayFiles[$nb];                 // 'file', 'tmp1', ...
+                            $tmpPath = $_FILES[$key]['tmp_name'];    // chemin temporaire réel
+
+                            $path = $this->imageSize($file, $tmpPath, 500, 500);
+                            if ($path === '') {
+                                break; // erreur déjà stockée dans $_SESSION['error']
+                            }
                             $nb++;
-                            // Stocke le chemin de fichier formater dans un array
-                            array_push($paths, $file);
+                            $paths[] = $path;
                         }
                     
                         // Si l'image est uploadé et déplacé
@@ -129,9 +133,9 @@ class AdminProductionController extends Controller
                             $error =  !empty($_SESSION['error']) ? $_SESSION['error'] : '';
                         }   
                     } 
-                } else {
-                    $error = "Le reCaptcha n'est pas valide";
-                }
+                // } else {
+                //     $error = "Le reCaptcha n'est pas valide";
+                // }
             } else {
                 // Sinon redirige directement vers l'index en supprimant les données de connexion
                 session_unset();
@@ -157,6 +161,7 @@ class AdminProductionController extends Controller
          $captcha = false;
          $arrayFiles =  ['file','tmp1', 'tmp2',  'tmp3',  'tmp4'];
          $nb = 0;
+         unset($_SESSION['error']);
 
         // Si les champs ne sont pas vides
         if ($this->form->validatePost($_POST, ['title', 'url', 'description', 'createdAt', 'comment'])) {
@@ -165,11 +170,11 @@ class AdminProductionController extends Controller
             //  $captcha = new Captcha();
 
              // si la clé en post de vérifiaction du captcha est déclaré
-             if (isset($_POST['recaptcha_response']))
-                 $captcha = $this->captcha->verify($_POST['recaptcha_response']);
+            //  if (isset($_POST['recaptcha_response']))
+            //      $captcha = $this->captcha->verify($_POST['recaptcha_response']);
              
              // Si la reponse du captcha est valide
-             if ($captcha == true) {
+            //  if ($captcha == true) {
                 // Si les tokens correspondent afin d'éviter une faille XSS
                 if (isset($_SESSION['token']) && isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
 
@@ -208,7 +213,7 @@ class AdminProductionController extends Controller
                             // Formate le fichier
                             $fileItem = $this->form->formateFileAdmin($_FILES, [$file]);
                             // Redimensionne l'image avant de l'uploader sur le serveur
-                            $file = $this->imageSize($fileItem[0], $arrayFiles[$nb], 457,  475);
+                            $file = $this->imageSize($_FILES[$arrayFiles[$nb]]['name'], $_FILES[$arrayFiles[$nb]]['tmp_name'], 457, 475);
                             
                             // Si le redimensionnement s'est bien dértoulé
                             if (empty($_SESSION['error'])) {
@@ -243,9 +248,9 @@ class AdminProductionController extends Controller
                     header('location:/public/');
                     exit();
                 }
-            } else {
-                $error = "Le reCaptcha n'est pas valide";
-            }
+            // } else {
+            //     $error = "Le reCaptcha n'est pas valide";
+            // }
            
            
         } else {
@@ -297,54 +302,52 @@ class AdminProductionController extends Controller
      * Permet le redimensionnement des images dans 3 formats
      * afin de l'adapter pour le RWD
      * 
-     * @param string $path Chemin du fichier
      * @param int $w Largeur de redimensionnement de l'image voulu
      * @param int $h Hauteur de redimensionnement de l'image voulu
-     * @param string $tmpName Chemin du fichier temporaire
      * 
      * @return string [$destination] Retourne le chemin de l'image redimensionnée
      */
-    protected function imageSize($path, $tmpName, $w, $h): string
+   protected function imageSize(string $originalName, string $tmpPath, int $w, int $h): string
     {
-        // Récupère l'extension, et le nom du fichier
-        $ext =  pathinfo($path, PATHINFO_EXTENSION);
-        $name = pathinfo($path, PATHINFO_FILENAME);
-        // Crée le chemin du fichier
-        $destination =  'img/'. $name . '.webp';
+        // Type réel du fichier, pas celui annoncé par le navigateur
+        $mime = (new \finfo(FILEINFO_MIME_TYPE))->file($tmpPath);
 
-        // Déplace le fichier dans le dossier correspondant s'il n'est pas présent
-        if (file_exists( $destination)) {
+        $loaders = [
+            'image/jpeg' => 'imagecreatefromjpeg',
+            'image/png'  => 'imagecreatefrompng',
+            'image/webp' => 'imagecreatefromwebp',
+        ];
 
-            $_SESSION['error'] = $name . '.webp' . " déja existant !";
-        } else {
-
-            move_uploaded_file($_FILES[$tmpName]['tmp_name'],  'img/'. $name . '.webp');
-           
-            // Récupère les dimension du fichier source
-            $size = getimagesize($destination);
-            $width = $size[0];
-            $height = $size[1];
-        
-            // Array permettant d'appeler la bonne méthode selon l'extension
-            // afin de stocker le format d'image
-            $handler = array(
-                    'jpg' => 'imagecreatefromjpeg', 'png' => 'imagecreatefrompng', 'webp' => 'imagecreatefromwebp', 'jpeg' => 'imagecreatefromjpeg',
-                    'new' => array('jpg' => 'imagejpeg', 'png' => 'imagepng', 'webp' => 'imagewebp', 'jpeg' => 'imagejpeg') );
-
-            //Appel la bonne méthode imagecreatefrom**
-            $image = $handler[$ext]($destination);
-
-            // Créer une image de fond par default
-            $new_image = imagecreatetruecolor($w, $h);
-            // Créer la copie de l'image
-            imagecopyresampled($new_image, $image, 0, 0, 0, 0, $w, $h, $width, $height);
-            // Créer l'image dans le format voulu
-            // en appelant la bonne méthode image**
-            $handler['new'][$ext]($new_image, $destination, 9);
-        
-            // Détruit l'image source de la mémoire
-            // imagedestroy($new_image);
+        if (!isset($loaders[$mime])) {
+            $_SESSION['error'] = 'Format non supporté (jpg, png, webp uniquement)';
+            return '';
         }
-        return  $destination;
+
+        // Nettoyage du nom : accents, espaces, apostrophes
+        $name = pathinfo($originalName, PATHINFO_FILENAME);
+        $name = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $name);
+        $name = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $name), '-'));
+        if ($name === '') {
+            $name = 'image-' . uniqid();
+        }
+
+        $destination = 'img/' . $name . '.webp';
+
+        if (file_exists($destination)) {
+            $_SESSION['error'] = $name . '.webp déjà existant !';
+            return '';
+        }
+
+        $source = $loaders[$mime]($tmpPath);
+
+        $newImage = imagecreatetruecolor($w, $h);
+        imagealphablending($newImage, false);
+        imagesavealpha($newImage, true);
+
+        imagecopyresampled($newImage, $source, 0, 0, 0, 0, $w, $h, imagesx($source), imagesy($source));
+        imagewebp($newImage, $destination, 80);
+
+
+        return $destination;
     }
 }
