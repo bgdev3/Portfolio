@@ -9,7 +9,7 @@ class ProductionsController extends Controller
 {
     public function __construct (
 
-        private ProductionModel $productionModel
+        private readonly ProductionModel $productionModel
 
     ){}
     /**

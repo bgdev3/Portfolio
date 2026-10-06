@@ -7,7 +7,7 @@ use Portfolio\Models\AdminUserModel;
 class HomeController extends Controller{
 
     public function __construct (
-        private AdminUserModel $adminUserModel
+        private readonly AdminUserModel $adminUserModel
     ){}
 
      /**

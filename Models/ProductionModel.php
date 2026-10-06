@@ -56,7 +56,7 @@ class ProductionModel  extends DbConnect
      * @param int $id correspondant de l'enregistrement sélectionné
      * @return object
      */
-    public function find(int $id): object
+    public function find(int $id): Production
     {
         $this->request = $this->connexion->prepare('SELECT * FROM production WHERE idProduction = :id');
         $this->request->bindParam(':id', $id);
@@ -70,7 +70,7 @@ class ProductionModel  extends DbConnect
      * 
      * @return object
      */
-    public function findLast(): object
+    public function findLast(): object|false
     {
         $this->request = $this->connexion->prepare('SELECT * FROM production ORDER BY idProduction DESC  LIMIT 1');
         $this->request->execute();
@@ -82,9 +82,8 @@ class ProductionModel  extends DbConnect
      * Récupère un enregistrement par l'id correspondnat
      * 
      *@param int $id correspondant de l'enregistrement sélectionné
-     * @return object
      */
-    public function update(int $id, Production $production)
+    public function update(int $id, Production $production): void
     {
         $this->request = $this->connexion->prepare('UPDATE production SET title = :title, url = :url, description = :description, path = :path, 
         createdAt = :createdAt, html = :html, sass = :sass, bootstrap = :bootstrap, js = :js, php = :php, symfony = :symfony, react = :react, wordpress = :wordpress WHERE idProduction = :id');
@@ -128,7 +127,7 @@ class ProductionModel  extends DbConnect
      * 
      * @param int $id Id de l'enregistrement à supprimer
      */
-    public function delete($id)
+    public function delete($id): void
     {
         $this->request = $this->connexion->prepare('DELETE FROM production WHERE idProduction = :idProduction');
         $this->request->bindParam(':idProduction', $id);

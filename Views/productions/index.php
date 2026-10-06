@@ -58,7 +58,6 @@ $comments = [];
                 </div>
 
                 <div style="text-align: center";>
-                    <!-- <small>Application de devis et de réservation de transport</small> -->
                     <!-- <?php
                        
                         // POur chaque languages avec une valeur non nulle

@@ -7,7 +7,7 @@ use Exception;
 
 class TemplateModel extends DbConnect
 {
-    public function create(Template $template)
+    public function create(Template $template): void
     {
         $this->request = $this->connexion-> prepare("INSERT INTO template VALUES(NULL, :path1, :path2, :path3, :path4, :comments, :idProduction)");
         $this->request->bindValue(':path1', $template->getPath1());
@@ -25,7 +25,7 @@ class TemplateModel extends DbConnect
      * @param object Template Entité à enregistrer
      * @param int $id Id de l'enregistrement à mettre à jour
      */
-    public function update(Template $template, int $id)
+    public function update(Template $template, int $id): void
     {
         $this->request = $this->connexion->prepare("UPDATE template SET template1 = :path1, template2 = :path2, template3 = :path3, template4 = :path4,
                                                     comments = :comments WHERE idProduction = :id");
@@ -39,7 +39,7 @@ class TemplateModel extends DbConnect
     }
 
 
-    private function ExecuteTryCatch()
+    private function ExecuteTryCatch(): void
     {
         try{
             $this->request->execute();

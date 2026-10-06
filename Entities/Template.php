@@ -4,11 +4,11 @@ namespace Portfolio\Entities;
 class Template 
 {
     private int $idTemplate;
-    private string $path1;
-    private string $path2;
-    private string $path3;
-    private string $path4;
-    private string $comments;
+    private string $path1 = '';
+    private string $path2 = '';
+    private string $path3 = '';
+    private string $path4 = '';
+    private string $comments = '';
     private int $idProduction;
 
     

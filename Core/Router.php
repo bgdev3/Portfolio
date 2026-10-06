@@ -7,8 +7,8 @@ use Portfolio\Core\WhiteList;
 class Router
 {
     public function __construct( 
-        private Container $container, 
-        private WhiteList $whiteList )
+        private readonly  Container $container, 
+        private readonly WhiteList $whiteList )
     {}
     // Route les requêtes entrantes vers les contrôleurs et actions appropriés
     public function routes(): void
