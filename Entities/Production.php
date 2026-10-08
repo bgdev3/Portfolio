@@ -10,13 +10,13 @@ class Production
     private string $path = '';
     private string $description = '';
     private string $createdAt = '';
-    private ?string $html = '';
     private ?string $sass = '';
     private ?string $bootstrap = '';
+    private ?string $tailwind = '';
     private ?string $js = '';
+    private ?string $docker = '';
     private ?string $php = '';
     private ?string $symfony = '';
-    private ?string $react = '';
     private ?string $wordpress = '';
     private int $idUser;
     
@@ -141,27 +141,6 @@ class Production
         return $this;
     }
 
-
-    /**
-     * Get the value of html
-     */ 
-    public function getHtml()
-    {
-        return $this->html;
-    }
-
-    /**
-     * Set the value of html
-     *
-     * @return  self
-     */ 
-    public function setHtml( ?string $html): self
-    {
-        $this->html = $html;
-
-        return $this;
-    }
-
      /**
      * Get the value of sass
      */ 
@@ -282,27 +261,7 @@ class Production
 
         return $this;
     }
-     /**
-     * Get the value of react
-     */ 
-    public function getReact()
-    {
-        return $this->react;
-    }
-
-    /**
-     * Set the value of react
-     *
-     * @return  self
-     */ 
-    public function setReact(?string $react): self
-    {
-        $this->react = $react;
-
-        return $this;
-    }
-
-
+   
       /**
      * Get the value of idUser
      */ 
@@ -319,6 +278,46 @@ class Production
     public function setIdUser(int $idUser)
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tailwind
+     */ 
+    public function getTailwind()
+    {
+        return $this->tailwind;
+    }
+
+    /**
+     * Set the value of tailwind
+     *
+     * @return  self
+     */ 
+    public function setTailwind(?string $tailwind)
+    {
+        $this->tailwind = $tailwind;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of docker
+     */ 
+    public function getDocker()
+    {
+        return $this->docker;
+    }
+
+    /**
+     * Set the value of docker
+     *
+     * @return  self
+     */ 
+    public function setDocker(?string $docker)
+    {
+        $this->docker = $docker;
 
         return $this;
     }

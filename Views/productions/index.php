@@ -19,7 +19,7 @@ $comments = [];
                         array_push($comments, $item->comments);
                          // Tableau pour stocker les languages
                          $languages = [];
-                         array_push($languages,  $item->html,  $item->sass, $item->bootstrap, $item->js,  $item->php,  $item->symfony,  $item->react,  $item->wordpress);
+                         array_push($languages,  $item->sass, $item->bootstrap, $item->tailwind, $item->js, $item->docker, $item->php,  $item->symfony,  $item->wordpress);
             ?>
                     
             <div class="img-project bgImg">
