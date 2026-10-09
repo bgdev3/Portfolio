@@ -47,10 +47,7 @@ if(!isset($_SESSION['username_admin']))
             </div>
             
             <div class="langages">
-                <div>
-                    <input type="checkbox" id="html" name="html" value="fa-brands fa-html5">
-                    <label for="html">HTML5</label>
-                </div>
+               
                 <div>
                     <input type="checkbox" id="sass" name="sass" value="fa-brands fa-sass">
                     <label for="sass">Sass</label>
@@ -60,19 +57,23 @@ if(!isset($_SESSION['username_admin']))
                     <label for="boot">Bootstrap</label>
                 </div>
                 <div>
+                    <input type="checkbox" id="tail" name="tail" value="fa-brands fa-tailwind-css">
+                    <label for="tail">Tailwind</label>
+                </div>
+                <div>
                     <input type="checkbox" id="js" name="js" value="fa-brands fa-square-js">
                     <label for="js">JS Vanilla</label>
                 </div>
+                 <div>
+                    <input type="checkbox" id="dock" name="dock" value="fa-brands fa-docker">
+                    <label for="dock">Dockers</label>
+                 </div>
                 <div>
                     <input type="checkbox" id="php" name="php" value="fa-brands fa-php">
                     <label for="php">PHP</label>
                 </div>
                     <div> <input type="checkbox" id="symfony" name="symfony" value="fa-brands fa-symfony">
                     <label for="symfony">Symfony</label></div>
-                <div>
-                    <input type="checkbox" id="react" name="react" value="fa-brands fa-react">
-                    <label for="react">React</label>
-                </div>
                 <div>
                     <input type="checkbox" id="wp" name="wp" value="fa-brands fa-wordpress-simple">
                     <label for="wp">Wordpress</label>

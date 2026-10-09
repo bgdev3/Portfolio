@@ -19,7 +19,7 @@ $comments = [];
                         array_push($comments, $item->comments);
                          // Tableau pour stocker les languages
                          $languages = [];
-                         array_push($languages,  $item->html,  $item->sass, $item->bootstrap, $item->js,  $item->php,  $item->symfony,  $item->react,  $item->wordpress);
+                         array_push($languages,  $item->sass, $item->bootstrap, $item->tailwind, $item->js, $item->docker, $item->php,  $item->symfony,  $item->wordpress);
             ?>
                     
             <div class="img-project bgImg">
@@ -40,10 +40,23 @@ $comments = [];
                                <?php 
                                 foreach ($languages as $lang) {
 
-                                    if($lang != null) { ?> 
+                                    if ($lang != null) { 
+                                ?> 
+                                    <div class="slack_title">
+
+                                   
                                         <li> <i class="<?php echo $lang; ?>"></i> </li> 
-                                    <?php } 
-                                } ?>
+                                        
+                                <?php 
+                                        $stacks = ['sass', 'bootstrap', 'tailwind', 'js', 'docker', 'php', 'symfony', 'wordpress'];
+                                        foreach ($stacks as $stack) {
+                                            if( str_contains($lang, $stack))   echo ucfirst($stack); 
+                                        }
+                                ?>  </div> 
+                                <?php
+                                    } 
+                                } 
+                                ?>
                             </ul>
                         </div>
                         
@@ -57,19 +70,6 @@ $comments = [];
                         <button class="btn-realisation ">+</button>
                 </div>
 
-                <div style="text-align: center";>
-                    <!-- <?php
-                       
-                        // POur chaque languages avec une valeur non nulle
-                        // on crée l'élément html en y insérant la class de l'icone fontawesome
-                        foreach ($languages as $lang) {
-
-                            if($lang != null) { ?> 
-                                <i class="<?php echo $lang; ?>"></i> 
-                            <?php } 
-                        } 
-                    ?> -->
-                </div>
             </div>
             
             <?php  } 

@@ -15,19 +15,19 @@ class ProductionModel  extends DbConnect
      */
     public function create(Production $production): void
     {
-        $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :url, :description, :path, :createdAt, :html, :sass, :bootstrap, :js, :php, :symfony, :react, :wordpress, :idUser)');
+        $this->request = $this->connexion->prepare('INSERT INTO production VALUES (NULL, :title, :url, :description, :path, :createdAt, :sass, :bootstrap, :tailwind, :js, :docker, :php, :symfony, :wordpress, :idUser)');
         $this->request->bindValue(':title', $production->getTitle());
         $this->request->bindValue(':url', $production->getUrl());
         $this->request->bindValue(':description', $production->getDescription());
         $this->request->bindValue(':path', $production->getPath());
         $this->request->bindValue(':createdAt', $production->getCreatedAt());
-        $this->request->bindValue(':html', $production->getHTML());
         $this->request->bindValue(':sass', $production->getSass());
         $this->request->bindValue(':bootstrap', $production->getBootstrap());
+        $this->request->bindValue(':tailwind', $production->getTailwind());
         $this->request->bindValue(':js', $production->getJs());
+        $this->request->bindValue(':docker', $production->getDocker());
         $this->request->bindValue(':php', $production->getPhp());
         $this->request->bindValue(':symfony', $production->getSymfony());
-        $this->request->bindValue(':react', $production->getReact());
         $this->request->bindValue(':wordpress', $production->getWordpress());
         $this->request->bindValue(':idUser', $production->getIdUser());
 
@@ -86,7 +86,7 @@ class ProductionModel  extends DbConnect
     public function update(int $id, Production $production): void
     {
         $this->request = $this->connexion->prepare('UPDATE production SET title = :title, url = :url, description = :description, path = :path, 
-        createdAt = :createdAt, html = :html, sass = :sass, bootstrap = :bootstrap, js = :js, php = :php, symfony = :symfony, react = :react, wordpress = :wordpress WHERE idProduction = :id');
+        createdAt = :createdAt, sass = :sass, bootstrap = :bootstrap, tailwind = :tailwind, js = :js, docker = :docker, php = :php, symfony = :symfony, wordpress = :wordpress WHERE idProduction = :id');
 
         $this->request->bindValue(':id', $id);
         $this->request->bindValue(':title', $production->getTitle());
@@ -94,13 +94,13 @@ class ProductionModel  extends DbConnect
         $this->request->bindValue(':description', $production->getDescription());
         $this->request->bindValue(':path', $production->getPath());
         $this->request->bindValue(':createdAt', $production->getCreatedAt());
-        $this->request->bindValue(':html', $production->getHTML());
         $this->request->bindValue(':sass', $production->getSass());
         $this->request->bindValue(':bootstrap', $production->getBootstrap());
+        $this->request->bindValue(':tailwind', $production->getTailwind());
         $this->request->bindValue(':js', $production->getJs());
+        $this->request->bindValue(':docker', $production->getDocker());
         $this->request->bindValue(':php', $production->getPhp());
         $this->request->bindValue(':symfony', $production->getSymfony());
-        $this->request->bindValue(':react', $production->getReact());
         $this->request->bindValue(':wordpress', $production->getWordpress());
         $this->ExecuteTryCatch();
        

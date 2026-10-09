@@ -102,13 +102,13 @@ class AdminProductionController extends Controller
                             $this->production->setDescription( htmlspecialchars($_POST['description'], ENT_QUOTES) );
                             $this->production->setPath($paths[0]);
                             $this->production->setCreatedAt( htmlspecialchars($_POST['createdAt'], ENT_QUOTES) );
-                            $this->production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
                             $this->production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
                             $this->production->setBootstrap( isset($_POST['boot']) ? $_POST['boot'] : null );
+                            $this->production->setTailwind( isset($_POST['tail']) ? $_POST['tail'] : null );
                             $this->production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
+                            $this->production->setDocker( isset($_POST['dock']) ? $_POST['dock'] : null );
                             $this->production->setPhp( isset($_POST['php']) ? $_POST['php'] : null );
                             $this->production->setSymfony( isset($_POST['symfony']) ? $_POST['symfony'] : null );
-                            $this->production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
                             $this->production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
                             $this->production->setIdUser($_SESSION['id_admin']);
                             // Crée l'enregistrement
@@ -186,13 +186,13 @@ class AdminProductionController extends Controller
                     $this->production->setUrl(htmlspecialchars($_POST['url'], ENT_QUOTES));
                     $this->production->setDescription(htmlspecialchars($_POST['description'], ENT_QUOTES));
                     $this->production->setCreatedAt(htmlspecialchars($_POST['createdAt'], ENT_QUOTES));
-                    $this->production->setHtml( isset($_POST['html']) ? $_POST['html'] : null );
                     $this->production->setSass( isset($_POST['sass']) ? $_POST['sass'] : null );
                     $this->production->setBootstrap( isset($_POST['boot']) ? $_POST['boot'] : null );
+                    $this->production->setTailwind( isset($_POST['tail']) ? $_POST['tail'] : null );
                     $this->production->setJs( isset($_POST['js']) ? $_POST['js'] : null );
+                    $this->production->setDocker( isset($_POST['dock']) ? $_POST['dock'] : null );
                     $this->production->setPhp( isset($_POST['php']) ? $_POST['php'] : null );
                     $this->production->setSymfony( isset($_POST['symfony']) ? $_POST['symfony'] : null );
-                    $this->production->setReact( isset($_POST['react']) ? $_POST['react'] : null );
                     $this->production->setWordpress( isset($_POST['wp']) ? $_POST['wp'] : null );
                     $this->production->setIdUser($_SESSION['id_admin']);
 
@@ -261,7 +261,6 @@ class AdminProductionController extends Controller
         if (isset($id) && isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
             // $model = new ProductionModel();
             $production = $this->productionModel->join($id);
-            
             // Récupère le premier élement de la jointure (qui sera toujours unique ici)
             $production = $production[0];
             
