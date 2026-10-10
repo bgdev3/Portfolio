@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-class Mailer 
+final class Mailer 
 {
     public function sendMail(array $post)
     {

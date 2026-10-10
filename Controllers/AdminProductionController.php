@@ -7,6 +7,7 @@ use Portfolio\Models\ProductionModel;
 use Portfolio\Models\TemplateModel;
 use Portfolio\Services\Captcha;
 use Portfolio\Services\Form;
+use Portfolio\Services\ImageGenerate;
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -21,7 +22,8 @@ class AdminProductionController extends Controller
             private readonly TemplateModel $templateModel,
             private readonly ProductionModel $productionModel,
             private readonly Template $template,
-            private readonly Production $production
+            private readonly Production $production,
+            private readonly ImageGenerate $image
         ){}
 
     /**
@@ -84,7 +86,7 @@ class AdminProductionController extends Controller
                             $key = $arrayFiles[$nb];                 // 'file', 'tmp1', ...
                             $tmpPath = $_FILES[$key]['tmp_name'];    // chemin temporaire réel
 
-                            $path = $this->imageSize($file, $tmpPath, 500, 500);
+                            $path = $this->image->imageSize($file, $tmpPath, 500, 500);
                             if ($path === '') {
                                 break; // erreur déjà stockée dans $_SESSION['error']
                             }
@@ -213,7 +215,7 @@ class AdminProductionController extends Controller
                             // Formate le fichier
                             $fileItem = $this->form->formateFileAdmin($_FILES, [$file]);
                             // Redimensionne l'image avant de l'uploader sur le serveur
-                            $file = $this->imageSize($_FILES[$arrayFiles[$nb]]['name'], $_FILES[$arrayFiles[$nb]]['tmp_name'], 457, 475);
+                            $file = $this->image->imageSize($_FILES[$arrayFiles[$nb]]['name'], $_FILES[$arrayFiles[$nb]]['tmp_name'], 457, 475);
                             
                             // Si le redimensionnement s'est bien dértoulé
                             if (empty($_SESSION['error'])) {
@@ -294,59 +296,5 @@ class AdminProductionController extends Controller
             $this->render('admin/productions/confirmDelete');
         }    
     }
-
-
-     /**
-     * 
-     * Permet le redimensionnement des images dans 3 formats
-     * afin de l'adapter pour le RWD
-     * 
-     * @param int $w Largeur de redimensionnement de l'image voulu
-     * @param int $h Hauteur de redimensionnement de l'image voulu
-     * 
-     * @return string [$destination] Retourne le chemin de l'image redimensionnée
-     */
-   protected function imageSize(string $originalName, string $tmpPath, int $w, int $h): string
-    {
-        // Type réel du fichier, pas celui annoncé par le navigateur
-        $mime = (new \finfo(FILEINFO_MIME_TYPE))->file($tmpPath);
-
-        $loaders = [
-            'image/jpeg' => 'imagecreatefromjpeg',
-            'image/png'  => 'imagecreatefrompng',
-            'image/webp' => 'imagecreatefromwebp',
-        ];
-
-        if (!isset($loaders[$mime])) {
-            $_SESSION['error'] = 'Format non supporté (jpg, png, webp uniquement)';
-            return '';
-        }
-
-        // Nettoyage du nom : accents, espaces, apostrophes
-        $name = pathinfo($originalName, PATHINFO_FILENAME);
-        $name = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $name);
-        $name = strtolower(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $name), '-'));
-        if ($name === '') {
-            $name = 'image-' . uniqid();
-        }
-
-        $destination = 'img/' . $name . '.webp';
-
-        if (file_exists($destination)) {
-            $_SESSION['error'] = $name . '.webp déjà existant !';
-            return '';
-        }
-
-        $source = $loaders[$mime]($tmpPath);
-
-        $newImage = imagecreatetruecolor($w, $h);
-        imagealphablending($newImage, false);
-        imagesavealpha($newImage, true);
-
-        imagecopyresampled($newImage, $source, 0, 0, 0, 0, $w, $h, imagesx($source), imagesy($source));
-        imagewebp($newImage, $destination, 80);
-
-
-        return $destination;
-    }
+   
 }

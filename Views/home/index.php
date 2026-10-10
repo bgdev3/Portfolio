@@ -21,13 +21,21 @@ if (!isset($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
     $_SESSION['token_time'] = time();
 }
- // Ajoute le chemin du pdf à l'url pour l'affichage du pdf
- $url = "https://www.bgdev.fr/public/" . $cv->pathCv;
+
+$base = "www.bgdev.fr/public/";
+$profile = $data_profile[0] ?? null;
+
+$url   = !empty($profile->pathCv) ? $base . $profile->pathCv : '';
+$photo = !empty($profile->profile) ? $profile->profile : '';
 ?>
 
 <section>
     <div class="presentation">
         <div class="name-style">
+           <?php if ($photo !== ''): ?>
+                <img src="<?php echo $photo; ?>" alt="Photo de profil" class="profile-pic">
+            <?php endif; ?>
+
             <p >Guillaume<Br><span class="name">Boukehaili</span></p>
             <div class="dev"> 
                 <span class="work">Développeur<span> web</span></span>

@@ -16,8 +16,9 @@ class adminUserModel extends DbConnect
      */
     public function create(Admin $admin): void
     {
-        $this->request = $this->connexion->prepare('INSERT INTO admin VALUES(null, :surname, :email, :pathCv, :password');
+        $this->request = $this->connexion->prepare('INSERT INTO admin VALUES(null, :surname, :profile, :email, :pathCv, :password');
         $this->request -> bindValue(':surname', $admin->getSurname());
+        $this->request -> bindValue(':profile', $admin->getProfile());
         $this->request -> bindValue(':email', $admin->getEmail());
         $this->request -> bindValue(':pathCv', $admin->getPathCv());
         $this->request -> bindValue(':password', $admin->getPassword());
@@ -33,9 +34,10 @@ class adminUserModel extends DbConnect
      */
     public function update($id, Admin $admin): void
     {
-        $this->request = $this->connexion->prepare("UPDATE admin SET surname = :surname, email = :email, pathCv = :pathCv, password = :password WHERE idUser = :idAdmin");
+        $this->request = $this->connexion->prepare("UPDATE admin SET surname = :surname, profile = :profile,  email = :email, pathCv = :pathCv, password = :password WHERE idUser = :idAdmin");
         $this->request -> bindValue(':idAdmin', $id);
         $this->request -> bindValue(':surname', $admin->getSurname());
+        $this->request -> bindValue(':profile', $admin->getProfile());
         $this->request -> bindValue(':email', $admin->getEmail());
         $this->request -> bindValue(':pathCv', $admin->getPathCv());
         $this->request -> bindValue(':password', $admin->getPassword());
@@ -62,13 +64,11 @@ class adminUserModel extends DbConnect
      * Permet de récupérer le chemin du CV
      * 
      */
-    public function findCv(): object
+    public function findProfile(): array
     {
-        $this->request = $this->connexion->prepare('SELECT pathCv FROM admin');
+        $this->request = $this->connexion->prepare('SELECT pathCv, profile FROM admin');
         $this->request->execute();
-        $pathCv =  $this->request->fetch();
-
-        return $pathCv;
+        return  $this->request->fetchAll();
     }
 
     /**
