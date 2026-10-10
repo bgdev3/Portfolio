@@ -4,7 +4,7 @@ namespace Portfolio\Services;
 /**
  * Class qui permet la vérification des différents champs de formulaires, des uploads, du formatge des fichiers stockés
  */
-final class Form 
+class Form 
 {
     
      /**

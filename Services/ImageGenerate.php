@@ -2,7 +2,7 @@
 
 namespace Portfolio\Services;
 
-final class ImageGenerate
+class ImageGenerate
 {
     public function imageSize(string $originalName, string $tmpPath, int $w, int $h): string
     {

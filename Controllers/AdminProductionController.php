@@ -18,7 +18,7 @@ class AdminProductionController extends Controller
 
     public function __construct (
             private readonly Form $form,
-            private readonly Captcha $captcha,
+            // private readonly Captcha $captcha,
             private readonly TemplateModel $templateModel,
             private readonly ProductionModel $productionModel,
             private readonly Template $template,

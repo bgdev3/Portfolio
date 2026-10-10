@@ -1,9 +1,10 @@
 <?php 
 namespace Portfolio\Models;
 
+use Exception;
+use PDO;
 use Portfolio\Core\DbConnect;
 use Portfolio\Entities\Production;
-use Exception;
 
 class ProductionModel  extends DbConnect
 {
@@ -54,15 +55,16 @@ class ProductionModel  extends DbConnect
      * Récupère un enregistrement par l'id correspondnat
      * 
      * @param int $id correspondant de l'enregistrement sélectionné
-     * @return object
+     * @return Production|null
      */
-    public function find(int $id): Production
+    public function find(int $id): ?Production
     {
         $this->request = $this->connexion->prepare('SELECT * FROM production WHERE idProduction = :id');
-        $this->request->bindParam(':id', $id);
+        $this->request->bindParam(':id', $id,  PDO::PARAM_INT);
+        $this->request->setFetchMode(PDO::FETCH_CLASS, Production::class);
         $this->request->execute();
         $prod = $this->request->fetch();
-        return $prod;
+        return $prod ?: null;
     }
 
     /**

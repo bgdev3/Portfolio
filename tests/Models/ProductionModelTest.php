@@ -87,27 +87,39 @@ class ProductionModelTest extends TestCase
 
     // --- find() ---
 
-    public function testFindReturnsObject(): void
-    {
-        $row = (object)['idProduction' => 1, 'title' => 'Projet A'];
+   public function testFindReturnsProduction(): void
+{
+    $production = (new Production())
+        ->setIdProduction(1)
+        ->setTitle('Projet A');
 
-        $this->pdoMock
-            ->method('prepare')
-            ->willReturn($this->stmtMock);
+    $this->pdoMock
+        ->method('prepare')
+        ->willReturn($this->stmtMock);
 
-        $this->stmtMock->method('bindParam');
-        $this->stmtMock->method('execute');
+    $this->stmtMock
+        ->expects($this->once())
+        ->method('fetch')
+        ->willReturn($production);
 
-        $this->stmtMock
-            ->expects($this->once())
-            ->method('fetch')
-            ->willReturn($row);
+    $result = $this->model->find(1);
 
-        $result = $this->model->find(1);
+    $this->assertInstanceOf(Production::class, $result);
+    $this->assertSame(1, $result->getIdProduction());
+}
 
-        $this->assertIsObject($result);
-        $this->assertSame(1, $result->idProduction);
-    }
+public function testFindReturnsNullWhenNotFound(): void
+{
+    $this->pdoMock
+        ->method('prepare')
+        ->willReturn($this->stmtMock);
+
+    $this->stmtMock
+        ->method('fetch')
+        ->willReturn(false);   // PDO renvoie false quand l'id n'existe pas
+
+    $this->assertNull($this->model->find(999));
+}
 
     // --- findLast() ---
 
@@ -157,13 +169,11 @@ class ProductionModelTest extends TestCase
           ->setDescription('Description test')
           ->setPath('img.jpg')
           ->setCreatedAt('2024-01-01')
-          ->setHtml('1')
           ->setSass(null)
           ->setBootstrap(null)
           ->setJs(null)
           ->setPhp('1')
           ->setSymfony(null)
-          ->setReact(null)
           ->setWordpress(null)
           ->setIdUser(1);
 
