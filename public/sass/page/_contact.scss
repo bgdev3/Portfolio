@@ -2,7 +2,6 @@
 @use '../utils/variables' as color ;
 
 .form-contact {
-
     width: 100%;
     @include mixins.tablet{ width: 80%; }
    

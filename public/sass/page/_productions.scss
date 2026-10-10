@@ -94,7 +94,6 @@
                         width: 100%;
                         transition: .2s;
                     }
-                    
                     &:hover{
                         > i{
                             display: none;
@@ -177,9 +176,7 @@
                     min-height: 6em;
                     border: 1px solid rgb(39, 39, 39);
                 }
-                
             }
-    
             & a{
                 display: block;
                 width: 60%;
@@ -201,7 +198,6 @@
                     margin: 5% auto;
                 }
             }
-            
             ul{
                 @include mixins.flex-row(row, center, center);
                 gap: 2%;
@@ -240,7 +236,6 @@
         background-color: color.$color_input;
     }
 }
-
 aside.quote{
     text-align: center;
     width: 80%;
@@ -255,7 +250,6 @@ aside.quote{
         width: 50%;
 
     }
-
      > a{
         position: absolute;
         top: 40%;
@@ -310,31 +304,31 @@ aside.quote{
             left: -15%;
         }
     }
-.content-quote {
-    width: 100%;
-    display: grid;              // au lieu de flex
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 20%;
-
-    @include mixins.tablet {
-        margin-bottom: initial;
-    }
-
-    > p {
-        grid-area: 1 / 1;       // tous les <p> dans la même case
+    .content-quote {
         width: 100%;
-        line-height: 1.5em;
-        font-style: italic;
+        display: grid;              // au lieu de flex
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 20%;
 
-        &::before, &::after {
-            content: "\0022";
-            font-size: 2rem;
-            color: color.$color_pink;
+        @include mixins.tablet {
+            margin-bottom: initial;
+        }
+
+        > p {
+            grid-area: 1 / 1;       // tous les <p> dans la même case
+            width: 100%;
+            line-height: 1.5em;
+            font-style: italic;
+
+            &::before, &::after {
+                content: "\0022";
+                font-size: 2rem;
+                color: color.$color_pink;
+            }
         }
     }
-}
 } 
   
 .slide__dot{

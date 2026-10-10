@@ -29,8 +29,16 @@ if (!isset($_SESSION['token'])) {
     <div class="presentation">
         <div class="name-style">
             <p >Guillaume<Br><span class="name">Boukehaili</span></p>
-            <span class="work">Développeur<span> web</span></span>
-            <a href=<?php echo $url;?> target="_blank" title="cv">Télécharger cv</a>
+            <div class="dev"> 
+                <span class="work">Développeur<span> web</span></span>
+                <span >PHP / Symfony . Freelance </span>
+            </div>
+            
+            <div class="actions">
+                    <a href=<?php echo $url;?> target="_blank" title="cv">Télécharger cv</a>
+                    <a href="/public/contact" title="contact">Me contacter</a>
+            </div>
+            
         </div>
         
         <p class="text-style">

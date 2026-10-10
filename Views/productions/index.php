@@ -44,7 +44,6 @@ $comments = [];
                                 ?> 
                                     <div class="slack_title">
 
-                                   
                                         <li> <i class="<?php echo $lang; ?>"></i> </li> 
                                         
                                 <?php 

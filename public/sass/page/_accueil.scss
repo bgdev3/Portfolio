@@ -1,8 +1,6 @@
 @use '../utils/mixins';
 @use '../utils/variables' as color ;
 
-
-
 .presentation {
     margin: 3% 0;
     @include mixins.flex-row(column, space-between, center);
@@ -11,19 +9,41 @@
         margin: 8% 0;
     }
 
-    span+a{
+     .actions a {
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-self: unset;
+        justify-content: center;
         margin-top: 3%;
         padding: .7em .5em .7em;
         font-size: 1rem;
-        border: 1px solid color.$color_pink;
         @include mixins.transition;
-        text-align: center;
+        @include mixins.tablet { 
+            justify-self: center;
+            justify-content: center; 
+        }
+    }
+
+    .actions  a:first-child{
+         border: 1px solid color.$color_pink;
+         margin-bottom: 5%;
+        @include mixins.transition;
         &:hover{
             border: 1px solid color.$color_font;
             color: color.$color_pink;
         }
     }
 
+      .actions a:last-child {
+            border: 1px solid color.$color_font;
+            color: color.$color_pink;
+            &:hover{
+             border: 1px solid color.$color_pink;
+            color: color.$color_font;
+        }
+    }
+   
     p+a{
        width: 90%;
        text-align: center;
@@ -69,17 +89,35 @@
             font-size: 1.72rem;
         }
     }
+    
+    .work + span{
+        font-size: 1rem;
+         text-transform: uppercase;
+        letter-spacing: .2em;
+        margin-top: 2%;
+    }
+    
+    .dev {
+          @include mixins.flex-row(column, space-between, center);
+    }
 
-   
-
+    .actions{
+        display: grid;
+        grid-auto-flow:row;
+        grid-auto-columns: 1fr;
+        gap: 2%;
+        width: max-content;
+        margin-top: 5%;
+        @include mixins.tablet{
+        grid-auto-flow:column;
+        }
+    }
 }
 
 .text-style {
     width: 95%;
     margin: 10% auto;
     line-height: 1.75em;
-
-    // bdi = color: white
     & span{
         display: block;
         height: .75em; /* Evite le décalage du texte "salut" lors de l'intégration en js*/
@@ -90,7 +128,6 @@
         @include mixins.desktop{
             height: .5em;
             font-size: 2rem;
-            // display: inline-block; ? permet l'lalignement à gauche de Salut
         }
     }
 
@@ -104,8 +141,7 @@
     }
 
     .hideLetter{
-        opacity: 0;
-       
+        opacity: 0;  
     }   
 }
 

@@ -24,14 +24,12 @@ nav:has(.nav-header) {
         display: block;
       
     }
-   
     li a {
         display: block;
         width: 100%;
         text-transform: uppercase;
         letter-spacing: .5em;
     }
-
     @include mixins.desktop() {
         padding-bottom: initial;
         position: initial;
@@ -45,13 +43,11 @@ nav:has(.nav-header) {
             text-transform: inherit;
             letter-spacing: 0;
         }
-
         li::after{
             transform: scaleX(0);
             transition: transform 250ms ease-in-out;
             border-bottom: 3px solid color.$color_pink;
         }
-        
         li:hover::after{
         transform: scaleX(1);
         }  

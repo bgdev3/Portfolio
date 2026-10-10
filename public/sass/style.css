@@ -286,17 +286,39 @@ nav:has(.nav-header) {
     margin: 8% 0;
   }
 }
-.presentation span + a {
+.presentation .actions a {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-self: unset;
+  justify-content: center;
   margin-top: 3%;
   padding: 0.7em 0.5em 0.7em;
   font-size: 1rem;
-  border: 1px solid #97004f;
   transition: all 250ms ease-out;
-  text-align: center;
 }
-.presentation span + a:hover {
+@media only screen and (min-width: 576px) {
+  .presentation .actions a {
+    justify-self: center;
+    justify-content: center;
+  }
+}
+.presentation .actions a:first-child {
+  border: 1px solid #97004f;
+  margin-bottom: 5%;
+  transition: all 250ms ease-out;
+}
+.presentation .actions a:first-child:hover {
   border: 1px solid #b6b6b6;
   color: #97004f;
+}
+.presentation .actions a:last-child {
+  border: 1px solid #b6b6b6;
+  color: #97004f;
+}
+.presentation .actions a:last-child:hover {
+  border: 1px solid #97004f;
+  color: #b6b6b6;
 }
 .presentation p + a {
   width: 90%;
@@ -356,6 +378,32 @@ nav:has(.nav-header) {
 @media only screen and (min-width: 576px) {
   .name-style .work {
     font-size: 1.72rem;
+  }
+}
+.name-style .work + span {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 2%;
+}
+.name-style .dev {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.name-style .actions {
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-columns: 1fr;
+  gap: 2%;
+  width: -moz-max-content;
+  width: max-content;
+  margin-top: 5%;
+}
+@media only screen and (min-width: 576px) {
+  .name-style .actions {
+    grid-auto-flow: column;
   }
 }
 

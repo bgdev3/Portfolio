@@ -24,7 +24,6 @@
         @include mixins.tablet{
             @include mixins.flex-row(row, space-around, center);
         }
-
         margin-bottom: 5%;
     }
 
