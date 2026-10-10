@@ -58,7 +58,6 @@ class ProductionTest extends TestCase
     {
        
         $this->assertNull($this->production->getSass());
-       
         $this->assertNull($this->production->getBootstrap());
         $this->assertNull($this->production->getTailwind());
         $this->assertNull($this->production->getJs());
@@ -88,8 +87,6 @@ class ProductionTest extends TestCase
 
         $this->assertInstanceOf(Production::class, $result);
     }
-
-    // --- Bug détecté : getUrl() retourne $this->title au lieu de $this->url ---
 
     public function testUrlIsIndependentFromTitle(): void
     {

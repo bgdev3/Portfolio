@@ -10,14 +10,14 @@ class Production
     private string $path = '';
     private string $description = '';
     private string $createdAt = '';
-    private ?string $sass = '';
-    private ?string $bootstrap = '';
-    private ?string $tailwind = '';
-    private ?string $js = '';
-    private ?string $docker = '';
-    private ?string $php = '';
-    private ?string $symfony = '';
-    private ?string $wordpress = '';
+    private ?string $sass = null;
+    private ?string $bootstrap = null;
+    private ?string $tailwind = null;
+    private ?string $js = null;
+    private ?string $docker = null;
+    private ?string $php = null;
+    private ?string $symfony = null;
+    private ?string $wordpress = null;
     private int $idUser;
     
 
