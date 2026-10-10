@@ -286,13 +286,24 @@ nav:has(.nav-header) {
     margin: 8% 0;
   }
 }
+.presentation .profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center top;
+     object-position: center top; /* garde le visage bien cadré */
+  border: 2px solid #131212; /* ton magenta, optionnel */
+  display: block;
+  margin: 0 auto 1.5rem; /* centrée, avec un espace sous la photo */
+}
 .presentation .actions a {
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-self: unset;
   justify-content: center;
-  margin-top: 3%;
   padding: 0.7em 0.5em 0.7em;
   font-size: 1rem;
   transition: all 250ms ease-out;
@@ -305,7 +316,6 @@ nav:has(.nav-header) {
 }
 .presentation .actions a:first-child {
   border: 1px solid #97004f;
-  margin-bottom: 5%;
   transition: all 250ms ease-out;
 }
 .presentation .actions a:first-child:hover {
@@ -396,7 +406,7 @@ nav:has(.nav-header) {
   display: grid;
   grid-auto-flow: row;
   grid-auto-columns: 1fr;
-  gap: 2%;
+  gap: 10%;
   width: -moz-max-content;
   width: max-content;
   margin-top: 5%;

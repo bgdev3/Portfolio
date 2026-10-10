@@ -5,6 +5,7 @@ class Admin
 {
     private int $idUser;
     private string $surname = '';
+    private string $profile = '';
     private string $email = '';
     private string $pathCv = '';
     private string $password = '';
@@ -105,6 +106,26 @@ class Admin
     public function setPassword(string $password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of profile
+     */ 
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set the value of profile
+     *
+     * @return  self
+     */ 
+    public function setProfile(string $profile)
+    {
+        $this->profile = $profile;
 
         return $this;
     }

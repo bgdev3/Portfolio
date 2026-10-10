@@ -1,10 +1,12 @@
 <?php
 namespace Portfolio\Controllers;
 
-use Portfolio\Services\Form;
-use Portfolio\Services\Captcha;
+
 use Portfolio\Entities\Admin;
 use Portfolio\Models\AdminUserModel;
+use Portfolio\Services\Captcha;
+use Portfolio\Services\Form;
+use Portfolio\Services\ImageGenerate;
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -16,7 +18,8 @@ class AdminController extends Controller
         private  readonly Form $form,
         private  readonly Captcha $captcha,
         private  readonly AdminUserModel $adminUserModel,
-        private  readonly Admin $admin
+        private  readonly Admin $admin,
+        private readonly ImageGenerate $image
     ){}
 
     /**
@@ -75,23 +78,51 @@ class AdminController extends Controller
 
     public function register($token): void
     {
-         $error = '';
-         $captcha = false;
+        $error = '';
+        $nb = 1;
+         $imagePaths =[]; $arrayFiles = []; 
+        $captcha = false;
         // Si les champs ne sont pas vides
-        if ($this->form->validatePost($_POST, ['surname', 'email', 'password']) && $this->form->validateFiles($_FILES, ['cv'])) {
+        if ($this->form->validatePost($_POST, ['surname', 'email', 'password'])
+             && $this->form->validateFiles($_FILES, ['profile', 'cv'])) {
 
-            $type = array('jpg' => 'image/jpg', 'pdf'=>'image/pdf');
+            $type = array('jpg'=>'image/jpeg', 'jpeg'=>'image/jpeg', 'webp'=>'image/webp', 'png'=>'image/png','pdf'=>'application/pdf');
              // Si un erreur est déclarée sur un des fichier uploadés
-             $error = empty($erreur) ? $this->form->errorUpload($_FILES, ['cv'], $type) : "" ;
+             $error = empty($erreur) ? $this->form->errorUpload($_FILES, ['profile', 'cv'], $type) : "" ;
              // Formate les noms de fichier sformatés dans un array 
-             $file = $this->form->formateFileCv($_FILES, ['cv']);
+             $profiles = $this->form->formateFileAdmin($_FILES, ['profile', 'cv']);
 
-             if (file_exists('img/'. $file)) {
-                $erreur = $file . " déja existant !";
-            } else {
-                move_uploaded_file($_FILES['cv']["tmp_name"], "img/" . $file);
-            }
-            $cv = "img/" . $file;
+              $arrayFiles =  ['profile', 'cv'];
+
+            //  if (file_exists('img/'. $file)) {
+            //     $erreur = $file . " déja existant !";
+            // } else {
+            //     move_uploaded_file($_FILES['cv']["tmp_name"], "img/" . $file);
+            // }
+            // $cv = "img/" . $file;
+             if (empty($error)) {
+                        // Boucle sur chaque fichier image  récupérés
+                foreach ($profiles as $i => $profile) {
+                    $key = $arrayFiles[$i];
+                    $tmpPath = $_FILES[$key]['tmp_name'];
+
+                    if ($key === 'profile') {
+                        $path = $this->image->imageSize($profile, $tmpPath, 500, 500);
+                    } else {
+                        $path = 'img/' . $profile;
+                        if (!move_uploaded_file($tmpPath, $path)) {
+                            $path = '';
+                        }
+                    }
+
+                    if ($path === '') {
+                        $error = $_SESSION['error'] ?? "Erreur lors de l'envoi des fichiers";
+                        unset($_SESSION['error']);
+                        break;
+                    }
+                    $imagePaths[] = $path;
+                }
+             }
              // Instance du reCpatcha
             //  $captcha = new Captcha();
 
@@ -104,7 +135,7 @@ class AdminController extends Controller
                 // Récupère les valeurs POST en supprimant les espace et agissant contre la faille XSS
                 $surname = isset($_POST['surname']) ? trim(htmlspecialchars($_POST['surname'], ENT_QUOTES)) : "";
                 $email = isset($_POST['email']) ? trim(htmlspecialchars($_POST['email'], ENT_QUOTES)) : "";
-                $password = isset($_POST['password']) ? trim(htmlspecialchars($_POST['password'], ENT_QUOTES)) : "";
+                $password = $_POST['password'];
 
                 // Si le mdp est supérieur à une longuer de 12
                 if(strlen($password) >= 12) {
@@ -118,8 +149,9 @@ class AdminController extends Controller
                             // Hash le mdp avec l'algo le plus récent et hydrate
                             $password = password_hash($password, PASSWORD_DEFAULT);
                             $this->admin->setSurname($surname);
+                            $this->admin->setProfile($imagePaths[0]);
                             $this->admin->setEmail($email);
-                            $this->admin->setPathCv($cv);
+                            $this->admin->setPathCv($imagePaths[1]);
                             $this->admin->setPassword($password);
                             // Effectue la mise à jour
                             // $adminModel = new AdminUserModel();
@@ -204,6 +236,7 @@ class AdminController extends Controller
         }
         return $error;
     }
+    
 
     public function logOut($token): void
     {

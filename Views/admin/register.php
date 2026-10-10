@@ -18,6 +18,8 @@ $token = isset($_SESSION['token']) ? trim($_SESSION['token']) : null ;
         <form action="" method="POST" id="myForm" enctype="multipart/form-data" novalidate>
             <label for="surname">Pseudonyme</label>
             <input type="text" id="surname" name="surname" class="inputForm" required>
+            <label for="profile">Profile</label>
+            <input type="file" id="profile" name="profile" class="inputForm" required>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" class="inputForm" required>
             <label for="cv">CV</label>

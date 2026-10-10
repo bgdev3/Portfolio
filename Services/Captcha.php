@@ -1,7 +1,7 @@
 <?php 
 namespace Portfolio\Services;
 
-class Captcha {
+final class Captcha {
 
     /**
      * Methode de vérification d'un test de turing 

@@ -56,22 +56,19 @@ class ProductionTest extends TestCase
 
     public function testStackTechDefaultsToNull(): void
     {
-        $this->assertNull($this->production->getHtml());
+       
         $this->assertNull($this->production->getSass());
+       
         $this->assertNull($this->production->getBootstrap());
+        $this->assertNull($this->production->getTailwind());
         $this->assertNull($this->production->getJs());
+        $this->assertNull($this->production->getDocker());
         $this->assertNull($this->production->getPhp());
         $this->assertNull($this->production->getSymfony());
-        $this->assertNull($this->production->getReact());
         $this->assertNull($this->production->getWordpress());
     }
 
-    public function testSetAndGetHtml(): void
-    {
-        $this->production->setHtml('1');
-        $this->assertSame('1', $this->production->getHtml());
-    }
-
+  
     public function testSetAndGetSymfony(): void
     {
         $this->production->setSymfony('1');

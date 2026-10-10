@@ -18,8 +18,8 @@ class HomeController extends Controller{
      */
     public function index(): void{
 
-        $cv = $this->adminUserModel->findCv();
-        $this->render('home/index', ['cv' => $cv]);
+        $data_profile = $this->adminUserModel->findProfile();
+        $this->render('home/index', ['data_profile' => $data_profile]);
     }   
 
      // Renvoi vers les mentions légales
