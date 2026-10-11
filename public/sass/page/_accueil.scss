@@ -18,7 +18,7 @@
         object-position: center top; /* garde le visage bien cadré */
         border: 2px solid color.$color_bg;   /* ton magenta, optionnel */
         display: block;
-        margin: 5% auto 20%;  
+        margin: 5% auto 0%;  
         @include mixins.desktop{
          margin: 0 auto 1.5rem;
         }   

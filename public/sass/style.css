@@ -297,7 +297,7 @@ nav:has(.nav-header) {
      object-position: center top; /* garde le visage bien cadré */
   border: 2px solid #131212; /* ton magenta, optionnel */
   display: block;
-  margin: 5% auto 20%;
+  margin: 5% auto 0%;
 }
 @media only screen and (min-width: 1024px) {
   .presentation .profile-pic {
