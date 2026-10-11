@@ -27,6 +27,7 @@
 }
 .footer p {
   text-align: center;
+  font-size: 0.75em;
 }
 .footer .social-footer {
   display: flex;
@@ -274,7 +275,7 @@ nav:has(.nav-header) {
   margin: 3% 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 @media only screen and (min-width: 1024px) {
@@ -283,7 +284,7 @@ nav:has(.nav-header) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 8% 0;
+    margin: 6% 0 5%;
   }
 }
 .presentation .profile-pic {
@@ -296,7 +297,12 @@ nav:has(.nav-header) {
      object-position: center top; /* garde le visage bien cadré */
   border: 2px solid #131212; /* ton magenta, optionnel */
   display: block;
-  margin: 0 auto 1.5rem; /* centrée, avec un espace sous la photo */
+  margin: 5% auto 20%;
+}
+@media only screen and (min-width: 1024px) {
+  .presentation .profile-pic {
+    margin: 0 auto 1.5rem;
+  }
 }
 .presentation .actions a {
   white-space: nowrap;
@@ -314,21 +320,43 @@ nav:has(.nav-header) {
     justify-content: center;
   }
 }
+.presentation .actions a[href*=pdf] {
+  border-bottom: 1px solid #97004f;
+}
+.presentation .actions a[href*=pdf]:hover {
+  border-bottom: 1px solid #b6b6b6;
+  color: #97004f;
+}
 .presentation .actions a:first-child {
-  border: 1px solid #97004f;
+  background-color: #b6b6b6;
+  border: 3px solid #97004f;
+  color: #131212;
+  font-weight: 500;
+  text-transform: uppercase;
   transition: all 250ms ease-out;
 }
 .presentation .actions a:first-child:hover {
+  background-color: #131212;
+  border: 3px solid #b6b6b6;
+  color: #97004f;
+}
+@media only screen and (min-width: 1024px) {
+  .presentation .actions a:first-child {
+    display: none;
+  }
+}
+.presentation .actions a:nth-child(2) {
   border: 1px solid #b6b6b6;
   color: #97004f;
 }
-.presentation .actions a:last-child {
-  border: 1px solid #b6b6b6;
-  color: #97004f;
-}
-.presentation .actions a:last-child:hover {
+.presentation .actions a:nth-child(2):hover {
   border: 1px solid #97004f;
   color: #b6b6b6;
+}
+@media only screen and (min-width: 1024px) {
+  .presentation .actions a:nth-child(2) {
+    display: none;
+  }
 }
 .presentation p + a {
   width: 90%;
@@ -350,8 +378,10 @@ nav:has(.nav-header) {
     display: none;
   }
 }
-
-.name-style {
+.presentation .name-style {
+  min-height: calc(100dvh - 80px);
+  justify-content: center;
+  margin-bottom: 0;
   font-size: 2em;
   display: flex;
   flex-direction: column;
@@ -359,67 +389,88 @@ nav:has(.nav-header) {
   align-items: center;
 }
 @media only screen and (min-width: 576px) {
-  .name-style {
+  .presentation .name-style {
     font-size: 4em;
   }
 }
 @media only screen and (min-width: 1024px) {
-  .name-style {
+  .presentation .name-style {
+    min-height: unset;
+    justify-content: start;
     flex: 1 0 50%;
   }
+  .presentation .name-style .dev {
+    margin-bottom: 0;
+  }
+  .presentation .name-style .actions {
+    margin-top: 1rem;
+    gap: 0.75rem;
+    font-size: 1rem;
+  }
 }
-.name-style .name {
+
+.name {
   text-transform: uppercase;
   font-size: 1.75rem;
 }
 @media only screen and (min-width: 576px) {
-  .name-style .name {
+  .name {
     font-size: 3.5rem;
   }
 }
-.name-style .work {
+
+.work {
   font-size: 1.15rem;
   text-transform: uppercase;
   letter-spacing: 0.5em;
 }
-.name-style .work span {
+.work span {
   color: #97004f;
 }
 @media only screen and (min-width: 576px) {
-  .name-style .work {
+  .work {
     font-size: 1.72rem;
   }
 }
-.name-style .work + span {
+
+.work + span {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-top: 2%;
 }
-.name-style .dev {
+
+.dev {
+  margin-bottom: 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.name-style .actions {
+@media only screen and (min-width: 576px) {
+  .dev {
+    margin-bottom: initial;
+  }
+}
+
+.actions {
   display: grid;
   grid-auto-flow: row;
   grid-auto-columns: 1fr;
   gap: 10%;
   width: -moz-max-content;
   width: max-content;
-  margin-top: 5%;
+  margin-top: 20%;
 }
 @media only screen and (min-width: 576px) {
-  .name-style .actions {
+  .actions {
     grid-auto-flow: column;
   }
 }
 
 .text-style {
   width: 95%;
-  margin: 10% auto;
+  margin: 0 auto;
   line-height: 1.75em;
 }
 .text-style span {
@@ -642,9 +693,16 @@ nav:has(.nav-header) {
 }
 .img-project .content-container .content-realisation .technos ul {
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: center;
   gap: 1em;
+}
+@media only screen and (min-width: 1024px) {
+  .img-project .content-container .content-realisation .technos ul {
+    flex-direction: row;
+  }
 }
 .img-project .content-container .content-realisation .technos .slack_title {
   display: flex;
@@ -653,7 +711,7 @@ nav:has(.nav-header) {
   gap: 0.5em;
   font-size: 0.8em;
   padding: 1em;
-  width: 20%;
+  min-width: 30%;
   min-height: 6em;
   border: 1px solid rgb(39, 39, 39);
 }
@@ -682,10 +740,6 @@ nav:has(.nav-header) {
   }
 }
 .img-project .content-container .content-realisation ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   gap: 2%;
 }
 .img-project .content-container .content-realisation ul i {

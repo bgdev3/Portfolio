@@ -39,12 +39,14 @@ $photo = !empty($profile->profile) ? $profile->profile : '';
             <p >Guillaume<Br><span class="name">Boukehaili</span></p>
             <div class="dev"> 
                 <span class="work">Développeur<span> web</span></span>
-                <span >PHP / Symfony . Freelance </span>
+                <span >PHP / Symfony &middot; Freelance </span>
             </div>
             
             <div class="actions">
-                    <a href=<?php echo $url;?> target="_blank" title="cv">Télécharger cv</a>
-                    <a href="/public/contact" title="contact">Me contacter</a>
+                <a href="/public/productions" title="Portfolio">Portfolio</a>  
+                <a href="/public/contact" title="contact">Me contacter</a>
+                <a href=<?php echo $url;?> target="_blank" title="cv">Télécharger cv</a>
+                   
             </div>
             
         </div>
@@ -54,7 +56,7 @@ $photo = !empty($profile->profile) ? $profile->profile : '';
                 Diplômé d'une formation certifiante de niveau V de développeur web et web mobile, je suis à l'écoute et étudie toutes les possibilités de projets pour lesquels nous pourrions travailler ensemble. En effet, mon expérience acquise me permet de répondre au mieux à vos différents besoins et de vous proposer les solutions les plus adéquates à vos attentes.<br><br>
                 D'un site vitrine à un projet plus complexe, je vous ferai part de la meilleure expertise possible afin d'évoluer dans les conditions les plus optimales. Alors, à très vite …
         </p>
-        <a href="/public/productions" title="Portfolio">Portfolio</a>  
+       
     </div>
    
 </section>

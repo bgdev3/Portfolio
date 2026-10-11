@@ -50,7 +50,7 @@
             <li><a href="https://github.com/bgdev3" title="Github"><i class="fa-brands fa-github"></i></a></li>
         </ul>
         <div>
-            <p><a href="/public/home/mentions" title="Mentions légales">Mentions légales</a>  | &copy;Tous droit réservés. 2024 - 2026  <a href="/public/admin"><i class="fa-solid fa-right-to-bracket color-link" title="Admin"></i></a> </p>
+            <p><a href="/public/home/mentions" title="Mentions légales">Mentions légales</a>  | &copy;Tous droits réservés. 2024 - 2026  <a href="/public/admin"><i class="fa-solid fa-right-to-bracket color-link" title="Admin"></i></a> </p>
         </div>
     </footer>
 

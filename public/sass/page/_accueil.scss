@@ -3,10 +3,11 @@
 
 .presentation {
     margin: 3% 0;
-    @include mixins.flex-row(column, space-between, center);
+    @include mixins.flex-row(column, center, center);
     @include mixins.desktop{
+
         @include mixins.flex-row(row, space-between, center);
-        margin: 8% 0;
+        margin: 6% 0 5%;
     }
 
     .profile-pic {
@@ -17,7 +18,11 @@
         object-position: center top; /* garde le visage bien cadré */
         border: 2px solid color.$color_bg;   /* ton magenta, optionnel */
         display: block;
-        margin: 0 auto 1.5rem;       /* centrée, avec un espace sous la photo */
+        margin: 5% auto 20%;  
+        @include mixins.desktop{
+         margin: 0 auto 1.5rem;
+        }   
+          
     }
 
      .actions a {
@@ -33,25 +38,46 @@
             justify-self: center;
             justify-content: center; 
         }
+
+            &[href*="pdf"] {
+                border-bottom: 1px solid color.$color_pink;
+                &:hover {
+                border-bottom: 1px solid color.$color_font;
+                color: color.$color_pink;
+                }
+            }
     }
+    
 
     .actions  a:first-child{
-         border: 1px solid color.$color_pink;
+        background-color: color.$color_font;
+         border: 3px solid color.$color_pink;
+         color: color.$color_bg;
+         font-weight: 500;
+         text-transform: uppercase;
         @include mixins.transition;
         &:hover{
-            border: 1px solid color.$color_font;
+             background-color: color.$color_bg;
+            border:3px solid color.$color_font;
             color: color.$color_pink;
+        }
+         @include mixins.desktop { 
+           display: none;
         }
     }
 
-      .actions a:last-child {
+      .actions a:nth-child(2) {
             border: 1px solid color.$color_font;
             color: color.$color_pink;
             &:hover{
              border: 1px solid color.$color_pink;
             color: color.$color_font;
+            }
+            @include mixins.desktop { 
+                display: none;
+            }
         }
-    }
+    
    
     p+a{
        width: 90%;
@@ -65,19 +91,37 @@
        @include mixins.tablet { width: 80%; }
        @include mixins.desktop{ display: none; }
     }
-}
+
 
 .name-style {
-   
+    min-height: calc(100dvh - 80px); // 70px = hauteur du header, à ajuster
+    justify-content: center;         // centre verticalement dans l'écran
+    margin-bottom: 0;
     font-size: 2em;
+   
     // Centre l'identité
     @include mixins.flex-row(column, start, center);
     @include mixins.tablet{
         font-size: 4em;
     }
     @include mixins.desktop{
+         min-height: unset;
+        justify-content: start;
+       
         flex: 1 0 50%;
+    .dev {
+        margin-bottom: 0;
     }
+
+    .actions {
+        margin-top: 1rem;   // en rem, donc indépendant du 4em
+        gap: .75rem;
+        font-size: 1rem;    // coupe l'héritage du 4em
+    }
+    }
+}
+}
+
 
     .name {
         text-transform: uppercase;
@@ -107,7 +151,11 @@
     }
     
     .dev {
-          @include mixins.flex-row(column, space-between, center);
+        margin-bottom: 10%;
+        @include mixins.flex-row(column, space-between, center);
+        @include mixins.tablet{
+            margin-bottom: initial;
+        }
     }
 
     .actions{
@@ -116,16 +164,16 @@
         grid-auto-columns: 1fr;
         gap: 10%;
         width: max-content;
-        margin-top: 5%;
+        margin-top: 20%;
         @include mixins.tablet{
         grid-auto-flow:column;
         }
     }
-}
+
 
 .text-style {
     width: 95%;
-    margin: 10% auto;
+    margin: 0 auto;
     line-height: 1.75em;
     & span{
         display: block;
