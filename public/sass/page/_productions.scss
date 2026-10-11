@@ -161,9 +161,15 @@
                 }
                 & ul {
                     display: flex;
-                    align-items: stretch;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    align-items: center;
                     justify-content: center;
                     gap: 1em;
+                    @include mixins.desktop{
+                    flex-direction: row;
+                }  
+
                 }
                 & .slack_title {
                     display: flex;
@@ -172,9 +178,10 @@
                     gap: .5em;
                     font-size: .8em;
                     padding: 1em;
-                    width: 20%;
+                    min-width: 30%;
                     min-height: 6em;
                     border: 1px solid rgb(39, 39, 39);
+                    
                 }
             }
             & a{
@@ -199,7 +206,7 @@
                 }
             }
             ul{
-                @include mixins.flex-row(row, center, center);
+                // @include mixins.flex-row(row, center, center);
                 gap: 2%;
                 i{
                     font-size: 1.5rem
