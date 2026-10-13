@@ -83,7 +83,7 @@ Les tests Models utilisent un **mock PDO** — aucune base de données réelle n
 
 ```bash
 # 1. Cloner le repo
-git clone https://github.com/charlieGui/Portfolio.git
+git clone https://github.com/bgdev3/Portfolio.git
 cd Portfolio
 
 # 2. Installer les dépendances
