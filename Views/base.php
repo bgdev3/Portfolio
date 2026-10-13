@@ -25,7 +25,7 @@
 
 <body class="scroller">
     <header class="header">
-        <h1><a href="/public/" title="Accueil">BgDev</a></h1>
+    <a href="/public/" title="bgdev">BgDev</a>
         
         <?php if(!isset( $_SESSION['id_admin']))
                 require_once "template_header/header_user.php"; 

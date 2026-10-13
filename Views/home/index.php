@@ -33,14 +33,17 @@ $photo = !empty($profile->profile) ? $profile->profile : '';
     <div class="presentation">
         <div class="name-style">
            <?php if ($photo !== ''): ?>
-                <img src="<?php echo $photo; ?>" alt="Photo de profil" class="profile-pic">
+                <img src="<?php echo $photo; ?>" alt="Guillaume Boukehaili, developpeur web" class="profile-pic">
             <?php endif; ?>
 
-            <p >Guillaume<Br><span class="name">Boukehaili</span></p>
-            <div class="dev"> 
-                <span class="work">Développeur<span> web</span></span>
-                <span >PHP / Symfony &middot; Freelance </span>
-            </div>
+            <h1>
+                <p >Guillaume<Br><span class="name">Boukehaili</span></p>
+                <div class="dev"> 
+                    <span class="work">Développeur<span> web</span></span>
+                    <span >PHP / Symfony &middot; Freelance </span>
+                </div>
+           </h1>
+            
             
             <div class="actions">
                 <a href="/public/productions" title="Portfolio">Portfolio</a>  
@@ -51,12 +54,19 @@ $photo = !empty($profile->profile) ? $profile->profile : '';
             
         </div>
         
-        <p class="text-style">
-            <span></span><br>Après 16 ans d'activité dans le domaine médical,  je me suis reconverti dans le développement web afin de rallier passion et monde professionnel.<br><br> 
-                Diplômé d'une formation certifiante de niveau V de développeur web et web mobile, je suis à l'écoute et étudie toutes les possibilités de projets pour lesquels nous pourrions travailler ensemble. En effet, mon expérience acquise me permet de répondre au mieux à vos différents besoins et de vous proposer les solutions les plus adéquates à vos attentes.<br><br>
-                D'un site vitrine à un projet plus complexe, je vous ferai part de la meilleure expertise possible afin d'évoluer dans les conditions les plus optimales. Alors, à très vite …
-        </p>
+        <div class="flex_presentation">
+
        
+                <section class="text-style">
+                    <span></span><br>Développeur web freelance PHP / Symfony, je conçois des sites et applications sur mesure : sites vitrines, e-commerce WordPress/WooCommerce, outils métier.<br><br>
+                                    Après 16 ans dans le secteur médical, j’ai gardé de ce métier la rigueur, le sang-froid et le sens du service. Je les applique à chaque projet : un besoin bien cadré, un code propre, des délais tenus.<br><br>
+                                    Titulaire d’un titre de niveau V de développeur web et web mobile, je travaille avec des TPE, artisans et commerçants, de l’idée à la mise en ligne.
+                                    <p >
+                    <a href="/public/productions" title="Mes projets" class=""> Voir mes projets</a>
+                    <a href="/public/contact" title="Contact"> Me contacter</a>
+                </p>
+                </section>
+                
+           </div>
     </div>
-   
 </section>
