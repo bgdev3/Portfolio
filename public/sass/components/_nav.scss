@@ -15,7 +15,7 @@ nav:has(.nav-header) {
     opacity: 0;
     z-index: -1;
     background-color: color.$color_bg;
-    padding-bottom: 50%;
+    padding-bottom: 45%;
     @include mixins.transition;
     @include mixins.flex-row(column, center, center);
     gap: 4%;

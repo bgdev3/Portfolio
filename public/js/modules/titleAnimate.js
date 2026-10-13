@@ -1,7 +1,7 @@
 
 export function animateTitle() {
 
-  const aText =  ["Salut", "!"];
+  const aText =  ["Bienvenue", "!"];
   const iSpeed = 100; // Delai de l'affichage
   let iIndex = 0; // Début de l'affichage
   let iArrLength = aText[0].length; // longeur du tableau
